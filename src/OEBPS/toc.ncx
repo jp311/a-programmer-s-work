@@ -1,0 +1,626 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="zh">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:2ebc6a62-56b0-4ff4-b925-7fb7eebd7424"/>
+    <meta name="dtb:depth" content="3"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>程序员的自我修养</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="num_1" playOrder="1">
+      <navLabel>
+        <text>作者访谈录</text>
+      </navLabel>
+      <content src="Text/i.html"/>
+    </navPoint>
+    <navPoint id="num_2" playOrder="2">
+      <navLabel>
+        <text>序言一</text>
+      </navLabel>
+      <content src="Text/ii.html"/>
+    </navPoint>
+    <navPoint id="num_3" playOrder="3">
+      <navLabel>
+        <text>序言二</text>
+      </navLabel>
+      <content src="Text/iii.html"/>
+    </navPoint>
+    <navPoint id="num_4" playOrder="4">
+      <navLabel>
+        <text>序言三</text>
+      </navLabel>
+      <content src="Text/iv.html"/>
+    </navPoint>
+    <navPoint id="num_5" playOrder="5">
+      <navLabel>
+        <text>导读</text>
+      </navLabel>
+      <content src="Text/v.html"/>
+    </navPoint>
+    <navPoint id="num_6" playOrder="6">
+      <navLabel>
+        <text>第1章 温故而知新</text>
+      </navLabel>
+      <content src="Text/1.html#sigil_toc_id_1"/>
+      <navPoint id="num_7" playOrder="7">
+        <navLabel>
+          <text>1.1 从Hello World说起</text>
+        </navLabel>
+        <content src="Text/1.1.html"/>
+      </navPoint>
+      <navPoint id="num_8" playOrder="8">
+        <navLabel>
+          <text>1.2 万变不离其宗</text>
+        </navLabel>
+        <content src="Text/1.2.html"/>
+      </navPoint>
+      <navPoint id="num_9" playOrder="9">
+        <navLabel>
+          <text>1.3 站得高，望得远</text>
+        </navLabel>
+        <content src="Text/1.3.html"/>
+      </navPoint>
+      <navPoint id="num_10" playOrder="10">
+        <navLabel>
+          <text>1.4 操作系统做什么</text>
+        </navLabel>
+        <content src="Text/1.4.html"/>
+      </navPoint>
+      <navPoint id="num_11" playOrder="11">
+        <navLabel>
+          <text>1.5 内存不够怎么办</text>
+        </navLabel>
+        <content src="Text/1.5.html"/>
+      </navPoint>
+      <navPoint id="num_12" playOrder="12">
+        <navLabel>
+          <text>1.6 众人拾柴火焰高</text>
+        </navLabel>
+        <content src="Text/1.6.html"/>
+      </navPoint>
+      <navPoint id="num_13" playOrder="13">
+        <navLabel>
+          <text>1.7 本章小结</text>
+        </navLabel>
+        <content src="Text/1.7.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_14" playOrder="14">
+      <navLabel>
+        <text>第2章 编译和链接</text>
+      </navLabel>
+      <content src="Text/2.html#sigil_toc_id_2"/>
+      <navPoint id="num_15" playOrder="15">
+        <navLabel>
+          <text>2.1 被隐藏了的过程</text>
+        </navLabel>
+        <content src="Text/2.1.html"/>
+      </navPoint>
+      <navPoint id="num_16" playOrder="16">
+        <navLabel>
+          <text>2.2 编译器做了什么</text>
+        </navLabel>
+        <content src="Text/2.2.html"/>
+      </navPoint>
+      <navPoint id="num_17" playOrder="17">
+        <navLabel>
+          <text>2.3 链接器年龄比编译器长</text>
+        </navLabel>
+        <content src="Text/2.3.html"/>
+      </navPoint>
+      <navPoint id="num_18" playOrder="18">
+        <navLabel>
+          <text>2.4 模块拼装——静态链接</text>
+        </navLabel>
+        <content src="Text/2.4.html"/>
+      </navPoint>
+      <navPoint id="num_19" playOrder="19">
+        <navLabel>
+          <text>2.5 本章小结</text>
+        </navLabel>
+        <content src="Text/2.5.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_20" playOrder="20">
+      <navLabel>
+        <text>第3章 目标文件里有什么</text>
+      </navLabel>
+      <content src="Text/3.html"/>
+      <navPoint id="num_21" playOrder="21">
+        <navLabel>
+          <text>3.1 目标文件的格式</text>
+        </navLabel>
+        <content src="Text/3.1.html"/>
+      </navPoint>
+      <navPoint id="num_22" playOrder="22">
+        <navLabel>
+          <text>3.2 目标文件是什么样的</text>
+        </navLabel>
+        <content src="Text/3.2.html"/>
+      </navPoint>
+      <navPoint id="num_23" playOrder="23">
+        <navLabel>
+          <text>3.3 挖掘SimpleSection.o</text>
+        </navLabel>
+        <content src="Text/3.3.html"/>
+      </navPoint>
+      <navPoint id="num_24" playOrder="24">
+        <navLabel>
+          <text>3.4 ELF文件结构描述</text>
+        </navLabel>
+        <content src="Text/3.4.html"/>
+      </navPoint>
+      <navPoint id="num_25" playOrder="25">
+        <navLabel>
+          <text>3.5 链接的接口——符号</text>
+        </navLabel>
+        <content src="Text/3.5.html"/>
+      </navPoint>
+      <navPoint id="num_26" playOrder="26">
+        <navLabel>
+          <text>3.6 调试信息</text>
+        </navLabel>
+        <content src="Text/3.6.html"/>
+      </navPoint>
+      <navPoint id="num_27" playOrder="27">
+        <navLabel>
+          <text>3.7 本章小结</text>
+        </navLabel>
+        <content src="Text/3.7.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_28" playOrder="28">
+      <navLabel>
+        <text>第4章 静态链接</text>
+      </navLabel>
+      <content src="Text/4.html"/>
+      <navPoint id="num_29" playOrder="29">
+        <navLabel>
+          <text>4.1 空间与地址分配</text>
+        </navLabel>
+        <content src="Text/4.1.html"/>
+      </navPoint>
+      <navPoint id="num_30" playOrder="30">
+        <navLabel>
+          <text>4.2 符号解析与重定位</text>
+        </navLabel>
+        <content src="Text/4.2.html"/>
+      </navPoint>
+      <navPoint id="num_31" playOrder="31">
+        <navLabel>
+          <text>4.3 COMMON块</text>
+        </navLabel>
+        <content src="Text/4.3.html"/>
+      </navPoint>
+      <navPoint id="num_32" playOrder="32">
+        <navLabel>
+          <text>4.4 C++相关问题</text>
+        </navLabel>
+        <content src="Text/4.4.html"/>
+      </navPoint>
+      <navPoint id="num_33" playOrder="33">
+        <navLabel>
+          <text>4.5 静态库链接</text>
+        </navLabel>
+        <content src="Text/4.5.html"/>
+      </navPoint>
+      <navPoint id="num_34" playOrder="34">
+        <navLabel>
+          <text>4.7 BFD库</text>
+        </navLabel>
+        <content src="Text/4.7.html"/>
+      </navPoint>
+      <navPoint id="num_35" playOrder="35">
+        <navLabel>
+          <text>4.8 本章小结</text>
+        </navLabel>
+        <content src="Text/4.8.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_36" playOrder="36">
+      <navLabel>
+        <text>第5章 Windows PE/COFF</text>
+      </navLabel>
+      <content src="Text/5.html"/>
+      <navPoint id="num_37" playOrder="37">
+        <navLabel>
+          <text>5.1 Windows的二进制文件格式PE/COFF</text>
+        </navLabel>
+        <content src="Text/5.1.html"/>
+      </navPoint>
+      <navPoint id="num_38" playOrder="38">
+        <navLabel>
+          <text>5.2 PE的前身——COFF</text>
+        </navLabel>
+        <content src="Text/5.2.html"/>
+      </navPoint>
+      <navPoint id="num_39" playOrder="39">
+        <navLabel>
+          <text>5.3 链接指示信息</text>
+        </navLabel>
+        <content src="Text/5.3.html"/>
+      </navPoint>
+      <navPoint id="num_40" playOrder="40">
+        <navLabel>
+          <text>5.4 调试信息</text>
+        </navLabel>
+        <content src="Text/5.4.html"/>
+      </navPoint>
+      <navPoint id="num_41" playOrder="41">
+        <navLabel>
+          <text>5.5 大家都有符号表</text>
+        </navLabel>
+        <content src="Text/5.5.html"/>
+      </navPoint>
+      <navPoint id="num_42" playOrder="42">
+        <navLabel>
+          <text>5.6 Windows下的ELF——PE</text>
+        </navLabel>
+        <content src="Text/5.6.html"/>
+      </navPoint>
+      <navPoint id="num_43" playOrder="43">
+        <navLabel>
+          <text>5.7 本章小结</text>
+        </navLabel>
+        <content src="Text/5.7.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_44" playOrder="44">
+      <navLabel>
+        <text>第6章 可执行文件的装载与进程</text>
+      </navLabel>
+      <content src="Text/6.html#sigil_toc_id_3"/>
+      <navPoint id="num_45" playOrder="45">
+        <navLabel>
+          <text>6.1 进程虚拟地址空间</text>
+        </navLabel>
+        <content src="Text/6.1.html"/>
+      </navPoint>
+      <navPoint id="num_46" playOrder="46">
+        <navLabel>
+          <text>6.2 装载的方式</text>
+        </navLabel>
+        <content src="Text/6.2.html"/>
+      </navPoint>
+      <navPoint id="num_47" playOrder="47">
+        <navLabel>
+          <text>6.3 从操作系统角度看可执行文件的装载</text>
+        </navLabel>
+        <content src="Text/6.3.html"/>
+      </navPoint>
+      <navPoint id="num_48" playOrder="48">
+        <navLabel>
+          <text>6.4 进程虚存空间分布</text>
+        </navLabel>
+        <content src="Text/6.4.html"/>
+      </navPoint>
+      <navPoint id="num_49" playOrder="49">
+        <navLabel>
+          <text>6.5 Linux内核装载ELF过程简介</text>
+        </navLabel>
+        <content src="Text/6.5.html"/>
+      </navPoint>
+      <navPoint id="num_50" playOrder="50">
+        <navLabel>
+          <text>6.6 Windows PE的装载</text>
+        </navLabel>
+        <content src="Text/6.6.html"/>
+      </navPoint>
+      <navPoint id="num_51" playOrder="51">
+        <navLabel>
+          <text>6.7 本章小结</text>
+        </navLabel>
+        <content src="Text/6.7.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_52" playOrder="52">
+      <navLabel>
+        <text>第7章 动态链接</text>
+      </navLabel>
+      <content src="Text/7.html"/>
+      <navPoint id="num_53" playOrder="53">
+        <navLabel>
+          <text>7.1 为什么要动态链接</text>
+        </navLabel>
+        <content src="Text/7.1.html"/>
+      </navPoint>
+      <navPoint id="num_54" playOrder="54">
+        <navLabel>
+          <text>7.2 简单的动态链接例子</text>
+        </navLabel>
+        <content src="Text/7.2.html"/>
+      </navPoint>
+      <navPoint id="num_55" playOrder="55">
+        <navLabel>
+          <text>7.3 地址无关代码</text>
+        </navLabel>
+        <content src="Text/7.3.html"/>
+      </navPoint>
+      <navPoint id="num_56" playOrder="56">
+        <navLabel>
+          <text>7.4 延迟绑定（PLT）</text>
+        </navLabel>
+        <content src="Text/7.4.html"/>
+      </navPoint>
+      <navPoint id="num_57" playOrder="57">
+        <navLabel>
+          <text>7.5 动态链接相关结构</text>
+        </navLabel>
+        <content src="Text/7.5.html"/>
+      </navPoint>
+      <navPoint id="num_58" playOrder="58">
+        <navLabel>
+          <text>7.6 动态链接的步骤和实现</text>
+        </navLabel>
+        <content src="Text/7.6.html"/>
+      </navPoint>
+      <navPoint id="num_59" playOrder="59">
+        <navLabel>
+          <text>7.7 显式运行时链接</text>
+        </navLabel>
+        <content src="Text/7.7.html"/>
+      </navPoint>
+      <navPoint id="num_60" playOrder="60">
+        <navLabel>
+          <text>7.8 本章小结</text>
+        </navLabel>
+        <content src="Text/7.8.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_61" playOrder="61">
+      <navLabel>
+        <text>第8章 Linux共享库的组织</text>
+      </navLabel>
+      <content src="Text/8.html"/>
+      <navPoint id="num_62" playOrder="62">
+        <navLabel>
+          <text>8.1 共享库版本</text>
+        </navLabel>
+        <content src="Text/8.1.html"/>
+      </navPoint>
+      <navPoint id="num_63" playOrder="63">
+        <navLabel>
+          <text>8.2 符号版本</text>
+        </navLabel>
+        <content src="Text/8.2.html"/>
+      </navPoint>
+      <navPoint id="num_64" playOrder="64">
+        <navLabel>
+          <text>8.3 共享库系统路径</text>
+        </navLabel>
+        <content src="Text/8.3.html"/>
+      </navPoint>
+      <navPoint id="num_65" playOrder="65">
+        <navLabel>
+          <text>8.4 共享库查找过程</text>
+        </navLabel>
+        <content src="Text/8.4.html"/>
+      </navPoint>
+      <navPoint id="num_66" playOrder="66">
+        <navLabel>
+          <text>8.5 环境变量</text>
+        </navLabel>
+        <content src="Text/8.5.html"/>
+      </navPoint>
+      <navPoint id="num_67" playOrder="67">
+        <navLabel>
+          <text>8.6 共享库的创建和安装</text>
+        </navLabel>
+        <content src="Text/8.6.html"/>
+      </navPoint>
+      <navPoint id="num_68" playOrder="68">
+        <navLabel>
+          <text>8.7 本章小结</text>
+        </navLabel>
+        <content src="Text/8.7.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_69" playOrder="69">
+      <navLabel>
+        <text>第9章 Windows下的动态链接</text>
+      </navLabel>
+      <content src="Text/9.html"/>
+      <navPoint id="num_70" playOrder="70">
+        <navLabel>
+          <text>9.1 DLL 简介</text>
+        </navLabel>
+        <content src="Text/9.1.html"/>
+      </navPoint>
+      <navPoint id="num_71" playOrder="71">
+        <navLabel>
+          <text>9.2 符号导出导入表</text>
+        </navLabel>
+        <content src="Text/9.2.html"/>
+      </navPoint>
+      <navPoint id="num_72" playOrder="72">
+        <navLabel>
+          <text>9.3 DLL优化</text>
+        </navLabel>
+        <content src="Text/9.3.html"/>
+      </navPoint>
+      <navPoint id="num_73" playOrder="73">
+        <navLabel>
+          <text>9.4 C++与动态链接</text>
+        </navLabel>
+        <content src="Text/9.4.html"/>
+      </navPoint>
+      <navPoint id="num_74" playOrder="74">
+        <navLabel>
+          <text>9.5 DLL HELL</text>
+        </navLabel>
+        <content src="Text/9.5.html"/>
+      </navPoint>
+      <navPoint id="num_75" playOrder="75">
+        <navLabel>
+          <text>9.6 本章小结</text>
+        </navLabel>
+        <content src="Text/9.6.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_76" playOrder="76">
+      <navLabel>
+        <text>第10章 内存</text>
+      </navLabel>
+      <content src="Text/10.html"/>
+      <navPoint id="num_77" playOrder="77">
+        <navLabel>
+          <text>10.1 程序的内存布局</text>
+        </navLabel>
+        <content src="Text/10.1.html"/>
+      </navPoint>
+      <navPoint id="num_78" playOrder="78">
+        <navLabel>
+          <text>10.2 栈与调用惯例</text>
+        </navLabel>
+        <content src="Text/10.2.html"/>
+      </navPoint>
+      <navPoint id="num_79" playOrder="79">
+        <navLabel>
+          <text>10.3 堆与内存管理</text>
+        </navLabel>
+        <content src="Text/10.3.html"/>
+      </navPoint>
+      <navPoint id="num_80" playOrder="80">
+        <navLabel>
+          <text>10.4 本章小结</text>
+        </navLabel>
+        <content src="Text/10.4.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_81" playOrder="81">
+      <navLabel>
+        <text>第11章 运行库</text>
+      </navLabel>
+      <content src="Text/11.html"/>
+      <navPoint id="num_82" playOrder="82">
+        <navLabel>
+          <text>11.1 入口函数和程序初始化</text>
+        </navLabel>
+        <content src="Text/11.1.html"/>
+      </navPoint>
+      <navPoint id="num_83" playOrder="83">
+        <navLabel>
+          <text>11.2 C/C++运行库</text>
+        </navLabel>
+        <content src="Text/11.2.html"/>
+      </navPoint>
+      <navPoint id="num_84" playOrder="84">
+        <navLabel>
+          <text>11.3 运行库与多线程</text>
+        </navLabel>
+        <content src="Text/11.3.html"/>
+      </navPoint>
+      <navPoint id="num_85" playOrder="85">
+        <navLabel>
+          <text>11.4 C++全局构造与析构</text>
+        </navLabel>
+        <content src="Text/11.4.html"/>
+      </navPoint>
+      <navPoint id="num_86" playOrder="86">
+        <navLabel>
+          <text>11.5 fread实现</text>
+        </navLabel>
+        <content src="Text/11.5.html"/>
+      </navPoint>
+      <navPoint id="num_87" playOrder="87">
+        <navLabel>
+          <text>11.6 本章小结</text>
+        </navLabel>
+        <content src="Text/11.6.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_88" playOrder="88">
+      <navLabel>
+        <text>第12章 系统调用与API</text>
+      </navLabel>
+      <content src="Text/12.html"/>
+      <navPoint id="num_89" playOrder="89">
+        <navLabel>
+          <text>12.1 系统调用介绍</text>
+        </navLabel>
+        <content src="Text/12.1.html"/>
+      </navPoint>
+      <navPoint id="num_90" playOrder="90">
+        <navLabel>
+          <text>12.2 系统调用原理</text>
+        </navLabel>
+        <content src="Text/12.2.html"/>
+      </navPoint>
+      <navPoint id="num_91" playOrder="91">
+        <navLabel>
+          <text>12.3 Windows API</text>
+        </navLabel>
+        <content src="Text/12.3.html"/>
+      </navPoint>
+      <navPoint id="num_92" playOrder="92">
+        <navLabel>
+          <text>12.4 本章小结</text>
+        </navLabel>
+        <content src="Text/12.4.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_93" playOrder="93">
+      <navLabel>
+        <text>第13章 运行库实现</text>
+      </navLabel>
+      <content src="Text/13.html"/>
+      <navPoint id="num_94" playOrder="94">
+        <navLabel>
+          <text>13.1 C语言运行库</text>
+        </navLabel>
+        <content src="Text/13.1.html"/>
+      </navPoint>
+      <navPoint id="num_95" playOrder="95">
+        <navLabel>
+          <text>13.2 如何使用Mini CRT</text>
+        </navLabel>
+        <content src="Text/13.2.html"/>
+      </navPoint>
+      <navPoint id="num_96" playOrder="96">
+        <navLabel>
+          <text>13.3 C++运行库实现</text>
+        </navLabel>
+        <content src="Text/13.3.html"/>
+      </navPoint>
+      <navPoint id="num_97" playOrder="97">
+        <navLabel>
+          <text>13.4 如何使用Mini CRT++</text>
+        </navLabel>
+        <content src="Text/13.4.html"/>
+      </navPoint>
+      <navPoint id="num_98" playOrder="98">
+        <navLabel>
+          <text>13.5 本章小结</text>
+        </navLabel>
+        <content src="Text/13.5.html"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="num_99" playOrder="99">
+      <navLabel>
+        <text>附录A</text>
+      </navLabel>
+      <content src="Text/a.html"/>
+      <navPoint id="num_100" playOrder="100">
+        <navLabel>
+          <text>A.1 字节序（Byte Order）</text>
+        </navLabel>
+        <content src="Text/a.1.html"/>
+      </navPoint>
+      <navPoint id="num_101" playOrder="101">
+        <navLabel>
+          <text>A.2 ELF常见段</text>
+        </navLabel>
+        <content src="Text/a.2.html"/>
+      </navPoint>
+      <navPoint id="num_102" playOrder="102">
+        <navLabel>
+          <text>A.3 常用开发工具命令行参考</text>
+        </navLabel>
+        <content src="Text/a.3.html"/>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

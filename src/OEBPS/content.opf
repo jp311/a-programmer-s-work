@@ -1,0 +1,407 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId" version="2.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title>程序员的自我修养</dc:title>
+    <dc:creator opf:role="aut">愈甲子</dc:creator>
+    <dc:creator opf:role="aut">石凡</dc:creator>
+    <dc:creator opf:role="aut">潘爱民</dc:creator>
+    <dc:identifier id="BookId" opf:scheme="UUID">urn:uuid:2ebc6a62-56b0-4ff4-b925-7fb7eebd7424</dc:identifier>
+    <dc:publisher>电子工业出版社</dc:publisher>
+    <dc:language>zh-CN</dc:language>
+    <dc:identifier opf:scheme="ISBN">9787121085116</dc:identifier>
+    <meta name="cover" content="cover.jpg"/>
+  </metadata>
+  <manifest>
+    <item href="Text/0.html" id="x0.html" media-type="application/xhtml+xml"/>
+    <item href="Text/i.html" id="i.html" media-type="application/xhtml+xml"/>
+    <item href="Text/ii.html" id="ii.html" media-type="application/xhtml+xml"/>
+    <item href="Text/iii.html" id="iii.html" media-type="application/xhtml+xml"/>
+    <item href="Text/iv.html" id="iv.html" media-type="application/xhtml+xml"/>
+    <item href="Text/v.html" id="v.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.html" id="x1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.1.html" id="x1.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.2.html" id="x1.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.3.html" id="x1.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.4.html" id="x1.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.5.html" id="x1.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.6.html" id="x1.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/1.7.html" id="x1.7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/2.html" id="x2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/2.1.html" id="x2.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/2.2.html" id="x2.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/2.3.html" id="x2.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/2.4.html" id="x2.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/2.5.html" id="x2.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.html" id="x3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.1.html" id="x3.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.2.html" id="x3.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.3.html" id="x3.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.4.html" id="x3.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.5.html" id="x3.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.6.html" id="x3.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/3.7.html" id="x3.7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.html" id="x4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.1.html" id="x4.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.2.html" id="x4.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.3.html" id="x4.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.4.html" id="x4.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.5.html" id="x4.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.6.html" id="x4.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.7.html" id="x4.7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/4.8.html" id="x4.8.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.html" id="x5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.1.html" id="x5.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.2.html" id="x5.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.3.html" id="x5.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.4.html" id="x5.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.5.html" id="x5.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.6.html" id="x5.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/5.7.html" id="x5.7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.html" id="x6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.1.html" id="x6.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.2.html" id="x6.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.3.html" id="x6.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.4.html" id="x6.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.5.html" id="x6.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.6.html" id="x6.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/6.7.html" id="x6.7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.html" id="x7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.1.html" id="x7.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.2.html" id="x7.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.3.html" id="x7.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.4.html" id="x7.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.5.html" id="x7.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.6.html" id="x7.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.7.html" id="x7.7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/7.8.html" id="x7.8.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.html" id="x8.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.1.html" id="x8.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.2.html" id="x8.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.3.html" id="x8.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.4.html" id="x8.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.5.html" id="x8.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.6.html" id="x8.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/8.7.html" id="x8.7.html" media-type="application/xhtml+xml"/>
+    <item href="Text/9.html" id="x9.html" media-type="application/xhtml+xml"/>
+    <item href="Text/9.1.html" id="x9.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/9.2.html" id="x9.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/9.3.html" id="x9.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/9.4.html" id="x9.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/9.5.html" id="x9.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/9.6.html" id="x9.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/10.html" id="x10.html" media-type="application/xhtml+xml"/>
+    <item href="Text/10.1.html" id="x10.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/10.2.html" id="x10.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/10.3.html" id="x10.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/10.4.html" id="x10.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/11.html" id="x11.html" media-type="application/xhtml+xml"/>
+    <item href="Text/11.1.html" id="x11.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/11.2.html" id="x11.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/11.3.html" id="x11.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/11.4.html" id="x11.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/11.5.html" id="x11.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/11.6.html" id="x11.6.html" media-type="application/xhtml+xml"/>
+    <item href="Text/12.html" id="x12.html" media-type="application/xhtml+xml"/>
+    <item href="Text/12.1.html" id="x12.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/12.2.html" id="x12.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/12.3.html" id="x12.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/12.4.html" id="x12.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/13.html" id="x13.html" media-type="application/xhtml+xml"/>
+    <item href="Text/13.1.html" id="x13.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/13.2.html" id="x13.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/13.3.html" id="x13.3.html" media-type="application/xhtml+xml"/>
+    <item href="Text/13.4.html" id="x13.4.html" media-type="application/xhtml+xml"/>
+    <item href="Text/13.5.html" id="x13.5.html" media-type="application/xhtml+xml"/>
+    <item href="Text/a.html" id="a.html" media-type="application/xhtml+xml"/>
+    <item href="Text/a.1.html" id="a.1.html" media-type="application/xhtml+xml"/>
+    <item href="Text/a.2.html" id="a.2.html" media-type="application/xhtml+xml"/>
+    <item href="Text/a.3.html" id="a.3.html" media-type="application/xhtml+xml"/>
+    <item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="Styles/Style.css" id="Style.css" media-type="text/css"/>
+    <item href="Images/1-0-1.jpg" id="x1-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-0-2.jpg" id="x1-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-0-3.jpg" id="x1-0-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-0-4.jpg" id="x1-0-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-0-5.jpg" id="x1-0-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-0-6.jpg" id="x1-0-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-1.jpg" id="x1-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-10.jpg" id="x1-10.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-11.jpg" id="x1-11.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-12.jpg" id="x1-12.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-13.jpg" id="x1-13.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-2.jpg" id="x1-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-3.jpg" id="x1-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-4.jpg" id="x1-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-5.jpg" id="x1-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-6.jpg" id="x1-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-7.jpg" id="x1-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-8.jpg" id="x1-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/1-9.jpg" id="x1-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-0-1.jpg" id="x10-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-0-2.jpg" id="x10-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-1.jpg" id="x10-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-10.jpg" id="x10-10.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-11.jpg" id="x10-11.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-12.jpg" id="x10-12.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-13.jpg" id="x10-13.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-14.jpg" id="x10-14.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-15.jpg" id="x10-15.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-16.jpg" id="x10-16.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-17.jpg" id="x10-17.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-2.jpg" id="x10-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-3.jpg" id="x10-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-4.jpg" id="x10-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-5.jpg" id="x10-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-6.jpg" id="x10-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-7.jpg" id="x10-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-8.jpg" id="x10-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/10-9.jpg" id="x10-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-0-1.jpg" id="x11-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-0-2.jpg" id="x11-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-0-3.jpg" id="x11-0-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-0-4.jpg" id="x11-0-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-1.jpg" id="x11-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-10.jpg" id="x11-10.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-11.jpg" id="x11-11.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-12.jpg" id="x11-12.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-13.jpg" id="x11-13.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-14.jpg" id="x11-14.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-15.jpg" id="x11-15.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-2.jpg" id="x11-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-3.jpg" id="x11-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-4.jpg" id="x11-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-5.jpg" id="x11-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-6.jpg" id="x11-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-7.jpg" id="x11-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-8.jpg" id="x11-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/11-9.jpg" id="x11-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-0-1-2.jpg" id="x12-0-1-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-0-1.jpg" id="x12-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-0-2-2.jpg" id="x12-0-2-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-0-2.jpg" id="x12-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-1.jpg" id="x12-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-10.jpg" id="x12-10.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-2.jpg" id="x12-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-3.jpg" id="x12-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-4.jpg" id="x12-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-5.jpg" id="x12-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-6.jpg" id="x12-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-7.jpg" id="x12-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-8.jpg" id="x12-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/12-9.jpg" id="x12-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/13-1.jpg" id="x13-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-0-1-2.jpg" id="x2-0-1-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-0-1.jpg" id="x2-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-1.jpg" id="x2-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-2.jpg" id="x2-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-3.jpg" id="x2-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-4.jpg" id="x2-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-5.jpg" id="x2-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-6.jpg" id="x2-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-7.jpg" id="x2-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-8.jpg" id="x2-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/2-9.jpg" id="x2-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-1.jpg" id="x3-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-10-2.jpg" id="x3-0-10-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-10.jpg" id="x3-0-10.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-11.jpg" id="x3-0-11.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-12.jpg" id="x3-0-12.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-13.jpg" id="x3-0-13.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-14.jpg" id="x3-0-14.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-15.jpg" id="x3-0-15.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-16.jpg" id="x3-0-16.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-17.jpg" id="x3-0-17.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-18.jpg" id="x3-0-18.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-19.jpg" id="x3-0-19.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-2.jpg" id="x3-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-3.jpg" id="x3-0-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-4.jpg" id="x3-0-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-5.jpg" id="x3-0-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-6.jpg" id="x3-0-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-7.jpg" id="x3-0-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-8-2.jpg" id="x3-0-8-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-8.jpg" id="x3-0-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-9.jpg" id="x3-0-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-1.jpg" id="x3-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-2.jpg" id="x3-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-3.jpg" id="x3-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-4.jpg" id="x3-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-5.jpg" id="x3-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-6.jpg" id="x3-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-0-1.jpg" id="x4-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-0-2-2.jpg" id="x4-0-2-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-0-2.jpg" id="x4-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-0-3.jpg" id="x4-0-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-0-4-2.jpg" id="x4-0-4-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-0-4.jpg" id="x4-0-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-0.jpg" id="x4-0.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-1.jpg" id="x4-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-2.jpg" id="x4-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-3.jpg" id="x4-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-4.jpg" id="x4-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-5.jpg" id="x4-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/4-6.jpg" id="x4-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/5-0-1-2.jpg" id="x5-0-1-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/5-0-1.jpg" id="x5-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/5-0-2.jpg" id="x5-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/5-1.jpg" id="x5-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/5-2.jpg" id="x5-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-0-1.jpg" id="x6-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-0-2.jpg" id="x6-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-0-3.jpg" id="x6-0-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-0-4.jpg" id="x6-0-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-0-5.jpg" id="x6-0-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-0-6.jpg" id="x6-0-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-1.jpg" id="x6-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-10.jpg" id="x6-10.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-11.jpg" id="x6-11.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-12.jpg" id="x6-12.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-2.jpg" id="x6-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-3.jpg" id="x6-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-4.jpg" id="x6-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-5.jpg" id="x6-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-6.jpg" id="x6-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-7.jpg" id="x6-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-8.jpg" id="x6-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/6-9.jpg" id="x6-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-0-1.jpg" id="x7-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-0-2.jpg" id="x7-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-0-3-2.jpg" id="x7-0-3-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-0-3.jpg" id="x7-0-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-1.jpg" id="x7-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-10.jpg" id="x7-10.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-11.jpg" id="x7-11.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-2.jpg" id="x7-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-3.jpg" id="x7-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-4.jpg" id="x7-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-5.jpg" id="x7-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-6.jpg" id="x7-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-7.jpg" id="x7-7.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-8.jpg" id="x7-8.jpg" media-type="image/jpeg"/>
+    <item href="Images/7-9.jpg" id="x7-9.jpg" media-type="image/jpeg"/>
+    <item href="Images/8-0-1.jpg" id="x8-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-0-1.jpg" id="x9-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-0-2.jpg" id="x9-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-1.jpg" id="x9-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-2.jpg" id="x9-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-3.jpg" id="x9-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-4.jpg" id="x9-4.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-5.jpg" id="x9-5.jpg" media-type="image/jpeg"/>
+    <item href="Images/9-6.jpg" id="x9-6.jpg" media-type="image/jpeg"/>
+    <item href="Images/a-0-1-2.jpg" id="a-0-1-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/a-0-1.jpg" id="a-0-1.jpg" media-type="image/jpeg"/>
+    <item href="Images/a-0-2-2.jpg" id="a-0-2-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/a-0-2-3.jpg" id="a-0-2-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/a-0-2.jpg" id="a-0-2.jpg" media-type="image/jpeg"/>
+    <item href="Images/a-0.jpg" id="a-0.jpg" media-type="image/jpeg"/>
+    <item href="Images/cover.jpg" id="cover.jpg" media-type="image/jpeg"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="x0.html"/>
+    <itemref idref="i.html"/>
+    <itemref idref="ii.html"/>
+    <itemref idref="iii.html"/>
+    <itemref idref="iv.html"/>
+    <itemref idref="v.html"/>
+    <itemref idref="x1.html"/>
+    <itemref idref="x1.1.html"/>
+    <itemref idref="x1.2.html"/>
+    <itemref idref="x1.3.html"/>
+    <itemref idref="x1.4.html"/>
+    <itemref idref="x1.5.html"/>
+    <itemref idref="x1.6.html"/>
+    <itemref idref="x1.7.html"/>
+    <itemref idref="x2.html"/>
+    <itemref idref="x2.1.html"/>
+    <itemref idref="x2.2.html"/>
+    <itemref idref="x2.3.html"/>
+    <itemref idref="x2.4.html"/>
+    <itemref idref="x2.5.html"/>
+    <itemref idref="x3.html"/>
+    <itemref idref="x3.1.html"/>
+    <itemref idref="x3.2.html"/>
+    <itemref idref="x3.3.html"/>
+    <itemref idref="x3.4.html"/>
+    <itemref idref="x3.5.html"/>
+    <itemref idref="x3.6.html"/>
+    <itemref idref="x3.7.html"/>
+    <itemref idref="x4.html"/>
+    <itemref idref="x4.1.html"/>
+    <itemref idref="x4.2.html"/>
+    <itemref idref="x4.3.html"/>
+    <itemref idref="x4.4.html"/>
+    <itemref idref="x4.5.html"/>
+    <itemref idref="x4.6.html"/>
+    <itemref idref="x4.7.html"/>
+    <itemref idref="x4.8.html"/>
+    <itemref idref="x5.html"/>
+    <itemref idref="x5.1.html"/>
+    <itemref idref="x5.2.html"/>
+    <itemref idref="x5.3.html"/>
+    <itemref idref="x5.4.html"/>
+    <itemref idref="x5.5.html"/>
+    <itemref idref="x5.6.html"/>
+    <itemref idref="x5.7.html"/>
+    <itemref idref="x6.html"/>
+    <itemref idref="x6.1.html"/>
+    <itemref idref="x6.2.html"/>
+    <itemref idref="x6.3.html"/>
+    <itemref idref="x6.4.html"/>
+    <itemref idref="x6.5.html"/>
+    <itemref idref="x6.6.html"/>
+    <itemref idref="x6.7.html"/>
+    <itemref idref="x7.html"/>
+    <itemref idref="x7.1.html"/>
+    <itemref idref="x7.2.html"/>
+    <itemref idref="x7.3.html"/>
+    <itemref idref="x7.4.html"/>
+    <itemref idref="x7.5.html"/>
+    <itemref idref="x7.6.html"/>
+    <itemref idref="x7.7.html"/>
+    <itemref idref="x7.8.html"/>
+    <itemref idref="x8.html"/>
+    <itemref idref="x8.1.html"/>
+    <itemref idref="x8.2.html"/>
+    <itemref idref="x8.3.html"/>
+    <itemref idref="x8.4.html"/>
+    <itemref idref="x8.5.html"/>
+    <itemref idref="x8.6.html"/>
+    <itemref idref="x8.7.html"/>
+    <itemref idref="x9.html"/>
+    <itemref idref="x9.1.html"/>
+    <itemref idref="x9.2.html"/>
+    <itemref idref="x9.3.html"/>
+    <itemref idref="x9.4.html"/>
+    <itemref idref="x9.5.html"/>
+    <itemref idref="x9.6.html"/>
+    <itemref idref="x10.html"/>
+    <itemref idref="x10.1.html"/>
+    <itemref idref="x10.2.html"/>
+    <itemref idref="x10.3.html"/>
+    <itemref idref="x10.4.html"/>
+    <itemref idref="x11.html"/>
+    <itemref idref="x11.1.html"/>
+    <itemref idref="x11.2.html"/>
+    <itemref idref="x11.3.html"/>
+    <itemref idref="x11.4.html"/>
+    <itemref idref="x11.5.html"/>
+    <itemref idref="x11.6.html"/>
+    <itemref idref="x12.html"/>
+    <itemref idref="x12.1.html"/>
+    <itemref idref="x12.2.html"/>
+    <itemref idref="x12.3.html"/>
+    <itemref idref="x12.4.html"/>
+    <itemref idref="x13.html"/>
+    <itemref idref="x13.1.html"/>
+    <itemref idref="x13.2.html"/>
+    <itemref idref="x13.3.html"/>
+    <itemref idref="x13.4.html"/>
+    <itemref idref="x13.5.html"/>
+    <itemref idref="a.html"/>
+    <itemref idref="a.1.html"/>
+    <itemref idref="a.2.html"/>
+    <itemref idref="a.3.html"/>
+  </spine>
+  <guide>
+    </guide>
+</package>

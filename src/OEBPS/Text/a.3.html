@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+  <h2>A.3 常用开发工具命令行参考</h2>
+
+  <h3>A.3.1 gcc，GCC编译器</h3>
+
+  <p>-E：只进行预处理并把预处理结果输出。</p>
+
+  <p>-c：只编译不链接。</p>
+
+  <p>-o &lt;filename&gt;：指定输出文件名。</p>
+
+  <p>-S：输出编译后的汇编代码文件。</p>
+
+  <p>-I：指定头文件路径。</p>
+
+  <p>-e name：指定name为程序入口地址。</p>
+
+  <p>-ffreestanding：编译独立的程序，不会自动链接C运行库、启动文件等。</p>
+
+  <p>-finline-functions,-fno-inline-functions：启用/关闭内联函数。</p>
+
+  <p>-g：在编译结果中加入调试信息，-ggdb就是加入GDB调试器能够识别的格式。</p>
+
+  <p>-L &lt;directory&gt;：指定链接时查找路径，多个路径之间用冒号隔开。</p>
+
+  <p>-nostartfiles：不要链接启动文件，比如crtbegin.o、crtend.o。</p>
+
+  <p>-nostdlib：不要链接标准库文件，主要是C运行库。</p>
+
+  <p>-O0：关闭所有优化选项。</p>
+
+  <p>-shared：产生共享对象文件。</p>
+
+  <p>-static：使用静态链接。</p>
+
+  <p>-Wall：对源代码中的多数编译警告进行启用。</p>
+
+  <p>-fPIC：使用地址无关代码模式进行编译。</p>
+
+  <p>-fPIE：使用地址无关代码模式编译可执行文件。</p>
+
+  <p>-XLinker &lt;option&gt;：把option传递给链接器。</p>
+
+  <p>-Wl &lt;option&gt;：把option传递给链接器，与上面的选项类似。</p>
+
+  <p>-fomit-frame-pointer：禁止使用EBP作为函数帧指针。</p>
+
+  <p>-fno-builtin：禁止GCC编译器内置函数。</p>
+
+  <p>-fno-stack-protector：是指关闭堆栈保护功能。</p>
+
+  <p>-ffunction-sections：将每个函数编译到独立的代码段。</p>
+
+  <p>-fdata-sections：将全局/静态变量编译到独立的数据段。</p>
+
+  <h3>A.3.2 ld，GNU链接器</h3>
+
+  <p>-static：静态链接。</p>
+
+  <p>-l&lt;libname&gt;：指定链接某个库。</p>
+
+  <p>-e name：指定name为程序入口。</p>
+
+  <p>-r：合并目标文件，不进行最终链接。</p>
+
+  <p>-L &lt;directory&gt;：指定链接时查找路径，多个路径之间用冒号隔开。</p>
+
+  <p>-M：将链接时的符号和地址输出成一个映射文件。</p>
+
+  <p>-o：指定输出文件名。</p>
+
+  <p>-s：清除输出文件中的符号信息。</p>
+
+  <p>-S：清除输出文件中的调试信息。</p>
+
+  <p>-T &lt;scriptfile&gt;：指定链接脚本文件。</p>
+
+  <p>-version-script &lt;file&gt;：指定符号版本脚本文件。</p>
+
+  <p>-soname &lt;name&gt;：指定输出共享库的SONAME。</p>
+
+  <p>-export-dynamic：将全局符号全部导出。</p>
+
+  <p>-verbose：链接时输出详细信息。</p>
+
+  <p>–rpath &lt;path&gt;：指定链接时库查找路径。</p>
+
+  <h3>A.3.3 objdump，GNU目标文件可执行文件查看器</h3>
+
+  <p>-a：列举.a文件中所有的目标文件。</p>
+
+  <p>-b bfdname：指定BFD名。</p>
+
+  <p>-C：对于C++符号名进行反修饰（Demangle）。</p>
+
+  <p>-g：显示调试信息。</p>
+
+  <p>-d：对包含机器指令的段进行反汇编。</p>
+
+  <p>-D：对所有的段进行反汇编。</p>
+
+  <p>-f：显示目标文件文件头。</p>
+
+  <p>-h：显示段表。</p>
+
+  <p>-l：显示行号信息。</p>
+
+  <p>-p：显示专有头部信息，具体内容取决于文件格式。</p>
+
+  <p>-r：显示重定位信息。</p>
+
+  <p>-R：显示动态链接重定位信息。</p>
+
+  <p>-s：显示文件所有内容。</p>
+
+  <p>-S：显示源代码和反汇编代码（包含-d参数）。</p>
+
+  <p>-W：显示文件中包含有DWARF调试信息格式的段。</p>
+
+  <p>-t：显示文件中的符号表。</p>
+
+  <p>-T：显示动态链接符号表。</p>
+
+  <p>-x：显示文件的所有文件头。</p>
+
+  <h3>A.3.4 cl，MSVC编译器</h3>
+
+  <p>/c：只编译不链接。</p>
+
+  <p>/Za：禁止语言扩展。</p>
+
+  <p>/link：链接指定的模块或给链接器传递参数。</p>
+
+  <p>/Od：禁止优化。</p>
+
+  <p>/O2：以运行速度最快为目标优化。</p>
+
+  <p>/O1：以最节省空间为目标优化。</p>
+
+  <p>/GR或/GR-：开启或关闭RTTI。</p>
+
+  <p>/Gy：开启函数级别链接。</p>
+
+  <p>/GS或/GS-：开启或关闭。</p>
+
+  <p>/Fa[file]：输出汇编文件。</p>
+
+  <p>/E：只进行预处理并且把结果输出。</p>
+
+  <p>/I：指定头文件包含目录。</p>
+
+  <p>/Zi：启用调试信息。</p>
+
+  <p>/LD：编译产生DLL文件。</p>
+
+  <p>/LDd：编译产生DLL文件（调试版）。</p>
+
+  <p>/MD：与动态多线程版本运行库MSVCRT.LIB链接。</p>
+
+  <p>/MDd：与调试版动态多线程版本运行库MSVCRTD.LIB链接。</p>
+
+  <p>/MT：与静态多线程版本运行库LIBCMT.LIB链接。</p>
+
+  <p>/MTd：与调试版静态多线程版本运行库LIBCMTD.LIB链接。</p>
+
+  <h3>A.3.5 link，MSVC链接器</h3>
+
+  <p>/BASE:address：指定输出文件的基地址。</p>
+
+  <p>/DEBUG：输出调试模式版本。</p>
+
+  <p>/DEF:filename：指定模块定义文件.DEF。</p>
+
+  <p>/DEFAULTLIB:library：指定默认运行库。</p>
+
+  <p>/DLL：产生DLL。</p>
+
+  <p>/ENTRY:symbol：指定程序入口。</p>
+
+  <p>/EXPORT:symbol：指定某个符号为导出符号。</p>
+
+  <p>/HEAP：指定默认堆大小。</p>
+
+  <p>/LIBPATH:dir：指定链接时库搜索路径。</p>
+
+  <p>/MAP[:filename]：产生链接MAP文件。</p>
+
+  <p>/NODEFAULTLIB[:library]：禁止默认运行库。</p>
+
+  <p>/OUT:filename：指定输出文件名。</p>
+
+  <p>/RELEASE：以发布版本产生输出文件。</p>
+
+  <p>/STACK：指定默认栈大小。</p>
+
+  <p>/SUBSYSTEM：指定子系统。</p>
+
+  <h3>A.3.6 dumpbin，MSVC的COFF/PE文件查看器</h3>
+
+  <p>/ALL：显示所有信息。</p>
+
+  <p>/ARCHIVEMEMBERS：显示.LIB文件中所有目标文件列表。</p>
+
+  <p>/DEPENDENTS：显示文件的动态链接依赖关系。</p>
+
+  <p>/DIRECTIVES：显示链接器指示。</p>
+
+  <p>/DISASM：显示反汇编。</p>
+
+  <p>/EXPORTS：显示导出函数表。</p>
+
+  <p>/HEADERS：显示文件头。</p>
+
+  <p>/IMPORTS：显示导入函数表。</p>
+
+  <p>/LINENUMBERS：显示行号信息。</p>
+
+  <p>/RELOCATIONS：显示重定位信息。</p>
+
+  <p>/SECTION:name ：显示某个段。</p>
+
+  <p>/SECTION：显示文件概要信息。</p>
+
+  <p>/SYMBOLS：显示文件符号表。</p>
+
+  <p>/TLS：显示线程局部存储TLS信息。</p>
+
+</body>
+
+</html>
