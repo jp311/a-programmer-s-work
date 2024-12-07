@@ -2,13 +2,12 @@
 <package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId" version="2.0">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
     <dc:title>程序员的自我修养</dc:title>
-    <dc:creator opf:role="aut">愈甲子</dc:creator>
-    <dc:creator opf:role="aut">石凡</dc:creator>
     <dc:creator opf:role="aut">潘爱民</dc:creator>
-    <dc:identifier id="BookId" opf:scheme="UUID">urn:uuid:2ebc6a62-56b0-4ff4-b925-7fb7eebd7424</dc:identifier>
+    <dc:creator opf:role="aut">石凡</dc:creator>
+    <dc:creator opf:role="aut">愈甲子</dc:creator>
+    <dc:identifier id="BookId" opf:scheme="ISBN">9787121085116</dc:identifier>
     <dc:publisher>电子工业出版社</dc:publisher>
     <dc:language>zh-CN</dc:language>
-    <dc:identifier opf:scheme="ISBN">9787121085116</dc:identifier>
     <meta name="cover" content="cover.jpg"/>
   </metadata>
   <manifest>
@@ -18,6 +17,7 @@
     <item href="Text/iii.html" id="iii.html" media-type="application/xhtml+xml"/>
     <item href="Text/iv.html" id="iv.html" media-type="application/xhtml+xml"/>
     <item href="Text/v.html" id="v.html" media-type="application/xhtml+xml"/>
+    <item href="Text/vi.html" id="vi.html" media-type="application/xhtml+xml"/>
     <item href="Text/1.html" id="x1.html" media-type="application/xhtml+xml"/>
     <item href="Text/1.1.html" id="x1.1.html" media-type="application/xhtml+xml"/>
     <item href="Text/1.2.html" id="x1.2.html" media-type="application/xhtml+xml"/>
@@ -303,6 +303,7 @@
     <itemref idref="iii.html"/>
     <itemref idref="iv.html"/>
     <itemref idref="v.html"/>
+    <itemref idref="vi.html"/>
     <itemref idref="x1.html"/>
     <itemref idref="x1.1.html"/>
     <itemref idref="x1.2.html"/>
@@ -403,5 +404,6 @@
     <itemref idref="a.3.html"/>
   </spine>
   <guide>
-    </guide>
+    <reference type="cover" href="Text/0.html"/>
+  </guide>
 </package>
