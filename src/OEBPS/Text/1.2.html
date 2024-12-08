@@ -24,7 +24,7 @@
 
   <p>位于中间是连接所有高速芯片的北桥（Northbridge，PCI Bridge），它就像人的心脏，连接并驱动身体的各个部位；它的左边是CPU，负责所有的控制和运算，就像人的大脑。北桥还连接着几个高速部件，包括左边的内存和下面的PCI总线。</p>
 
-  <p>PCI的速度最高为133 MHz，它还是不能满足人们的需求，于是人们又发明了AGP、</p>
+  <p>PCI的速度最高为133MHz，它还是不能满足人们的需求，于是人们又发明了AGP、</p>
 
   <p style="text-align: center"><img alt="" src="../Images/1-2.jpg"/><br/>图1-2 硬件结构框架</p>
 
@@ -40,11 +40,15 @@
 
   <p>多处理器应用最多的场合也是这些商用的服务器和需要处理大量计算的环境。而在个人电脑中，使用多处理器则是比较奢侈的行为，毕竟多处理器的成本是很高的。于是处理器的厂商开始考虑将多个处理器“合并在一起打包出售”，这些“被打包”的处理器之间共享比较昂贵的缓存部件，只保留多个核心，并且以一个处理器的外包装进行出售，售价比单核心的处理器只贵了一点，这就是多核处理器（Multi-core Processor）的基本想法。多核处理器实际上就是SMP的简化版，当然它们在细节上还有一些差别，但是从程序员的角度来看，它们之间区别很小，逻辑上来看它们是完全相同的。只是多核和SMP在缓存共享等方面有细微的差别，使得程序在优化上可以有针对性地处理。简单地讲，除非想把CPU的每一滴油水都榨干，否则可以把多核和SMP看成同一个概念。</p>
 
-  <p>推荐阅读：“Free Lunch is Over”（免费午餐已经结束了）</p>
+  <blockquote>
 
-  <p><a href="http://www.gotw.ca/publications/concurrency-ddj.htm">http://www.gotw.ca/publications/concurrency-ddj.htm</a></p>
+    <p>推荐阅读：“Free Lunch is Over”（免费午餐已经结束了）</p>
 
-  <p>随着CPU频率碰到了“天花板”，多核处理器越来越普及，对程序员开发程序的方式也将发生极大的变化，这篇文章很好地分析了将要到来的多核时代对程序开发的挑战和机遇。</p>
+    <p><a href="http://www.gotw.ca/publications/concurrency-ddj.htm">http://www.gotw.ca/publications/concurrency-ddj.htm</a></p>
+
+    <p>随着CPU频率碰到了“天花板”，多核处理器越来越普及，对程序员开发程序的方式也将发生极大的变化，这篇文章很好地分析了将要到来的多核时代对程序开发的挑战和机遇。</p>
+
+  </blockquote>
 
 </body>
 
