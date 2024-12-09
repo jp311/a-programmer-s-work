@@ -295,6 +295,7 @@
     <item href="Images/a-0-2.jpg" id="a-0-2.jpg" media-type="image/jpeg"/>
     <item href="Images/a-0.jpg" id="a-0.jpg" media-type="image/jpeg"/>
     <item href="Images/cover.jpg" id="cover.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-4-2.jpg" id="3-0-4-2.jpg" media-type="image/jpeg"/>
   </manifest>
   <spine toc="ncx">
     <itemref idref="x0.html"/>
