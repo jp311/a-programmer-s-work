@@ -14,7 +14,7 @@
 
   <p>程序源代码编译后的机器指令经常被放在代码段（Code Section）里，代码段常见的名字有“.code”或“.text”；全局变量和局部静态变量数据经常放在数据段（Data Section），数据段的一般名字都叫“.data”。让我们来看一个简单的程序被编译成目标文件后的结构，如图3-1所示。</p>
 
-  <p style="text-align: center"><img alt="" src="../Images/3-1.jpg"/><br/>图3-1 程序与目标文件</p>
+  <p><img alt="" src="../Images/3-1.jpg"/><br/>图3-1 程序与目标文件</p>
 
   <p>假设图3-1的可执行文件（目标文件）的格式是ELF，从图中可以看到，ELF文件的开头是一个“文件头”，它描述了整个文件的文件属性，包括文件是否可执行、是静态链接还是动态链接及入口地址（如果是可执行文件）、目标硬件、目标操作系统等信息，文件头还包括一个段表（Section Table），段表其实是一个描述文件中各个段的数组。段表描述了文件中各个段在文件中的偏移位置及段的属性等，从段表里面可以得到每个段的所有信息。文件头后面就是各个段的内容，比如代码段保存的就是程序的指令，数据段保存的就是程序的静态变量等。</p>
 
@@ -46,7 +46,7 @@
 
   </ul>
 
-  <p style="text-align: center"><img alt="" src="../Images/3-2.jpg"/><br/>图3-2 Process Explorer 下查看进程IExplorer.exe的进程信息</p>
+  <p><img alt="" src="../Images/3-2.jpg"/><br/>图3-2 Process Explorer 下查看进程IExplorer.exe的进程信息</p>
 
 </body>
 
