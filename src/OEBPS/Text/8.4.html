@@ -14,11 +14,15 @@
 
   <p>ld.so.conf是一个文本配置文件，它可能包含其他的配置文件，这些配置文件中存放着目录信息。在我的机器中，由ld.so.conf指定的目录是：</p>
 
-  <p>/usr/local/lib</p>
+  <ul>
 
-  <p>/lib/i486-linux-gnu</p>
+    <li>/usr/local/lib</li>
 
-  <p>/usr/lib/i486-linux-gnu</p>
+    <li>/lib/i486-linux-gnu</li>
+
+    <li>/usr/lib/i486-linux-gnu</li>
+
+  </ul>
 
   <p>如果动态链接器在每次查找共享库时都去遍历这些目录，那将会非常耗费时间。所以Linux系统中都有一个叫做ldconfig的程序，这个程序的作用是为共享库目录下的各个共享库创建、删除或更新相应的SO-NAME（即相应的符号链接），这样每个共享库的SO-NAME就能够指向正确的共享库文件；并且这个程序还会将这些SO-NAME收集起来，集中存放到/etc/ld.so.cache文件里面，并建立一个SO-NAME的缓存。当动态链接器要查找共享库时，它可以直接从/etc/ld.so.cache里面查找。而/etc/ld.so.cache的结构是经过特殊设计的，非常适合查找，所以这个设计大大加快了共享库的查找过程。</p>
 
@@ -26,7 +30,11 @@
 
   <p>所以理论上讲，如果我们在系统指定的共享库目录下添加、删除或更新任何一个共享库，或者我们更改了/etc/ld.so.conf的配置，都应该运行ldconfig这个程序，以便调整SO-NAME和/etc/ld.so.cache。很多软件包的安装程序在往系统里面安装共享库以后都会调用ldconfig。</p>
 
-  <p>不同的系统中，上面的各个文件的名字或路径可能有所不同，比如FreeBSD的SO-NAME缓存文件是/var/run/ld-elf.so.hints，我们可以通过查看ldconfig的man手册来得知这些信息。</p>
+  <blockquote>
+
+    <p>不同的系统中，上面的各个文件的名字或路径可能有所不同，比如FreeBSD的SO-NAME缓存文件是/var/run/ld-elf.so.hints，我们可以通过查看ldconfig的man手册来得知这些信息。</p>
+
+  </blockquote>
 
 </body>
 
