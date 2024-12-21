@@ -16,31 +16,31 @@
 
   <p>很多操作系统是以系统调用作为应用程序最底层的，而Windows的最底层接口是Windows API。Windows API是Windows编程的基础，尽管Windows的内核提供了数百个系统调用（Windows又把系统调用称作系统服务（System Service）），但是出于种种原因，微软并没有将这些系统调用公开，而在这些系统调用之上，建立了这样一个API层，让程序员只能调用API层的函数，而不是如Linux一般直接使用系统调用。Windows在加入API层以后，一个普通的<code>fwrite()</code>的调用路径如图12-9所示。</p>
 
-  <p><span><img alt="" src="../Images/12-9.jpg"/></span> <span>图12-9 Linux和Windows的fwrite路径 …</span></p>
+  <p><img alt="" src="../Images/12-9.jpg"/><br/>图12-9 Linux和Windows的fwrite路径</p>
 
-  <p>12.3.1 Windows API概览</p>
+  <h3>12.3.1 Windows API概览</h3>
 
   <p>Windows API是以DLL导出函数的形式暴露给应用程序开发者的。它被包含在诸多的系统DLL内，规模上非常庞大，所有的导出函数大约有数千个（以Windows XP为例）。微软把这些Windows API DLL导出函数的声明的头文件、导出库、相关文件和工具一起提供给开发者，并让它们成为Software Development Kit（SDK）。</p>
 
   <p>SDK可以单独地在微软的官方网站下载，也可能被集成到Visual Studio这样的开发工具中。当我们安装了Visual Studio后，可以在SDK的安装目录下找到所有的Windows API函数声明。其中有一个头文件“Windows.h”包含了Windows API的核心部分，只要我们在程序里面包含了它，就可以使用Windows API的核心部分了。</p>
 
-  <p>Windows API 版本</p>
+  <blockquote>
 
-  <p>Windows API随着Windows 版本的升级也经历了好几个版本，每次Windows进行大升级的时候，也会引入新版本的API。最早期的Windows API是Win16，即16位Windows（Windows 3.x系列）所提供的API，Win16的核心部分是由3个16位DLL提供的：kernel.exe（或kernel286.exe或kernel386.exe）、user.exe和gdi.exe（虽然扩展名是exe，但实际上它们有导出函数，再说DLL和EXE其实就是一回事嘛）。</p>
+    <p><b>Windows API 版本</b></p>
 
-  <p>伴随32位Windows的API是Win32，它主要有3个核心DLL：kernel32.dll、user32.dll和gdi32.dll。Windows 3.x为了支持一部分Win32程序，还提供了一个Win32的子集叫做Win32s（s为Subset，即子集）。</p>
+    <p>Windows API随着Windows 版本的升级也经历了好几个版本，每次Windows进行大升级的时候，也会引入新版本的API。最早期的Windows API是Win16，即16位Windows（Windows 3.x系列）所提供的API，Win16的核心部分是由3个16位DLL提供的：kernel.exe（或kernel286.exe或kernel386.exe）、user.exe和gdi.exe（虽然扩展名是exe，但实际上它们有导出函数，再说DLL和EXE其实就是一回事嘛）。</p>
 
-  <p>64位的Windows提供了兼容Win32的API，被称为Win64。Win64与Win32没有增加接口的数量，只是所有的指针类型都改成了64位。</p>
+    <p>伴随32位Windows的API是Win32，它主要有3个核心DLL：kernel32.dll、user32.dll和gdi32.dll。Windows 3.x为了支持一部分Win32程序，还提供了一个Win32的子集叫做Win32s（s为Subset，即子集）。</p>
 
-  <p>因为Win32是使用最广泛也是最成熟的Windows API版本，下文中如果我们不额外注明，则默认为Win32。</p>
+    <p>64位的Windows提供了兼容Win32的API，被称为Win64。Win64与Win32没有增加接口的数量，只是所有的指针类型都改成了64位。</p>
+
+    <p>因为Win32是使用最广泛也是最成熟的Windows API版本，下文中如果我们不额外注明，则默认为Win32。</p>
+
+  </blockquote>
 
   <p>Windows API现在的数量已经十分庞大，它们按照功能被划分成了几大类别，如表12-2所示。</p>
 
-  <p>
-  <span><img alt="" src="../Images/12-0-2.jpg"/></span>
-  <span><img alt="" src="../Images/12-0-2-2.jpg"/></span>
-  <span>表12-2 …</span>
-  </p>
+  <p><img alt="" src="../Images/12-0-2.jpg"/><br/><img alt="" src="../Images/12-0-2-2.jpg"/><br/>表12-2</p>
 
   <p>我们可以在MSDN里找到每一个API的文档，很多API还可以找到使用示例，因此MSDN是学习Win32 API极佳的工具。</p>
 
@@ -48,7 +48,7 @@
 
   <p>由于Windows API所提供的接口还是相对比较原始的，比如它所提供的网络相关的接口仅仅是socket级别的操作，如果用户要通过API访问HTTP资源，还需要自己实现HTTP协议，所以直接使用API进行程序开发往往效率较低。Windows系统在API之上建立了很多应用模块，这些应用模块是对Windows API的功能的扩展，比如对HTTP/FTP等协议进行包装的Internet模块（wininet.dll）对WinSocket API进行了扩展，这样程序开发者就可以通过Internet模块直接访问HTTP/FTP资源，而不需要自己实现一套HTTP/FTP协议。除了wininet.dll之外，Windows还有许多类似的对Windows API的包装模块，比如OPENGL模块、ODBC（统一的数据库接口）、WIA（数字图像设备接口）等。</p>
 
-  <p>12.3.2 为什么要使用Windows API</p>
+  <h3>12.3.2 为什么要使用Windows API</h3>
 
   <p>能省一事则省一事，微软为什么放着好好的系统调用不用，又要在CRT和系统调用之间增加一层Windows API层呢？</p>
 
@@ -64,13 +64,17 @@
 
   <p>Windows API以DLL导出函数的形式存在也自然是水到渠成，我们知道DLL作为Windows系统的最基本的模块组织形式，它有着良好的接口定义和灵活的组合方式。DLL基本上是Windows系统上很多高级接口和程序设计方法的基石，包括内核与驱动程序、COM、OLE、ActiveX等都是基于DLL技术的。</p>
 
-  <p>银弹</p>
+  <blockquote>
 
-  <p>很多时候人们把这种通过在软件体系结构中增加层以解决兼容性问题的做法又叫做“银弹”。古老相传，只有银弹(silver bullet)才能杀死巫士、巨人、有魔力的动物，譬如狼人。在现代软件工程的巨著《人月神话》中，作者把规模越来越大的软件开发项目比作无法控制的怪物，希望有一样技术，能够像银弹彻底杀死狼人那样，彻底解决这个问题。因而现在计算机界中的银弹，指的就是能够迅速解决各种问题的“万灵药”。</p>
+    <p><b>银弹</b></p>
 
-  <p>当某个软件某个层面要发生变化，却要保持与之相关联的另一方面不变时，加一个中间层即可。Windows API层就是这样的一个“银弹”。</p>
+    <p>很多时候人们把这种通过在软件体系结构中增加层以解决兼容性问题的做法又叫做“银弹”。古老相传，只有银弹(silver bullet)才能杀死巫士、巨人、有魔力的动物，譬如狼人。在现代软件工程的巨著《人月神话》中，作者把规模越来越大的软件开发项目比作无法控制的怪物，希望有一样技术，能够像银弹彻底杀死狼人那样，彻底解决这个问题。因而现在计算机界中的银弹，指的就是能够迅速解决各种问题的“万灵药”。</p>
 
-  <p>Windows API的实例</p>
+    <p>当某个软件某个层面要发生变化，却要保持与之相关联的另一方面不变时，加一个中间层即可。Windows API层就是这样的一个“银弹”。</p>
+
+  </blockquote>
+
+  <h4>Windows API的实例</h4>
 
   <p>我们知道Windows NT系列与Windows 9x系列是两个内核完全不同的操作系统，它们分别属于两个不同的Windows产品线，前者的目的主要为商业应用，它的内核以稳定高效著称；而后者是以家庭和多媒体应用为目标，注重体系应用程序的兼容性（支持DOS程序）和多媒体功能。</p>
 
@@ -146,11 +150,11 @@ CreateFileW(
 
   <p>对上面的代码我们进行了简化，但是它表达的思想与实际的实现是一致的。可以想象，在Windows 9x的kernel32.dll所进行的恰恰是相反的步骤，CreateFileW函数中的宽字符串通过WideCharToMultiByte()被转换成了ANSI字符串，然后调用CreateFileA。API层在这一过程中所扮演的角色可以如图12-10所示。</p>
 
-  <p><span><img alt="" src="../Images/12-10.jpg"/></span> <span>图12-10 Windows NT和Windows 9x的API层次结构对比 …</span></p>
+  <p><img alt="" src="../Images/12-10.jpg"/><br/>图12-10 Windows NT和Windows 9x的API层次结构对比</p>
 
   <p>所以不管内核如何改变接口，只要维持API层面的接口不变，理论上所有的应用程序都不用重新编译就可以正常运行，这也是Windows API存在的主要原因。</p>
 
-  <p>12.3.3 API与子系统</p>
+  <h3>12.3.3 API与子系统</h3>
 
   <p>作为一个商业操作系统，应用程序兼容性是评价操作系统是否有竞争力最重要的指标之一。一方面从用户的角度看，如果一个商业操作系统只能运行数量很少的应用程序，是不会有人使用的；从应用程序的开发者角度看，他们投入了巨大的精力在应用程序上，如果操作系统不支持这些应用程序，无疑会使开发者的努力白费。微软最初在开发Windows NT的时候除了考虑向后兼容性之外（兼容其他版本Windows），它还考虑到了兼容Windows之外的操作系统。</p>
 
