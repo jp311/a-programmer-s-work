@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId" version="2.0">
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="ISBN" version="2.0">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
     <dc:title>程序员的自我修养</dc:title>
-    <dc:creator opf:role="aut">潘爱民</dc:creator>
-    <dc:creator opf:role="aut">石凡</dc:creator>
     <dc:creator opf:role="aut">愈甲子</dc:creator>
-    <dc:identifier id="BookId" opf:scheme="ISBN">9787121085116</dc:identifier>
+    <dc:contributor opf:role="aut">石凡</dc:contributor>
+    <dc:contributor opf:role="aut">潘爱民</dc:contributor>
+    <dc:identifier id="ISBN" opf:scheme="ISBN">9787121085116</dc:identifier>
     <dc:publisher>电子工业出版社</dc:publisher>
     <dc:language>zh-CN</dc:language>
+    <dc:date>2009-04</dc:date>
     <meta name="cover" content="cover.jpg"/>
   </metadata>
   <manifest>
@@ -215,6 +216,7 @@
     <item href="Images/3-0-19.jpg" id="x3-0-19.jpg" media-type="image/jpeg"/>
     <item href="Images/3-0-2.jpg" id="x3-0-2.jpg" media-type="image/jpeg"/>
     <item href="Images/3-0-3.jpg" id="x3-0-3.jpg" media-type="image/jpeg"/>
+    <item href="Images/3-0-4-2.jpg" id="x3-0-4-2.jpg" media-type="image/jpeg"/>
     <item href="Images/3-0-4.jpg" id="x3-0-4.jpg" media-type="image/jpeg"/>
     <item href="Images/3-0-5.jpg" id="x3-0-5.jpg" media-type="image/jpeg"/>
     <item href="Images/3-0-6.jpg" id="x3-0-6.jpg" media-type="image/jpeg"/>
@@ -295,7 +297,6 @@
     <item href="Images/a-0-2.jpg" id="a-0-2.jpg" media-type="image/jpeg"/>
     <item href="Images/a-0.jpg" id="a-0.jpg" media-type="image/jpeg"/>
     <item href="Images/cover.jpg" id="cover.jpg" media-type="image/jpeg"/>
-    <item href="Images/3-0-4-2.jpg" id="3-0-4-2.jpg" media-type="image/jpeg"/>
   </manifest>
   <spine toc="ncx">
     <itemref idref="x0.html"/>
