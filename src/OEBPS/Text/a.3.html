@@ -12,227 +12,251 @@
 
   <h3>A.3.1 gcc，GCC编译器</h3>
 
-  <p>-E：只进行预处理并把预处理结果输出。</p>
+  <ul>
 
-  <p>-c：只编译不链接。</p>
+    <li>-E：只进行预处理并把预处理结果输出。</li>
 
-  <p>-o &lt;filename&gt;：指定输出文件名。</p>
+    <li>-c：只编译不链接。</li>
 
-  <p>-S：输出编译后的汇编代码文件。</p>
+    <li>-o &lt;filename&gt;：指定输出文件名。</li>
 
-  <p>-I：指定头文件路径。</p>
+    <li>-S：输出编译后的汇编代码文件。</li>
 
-  <p>-e name：指定name为程序入口地址。</p>
+    <li>-I：指定头文件路径。</li>
 
-  <p>-ffreestanding：编译独立的程序，不会自动链接C运行库、启动文件等。</p>
+    <li>-e name：指定name为程序入口地址。</li>
 
-  <p>-finline-functions,-fno-inline-functions：启用/关闭内联函数。</p>
+    <li>-ffreestanding：编译独立的程序，不会自动链接C运行库、启动文件等。</li>
 
-  <p>-g：在编译结果中加入调试信息，-ggdb就是加入GDB调试器能够识别的格式。</p>
+    <li>-finline-functions,-fno-inline-functions：启用/关闭内联函数。</li>
 
-  <p>-L &lt;directory&gt;：指定链接时查找路径，多个路径之间用冒号隔开。</p>
+    <li>-g：在编译结果中加入调试信息，-ggdb就是加入GDB调试器能够识别的格式。</li>
 
-  <p>-nostartfiles：不要链接启动文件，比如crtbegin.o、crtend.o。</p>
+    <li>-L &lt;directory&gt;：指定链接时查找路径，多个路径之间用冒号隔开。</li>
 
-  <p>-nostdlib：不要链接标准库文件，主要是C运行库。</p>
+    <li>-nostartfiles：不要链接启动文件，比如crtbegin.o、crtend.o。</li>
 
-  <p>-O0：关闭所有优化选项。</p>
+    <li>-nostdlib：不要链接标准库文件，主要是C运行库。</li>
 
-  <p>-shared：产生共享对象文件。</p>
+    <li>-O0：关闭所有优化选项。</li>
 
-  <p>-static：使用静态链接。</p>
+    <li>-shared：产生共享对象文件。</li>
 
-  <p>-Wall：对源代码中的多数编译警告进行启用。</p>
+    <li>-static：使用静态链接。</li>
 
-  <p>-fPIC：使用地址无关代码模式进行编译。</p>
+    <li>-Wall：对源代码中的多数编译警告进行启用。</li>
 
-  <p>-fPIE：使用地址无关代码模式编译可执行文件。</p>
+    <li>-fPIC：使用地址无关代码模式进行编译。</li>
 
-  <p>-XLinker &lt;option&gt;：把option传递给链接器。</p>
+    <li>-fPIE：使用地址无关代码模式编译可执行文件。</li>
 
-  <p>-Wl &lt;option&gt;：把option传递给链接器，与上面的选项类似。</p>
+    <li>-XLinker &lt;option&gt;：把option传递给链接器。</li>
 
-  <p>-fomit-frame-pointer：禁止使用EBP作为函数帧指针。</p>
+    <li>-Wl &lt;option&gt;：把option传递给链接器，与上面的选项类似。</li>
 
-  <p>-fno-builtin：禁止GCC编译器内置函数。</p>
+    <li>-fomit-frame-pointer：禁止使用EBP作为函数帧指针。</li>
 
-  <p>-fno-stack-protector：是指关闭堆栈保护功能。</p>
+    <li>-fno-builtin：禁止GCC编译器内置函数。</li>
 
-  <p>-ffunction-sections：将每个函数编译到独立的代码段。</p>
+    <li>-fno-stack-protector：是指关闭堆栈保护功能。</li>
 
-  <p>-fdata-sections：将全局/静态变量编译到独立的数据段。</p>
+    <li>-ffunction-sections：将每个函数编译到独立的代码段。</li>
+
+    <li>-fdata-sections：将全局/静态变量编译到独立的数据段。</li>
+
+  </ul>
 
   <h3>A.3.2 ld，GNU链接器</h3>
 
-  <p>-static：静态链接。</p>
+  <ul>
 
-  <p>-l&lt;libname&gt;：指定链接某个库。</p>
+    <li>-static：静态链接。</li>
 
-  <p>-e name：指定name为程序入口。</p>
+    <li>-l&lt;libname&gt;：指定链接某个库。</li>
 
-  <p>-r：合并目标文件，不进行最终链接。</p>
+    <li>-e name：指定name为程序入口。</li>
 
-  <p>-L &lt;directory&gt;：指定链接时查找路径，多个路径之间用冒号隔开。</p>
+    <li>-r：合并目标文件，不进行最终链接。</li>
 
-  <p>-M：将链接时的符号和地址输出成一个映射文件。</p>
+    <li>-L &lt;directory&gt;：指定链接时查找路径，多个路径之间用冒号隔开。</li>
 
-  <p>-o：指定输出文件名。</p>
+    <li>-M：将链接时的符号和地址输出成一个映射文件。</li>
 
-  <p>-s：清除输出文件中的符号信息。</p>
+    <li>-o：指定输出文件名。</li>
 
-  <p>-S：清除输出文件中的调试信息。</p>
+    <li>-s：清除输出文件中的符号信息。</li>
 
-  <p>-T &lt;scriptfile&gt;：指定链接脚本文件。</p>
+    <li>-S：清除输出文件中的调试信息。</li>
 
-  <p>-version-script &lt;file&gt;：指定符号版本脚本文件。</p>
+    <li>-T &lt;scriptfile&gt;：指定链接脚本文件。</li>
 
-  <p>-soname &lt;name&gt;：指定输出共享库的SONAME。</p>
+    <li>-version-script &lt;file&gt;：指定符号版本脚本文件。</li>
 
-  <p>-export-dynamic：将全局符号全部导出。</p>
+    <li>-soname &lt;name&gt;：指定输出共享库的SONAME。</li>
 
-  <p>-verbose：链接时输出详细信息。</p>
+    <li>-export-dynamic：将全局符号全部导出。</li>
 
-  <p>–rpath &lt;path&gt;：指定链接时库查找路径。</p>
+    <li>-verbose：链接时输出详细信息。</li>
+
+    <li>-rpath &lt;path&gt;：指定链接时库查找路径。</li>
+
+  </ul>
 
   <h3>A.3.3 objdump，GNU目标文件可执行文件查看器</h3>
 
-  <p>-a：列举.a文件中所有的目标文件。</p>
+  <ul>
 
-  <p>-b bfdname：指定BFD名。</p>
+    <li>-a：列举.a文件中所有的目标文件。</li>
 
-  <p>-C：对于C++符号名进行反修饰（Demangle）。</p>
+    <li>-b bfdname：指定BFD名。</li>
 
-  <p>-g：显示调试信息。</p>
+    <li>-C：对于C++符号名进行反修饰（Demangle）。</li>
 
-  <p>-d：对包含机器指令的段进行反汇编。</p>
+    <li>-g：显示调试信息。</li>
 
-  <p>-D：对所有的段进行反汇编。</p>
+    <li>-d：对包含机器指令的段进行反汇编。</li>
 
-  <p>-f：显示目标文件文件头。</p>
+    <li>-D：对所有的段进行反汇编。</li>
 
-  <p>-h：显示段表。</p>
+    <li>-f：显示目标文件文件头。</li>
 
-  <p>-l：显示行号信息。</p>
+    <li>-h：显示段表。</li>
 
-  <p>-p：显示专有头部信息，具体内容取决于文件格式。</p>
+    <li>-l：显示行号信息。</li>
 
-  <p>-r：显示重定位信息。</p>
+    <li>-p：显示专有头部信息，具体内容取决于文件格式。</li>
 
-  <p>-R：显示动态链接重定位信息。</p>
+    <li>-r：显示重定位信息。</li>
 
-  <p>-s：显示文件所有内容。</p>
+    <li>-R：显示动态链接重定位信息。</li>
 
-  <p>-S：显示源代码和反汇编代码（包含-d参数）。</p>
+    <li>-s：显示文件所有内容。</li>
 
-  <p>-W：显示文件中包含有DWARF调试信息格式的段。</p>
+    <li>-S：显示源代码和反汇编代码（包含-d参数）。</li>
 
-  <p>-t：显示文件中的符号表。</p>
+    <li>-W：显示文件中包含有DWARF调试信息格式的段。</li>
 
-  <p>-T：显示动态链接符号表。</p>
+    <li>-t：显示文件中的符号表。</li>
 
-  <p>-x：显示文件的所有文件头。</p>
+    <li>-T：显示动态链接符号表。</li>
+
+    <li>-x：显示文件的所有文件头。</li>
+
+  </ul>
 
   <h3>A.3.4 cl，MSVC编译器</h3>
 
-  <p>/c：只编译不链接。</p>
+  <ul>
 
-  <p>/Za：禁止语言扩展。</p>
+    <li>/c：只编译不链接。</li>
 
-  <p>/link：链接指定的模块或给链接器传递参数。</p>
+    <li>/Za：禁止语言扩展。</li>
 
-  <p>/Od：禁止优化。</p>
+    <li>/link：链接指定的模块或给链接器传递参数。</li>
 
-  <p>/O2：以运行速度最快为目标优化。</p>
+    <li>/Od：禁止优化。</li>
 
-  <p>/O1：以最节省空间为目标优化。</p>
+    <li>/O2：以运行速度最快为目标优化。</li>
 
-  <p>/GR或/GR-：开启或关闭RTTI。</p>
+    <li>/O1：以最节省空间为目标优化。</li>
 
-  <p>/Gy：开启函数级别链接。</p>
+    <li>/GR或/GR-：开启或关闭RTTI。</li>
 
-  <p>/GS或/GS-：开启或关闭。</p>
+    <li>/Gy：开启函数级别链接。</li>
 
-  <p>/Fa[file]：输出汇编文件。</p>
+    <li>/GS或/GS-：开启或关闭。</li>
 
-  <p>/E：只进行预处理并且把结果输出。</p>
+    <li>/Fa[file]：输出汇编文件。</li>
 
-  <p>/I：指定头文件包含目录。</p>
+    <li>/E：只进行预处理并且把结果输出。</li>
 
-  <p>/Zi：启用调试信息。</p>
+    <li>/I：指定头文件包含目录。</li>
 
-  <p>/LD：编译产生DLL文件。</p>
+    <li>/Zi：启用调试信息。</li>
 
-  <p>/LDd：编译产生DLL文件（调试版）。</p>
+    <li>/LD：编译产生DLL文件。</li>
 
-  <p>/MD：与动态多线程版本运行库MSVCRT.LIB链接。</p>
+    <li>/LDd：编译产生DLL文件（调试版）。</li>
 
-  <p>/MDd：与调试版动态多线程版本运行库MSVCRTD.LIB链接。</p>
+    <li>/MD：与动态多线程版本运行库MSVCRT.LIB链接。</li>
 
-  <p>/MT：与静态多线程版本运行库LIBCMT.LIB链接。</p>
+    <li>/MDd：与调试版动态多线程版本运行库MSVCRTD.LIB链接。</li>
 
-  <p>/MTd：与调试版静态多线程版本运行库LIBCMTD.LIB链接。</p>
+    <li>/MT：与静态多线程版本运行库LIBCMT.LIB链接。</li>
+
+    <li>/MTd：与调试版静态多线程版本运行库LIBCMTD.LIB链接。</li>
+
+  </ul>
 
   <h3>A.3.5 link，MSVC链接器</h3>
 
-  <p>/BASE:address：指定输出文件的基地址。</p>
+  <ul>
 
-  <p>/DEBUG：输出调试模式版本。</p>
+    <li>/BASE:address：指定输出文件的基地址。</li>
 
-  <p>/DEF:filename：指定模块定义文件.DEF。</p>
+    <li>/DEBUG：输出调试模式版本。</li>
 
-  <p>/DEFAULTLIB:library：指定默认运行库。</p>
+    <li>/DEF:filename：指定模块定义文件.DEF。</li>
 
-  <p>/DLL：产生DLL。</p>
+    <li>/DEFAULTLIB:library：指定默认运行库。</li>
 
-  <p>/ENTRY:symbol：指定程序入口。</p>
+    <li>/DLL：产生DLL。</li>
 
-  <p>/EXPORT:symbol：指定某个符号为导出符号。</p>
+    <li>/ENTRY:symbol：指定程序入口。</li>
 
-  <p>/HEAP：指定默认堆大小。</p>
+    <li>/EXPORT:symbol：指定某个符号为导出符号。</li>
 
-  <p>/LIBPATH:dir：指定链接时库搜索路径。</p>
+    <li>/HEAP：指定默认堆大小。</li>
 
-  <p>/MAP[:filename]：产生链接MAP文件。</p>
+    <li>/LIBPATH:dir：指定链接时库搜索路径。</li>
 
-  <p>/NODEFAULTLIB[:library]：禁止默认运行库。</p>
+    <li>/MAP[:filename]：产生链接MAP文件。</li>
 
-  <p>/OUT:filename：指定输出文件名。</p>
+    <li>/NODEFAULTLIB[:library]：禁止默认运行库。</li>
 
-  <p>/RELEASE：以发布版本产生输出文件。</p>
+    <li>/OUT:filename：指定输出文件名。</li>
 
-  <p>/STACK：指定默认栈大小。</p>
+    <li>/RELEASE：以发布版本产生输出文件。</li>
 
-  <p>/SUBSYSTEM：指定子系统。</p>
+    <li>/STACK：指定默认栈大小。</li>
+
+    <li>/SUBSYSTEM：指定子系统。</li>
+
+  </ul>
 
   <h3>A.3.6 dumpbin，MSVC的COFF/PE文件查看器</h3>
 
-  <p>/ALL：显示所有信息。</p>
+  <ul>
 
-  <p>/ARCHIVEMEMBERS：显示.LIB文件中所有目标文件列表。</p>
+    <li>/ALL：显示所有信息。</li>
 
-  <p>/DEPENDENTS：显示文件的动态链接依赖关系。</p>
+    <li>/ARCHIVEMEMBERS：显示.LIB文件中所有目标文件列表。</li>
 
-  <p>/DIRECTIVES：显示链接器指示。</p>
+    <li>/DEPENDENTS：显示文件的动态链接依赖关系。</li>
 
-  <p>/DISASM：显示反汇编。</p>
+    <li>/DIRECTIVES：显示链接器指示。</li>
 
-  <p>/EXPORTS：显示导出函数表。</p>
+    <li>/DISASM：显示反汇编。</li>
 
-  <p>/HEADERS：显示文件头。</p>
+    <li>/EXPORTS：显示导出函数表。</li>
 
-  <p>/IMPORTS：显示导入函数表。</p>
+    <li>/HEADERS：显示文件头。</li>
 
-  <p>/LINENUMBERS：显示行号信息。</p>
+    <li>/IMPORTS：显示导入函数表。</li>
 
-  <p>/RELOCATIONS：显示重定位信息。</p>
+    <li>/LINENUMBERS：显示行号信息。</li>
 
-  <p>/SECTION:name ：显示某个段。</p>
+    <li>/RELOCATIONS：显示重定位信息。</li>
 
-  <p>/SECTION：显示文件概要信息。</p>
+    <li>/SECTION:name ：显示某个段。</li>
 
-  <p>/SYMBOLS：显示文件符号表。</p>
+    <li>/SECTION：显示文件概要信息。</li>
 
-  <p>/TLS：显示线程局部存储TLS信息。</p>
+    <li>/SYMBOLS：显示文件符号表。</li>
+
+    <li>/TLS：显示线程局部存储TLS信息。</li>
+
+  </ul>
 
 </body>
 
