@@ -35,25 +35,33 @@ int main(int argc, char* argv[])
 
   <p>上面这段程序看似简单，实际上它用到了C++运行库的诸多功能，我们将所用到的特性列举如下：</p>
 
-  <p>string类的实现。</p>
+  <ul>
 
-  <p>stream类的实现，包括操纵符（Manupilator）（endl）。</p>
+    <li>string类的实现。</li>
 
-  <p>全局对象构造和析构（cout）。</p>
+    <li>stream类的实现，包括操纵符（Manupilator）（endl）。</li>
 
-  <p>new/delete。</p>
+    <li>全局对象构造和析构（cout）。</li>
+
+    <li>new/delete。</li>
+
+  </ul>
 
   <p>在开始本节之前，还是按照前面Mini CRT实现时的做法：在进入具体主题之前先列举一些实现的原则。在实现Mini CRT对C++的支持时，我们遵循如下原则：</p>
 
-  <p>HelloWorld程序无须用到的功能就不实现，比如异常。</p>
+  <ul>
 
-  <p>尽量简化设计，尽量符合C++标准库的规范。</p>
+    <li>HelloWorld程序无须用到的功能就不实现，比如异常。</li>
 
-  <p>对于可以直接在头文件实现的模块尽量在头文件中实现，以免诸多的类、函数的声明和定义造成代码量膨胀，不便于演示。</p>
+    <li>尽量简化设计，尽量符合C++标准库的规范。</li>
 
-  <p>与前面的Mini CRT实现一样，运行库代码要做到可以在Windows和Linux上同时运行，因此对于平台相关部分要使用条件编译分别实现。虽然C++运行库几乎没有与系统相关的部分（全局构造和析构除外），C运行库已经将大部分系统相关部分封装成C标准库接口，C++运行库只须要调用这些接口即可。</p>
+    <li>对于可以直接在头文件实现的模块尽量在头文件中实现，以免诸多的类、函数的声明和定义造成代码量膨胀，不便于演示。</li>
 
-  <p>另外值得一提的是，模板是不需要运行库支持的，它的实现依赖于编译器和链接器，对运行库基本上没有要求。</p>
+    <li>与前面的Mini CRT实现一样，运行库代码要做到可以在Windows和Linux上同时运行，因此对于平台相关部分要使用条件编译分别实现。虽然C++运行库几乎没有与系统相关的部分（全局构造和析构除外），C运行库已经将大部分系统相关部分封装成C标准库接口，C++运行库只须要调用这些接口即可。</li>
+
+    <li>另外值得一提的是，模板是不需要运行库支持的，它的实现依赖于编译器和链接器，对运行库基本上没有要求。</li>
+
+  </ul>
 
   <h3>13.3.1 new与delete</h3>
 
@@ -240,7 +248,11 @@ int atexit(atexit_func_t func);
 
   <p><code>__cxa_atexit</code>所接受的函数指针必须有一个<code>void*</code>型指针作为参数，并且调用<code>__cxa_atexit</code>的时候，这个参数<code>(void* arg)</code>也要随着记录下来，等到要执行的时候再传递进去。也就是说<code>，__cxa_atexit()</code>注册的回调函数是带一个参数的，我们必须把这个参数也记下来。</p>
 
-  <p><code>__cxa_atexit</code>的最后一个参数可以忽略，在这里不会用到。</p>
+  <blockquote>
+
+    <p><code>__cxa_atexit</code>的最后一个参数可以忽略，在这里不会用到。</p>
+
+  </blockquote>
 
   <p>于是在设计链表时要考虑到这一点，链表的节点必须能够区分是否是<code>atexit()</code>函数<code>__cxa_atexit()</code>注册的函数，如果是<code>__cxa_atexit()</code>注册的函数，还要把回调函数的参数保存下来。我们定义链表节点的结构如下：</p>
 
@@ -362,13 +374,17 @@ void exit(int exitCode)
 
   <p>当然，在真正的STL实现中，string和stream的实现十分复杂，不仅有强大的模板定制功能、缓冲，庞大的继承体系及一系列辅助类。我们在实现时还是以展示和剖析为最基本的目的，简化一切能够简化的内容。string和stream的实现将遵循下列原则。</p>
 
-  <p>不支持模板定制，即这两个类仅支持char字符串类型，不支持自定义分配器等，没有<code>basic_string</code>模板类。</p>
+  <ul>
 
-  <p>流对象仅实现ofstream，且没有继承体系，即没有ios_base、stream、ostream、fstream等类似的相关类。</p>
+    <li>不支持模板定制，即这两个类仅支持char字符串类型，不支持自定义分配器等，没有<code>basic_string</code>模板类。</li>
 
-  <p>流对象没有内置的缓冲功能，即没有<code>stream_buffer</code>类支持。</p>
+    <li>流对象仅实现ofstream，且没有继承体系，即没有ios_base、stream、ostream、fstream等类似的相关类。</li>
 
-  <p>cout作为ofstream的一个实例，它的输出文件是标准输出。</p>
+    <li>流对象没有内置的缓冲功能，即没有<code>stream_buffer</code>类支持。</li>
+
+    <li>cout作为ofstream的一个实例，它的输出文件是标准输出。</li>
+
+  </ul>
 
   <p>stream和string类的实现用到了不少C++语言的特性，已经一定程度上偏离了本书所要描述的主题，因此在此仅将它们的实现源代码列出，而不做更多的详细分析。有兴趣的读者可以参考C++ STL的相关实现的资料，如果对C++语言本身不熟悉，也可以跳过这一节，这并不影响对Mini CRT整体实现的理解。string和iostream的实现如清单13-13、清单13-14、清单13-15所示。</p>
 
