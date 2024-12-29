@@ -20,14 +20,14 @@
 
   <p>与ELF文件相同，PE/COFF格式也是采用了那种基于段的格式。一个段可以包含代码、数据或其他信息，在PE/COFF文件中，至少包含一个代码段，这个代码段的名字往往叫做“.code”，数据段叫做“.data”。不同的编译器产生的目标文件的段名不同，VISUAL C++使用“.code”和“.data”，而Borland的编译器使用“CODE”，“DATA”。也就是说跟ELF一样，段名只有提示性作用，并没有实际意义。当然，如果使用链接脚本来控制链接，段名可能会起到一定的作用。</p>
 
-  <p>跟ELF一样，PE中也允许程序员将变量或函数放到自定义的段。在GCC中我们使用“<code>__attribute__((section("name")))</code>”扩展属性，在VISUAL C++中可以使用“<code>#pragma</code>”编译器指示。比如下面这个语句：</p>
+  <p>跟ELF一样，PE中也允许程序员将变量或函数放到自定义的段。在GCC中我们使用“__attribute__((section("name")))”扩展属性，在VISUAL C++中可以使用“#pragma”编译器指示。比如下面这个语句：</p>
 
   <pre>#pragma data_seg("FOO")
 int global = 1;
 #pragma data_seg(".data")
 </pre>
 
-  <p>就表示把所有全局变量“global”放到“FOO”段里面去，然后再使用“<code>#pragram</code>”将这个编译器指示换回来，恢复到“.data”，否则，任何全局变量和静态变量都会被放到“FOO”段。</p>
+  <p>就表示把所有全局变量“global”放到“FOO”段里面去，然后再使用“#pragram”将这个编译器指示换回来，恢复到“.data”，否则，任何全局变量和静态变量都会被放到“FOO”段。</p>
 
 </body>
 

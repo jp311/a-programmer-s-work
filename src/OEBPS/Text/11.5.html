@@ -16,7 +16,7 @@
 
   <p>我们知道C语言的运行库十分庞大，前面介绍的启动部分、多线程、全局构造和析构这些内容其实都不是占CRT篇幅最大的部分。与任何系统级别的软件一样，真正复杂的并且有挑战性的往往是软件与外部通信的部分，即IO部分。</p>
 
-  <p>前面的章节中对运行库的分析都是比较粗略的，虽然涉及运行库的各个方面，但是在运行库实现的深度上挖掘得不够。我们知道，IO部分实际上是运行库中最为重要也最为复杂的部分之一，在结束本章之前，最后来仔细了解C语言标准库中一个非常重要的IO函数fread的具体实现，我们知道fread最终是通过Windows的系统API： ReadFile()来实现对文件的读取的，但是从fread到ReadFile之间究竟发生了什么却是一个未知的迷。我们希望通过对<code>fread()</code>的挖掘，能够打通从运行库函数fread到Windows系统API的ReadFile()函数之间的这条通路，这有助于对运行库和IO的进一步了解。</p>
+  <p>前面的章节中对运行库的分析都是比较粗略的，虽然涉及运行库的各个方面，但是在运行库实现的深度上挖掘得不够。我们知道，IO部分实际上是运行库中最为重要也最为复杂的部分之一，在结束本章之前，最后来仔细了解C语言标准库中一个非常重要的IO函数fread的具体实现，我们知道fread最终是通过Windows的系统API： ReadFile()来实现对文件的读取的，但是从fread到ReadFile之间究竟发生了什么却是一个未知的迷。我们希望通过对fread()的挖掘，能够打通从运行库函数fread到Windows系统API的ReadFile()函数之间的这条通路，这有助于对运行库和IO的进一步了解。</p>
 
   <p>首先我们来看fread的函数声明：</p>
 
@@ -128,11 +128,11 @@ size_t __cdecl fread_s(
 }
 </pre>
 
-  <p><code>fread_s</code>的参数比fread多一个bufferSize，这个参数用于指定参数buffer的大小。在fread中，这个参数直接被定义为SIZE_MAX，即<code>size_t</code>的最大值，表明fread不关心这个参数。而用户在使用<code>fread_s</code>时就可以指定这个参数，以达到防止越界的目的（fread_s的s是safe的意思）。<code>fread_s</code>首先对各个参数检查，然后使用<code>_lock_str</code>对文件进行加锁，以防止多个线程同时读取文件而导致缓冲区不一致。我们可以看到<code>fread_s</code>其实又把工作交给了<code>_fread_nolock_s</code>。</p>
+  <p>fread_s的参数比fread多一个bufferSize，这个参数用于指定参数buffer的大小。在fread中，这个参数直接被定义为SIZE_MAX，即size_t的最大值，表明fread不关心这个参数。而用户在使用fread_s时就可以指定这个参数，以达到防止越界的目的（fread_s的s是safe的意思）。fread_s首先对各个参数检查，然后使用_lock_str对文件进行加锁，以防止多个线程同时读取文件而导致缓冲区不一致。我们可以看到fread_s其实又把工作交给了_fread_nolock_s。</p>
 
   <h3>11.5.3 fread_nolock_s</h3>
 
-  <p><code>fread_nolock_s</code>是进行实际工作的函数，为了便于理解，下面会分段列出<code>fread_nolock_s</code>的实现，并且将省去所有的参数检查和错误检查。同样，还将省去64位部分的代码。</p>
+  <p>fread_nolock_s是进行实际工作的函数，为了便于理解，下面会分段列出fread_nolock_s的实现，并且将省去所有的参数检查和错误检查。同样，还将省去64位部分的代码。</p>
 
   <pre>fread -&gt; fread_s -&gt; _fread_nolock_s:
 
@@ -159,7 +159,7 @@ size_t __cdecl _fread_nolock_s(
     count = total = elementSize * num;
 </pre>
 
-  <p>这一段是<code>fread_nolock_s</code>的初始化部分。在它的局部变量中，data将始终指向buffer中尚未被写入的起始部分。在最开始的时候，data指向buffer的开头。dataSize记录了buffer中还可以写入的字节数，理论上，data + dataSize = buffer + bufferSize。如图11-12所示。</p>
+  <p>这一段是fread_nolock_s的初始化部分。在它的局部变量中，data将始终指向buffer中尚未被写入的起始部分。在最开始的时候，data指向buffer的开头。dataSize记录了buffer中还可以写入的字节数，理论上，data + dataSize = buffer + bufferSize。如图11-12所示。</p>
 
   <p><img alt="" src="../Images/11-12.jpg"/><br/>图11-12 data、buffer、bufferSize和dataSize</p>
 
@@ -180,7 +180,7 @@ size_t __cdecl _fread_nolock_s(
 typedef struct _iobuf FILE;
 </pre>
 
-  <p>在这里，<code>_base</code>字段指向一个字符数组，即这个文件的缓冲，而<code>_bufsiz</code>记录着这个缓冲的大小。<code>_ptr</code>和<code>fread_nolock_s</code>的局部变量data一样，指向buffer中第一个未读的字节，而<code>_cnt</code>记录剩余未读字节的个数。<code>_flag</code>记录了FILE结构所代表的打开文件的一些属性，目前我们感兴趣的是3个标志：</p>
+  <p>在这里，_base字段指向一个字符数组，即这个文件的缓冲，而_bufsiz记录着这个缓冲的大小。_ptr和fread_nolock_s的局部变量data一样，指向buffer中第一个未读的字节，而_cnt记录剩余未读字节的个数。_flag记录了FILE结构所代表的打开文件的一些属性，目前我们感兴趣的是3个标志：</p>
 
   <pre>#define _IOYOURBUF    0x0100
 #define _IOMYBUF      0x0008
@@ -229,7 +229,7 @@ typedef struct _iobuf FILE;
 }
 </pre>
 
-  <p>在if的判断句中，anybuf判断文件是否有缓冲，而<code>stream-&gt;_cnt != 0</code>判断缓冲是否为空。因此当且仅当文件有缓冲且不为空时，这段代码才会执行。</p>
+  <p>在if的判断句中，anybuf判断文件是否有缓冲，而stream-&gt;_cnt != 0判断缓冲是否为空。因此当且仅当文件有缓冲且不为空时，这段代码才会执行。</p>
 
   <p>让我们一行一行地来看这段代码的作用。nbytes代表这次要从缓冲中读取多少字节。在这里，nbytes等于还须要读取的字节数（count）与缓冲剩余的字节数（stream-&gt;_cnt）中较小的一个。</p>
 
@@ -270,7 +270,7 @@ typedef struct _iobuf FILE;
 }
 </pre>
 
-  <p>在代码中，<code>_read</code>函数用于真正从文件读取数据。在这里我们先不管这个函数，在稍后的内容中会对此函数进行详细的介绍。如果要读取的数据不大于缓冲的尺寸，那么仅需要重新填充缓冲即可：</p>
+  <p>在代码中，_read函数用于真正从文件读取数据。在这里我们先不管这个函数，在稍后的内容中会对此函数进行详细的介绍。如果要读取的数据不大于缓冲的尺寸，那么仅需要重新填充缓冲即可：</p>
 
   <pre>else {
     if ((c = _filbuf(stream)) == EOF) {
@@ -282,11 +282,11 @@ typedef struct _iobuf FILE;
 }
 </pre>
 
-  <p><code>_filbuf</code>函数负责填充缓冲。该函数的具体实现重要的部分只有一行：</p>
+  <p>_filbuf函数负责填充缓冲。该函数的具体实现重要的部分只有一行：</p>
 
   <pre>stream-&gt;_cnt = _read(_fileno(stream), stream-&gt;_base, stream-&gt;_bufsiz);</pre>
 
-  <p>可以看见所有的线索都指向了<code>_read</code>函数。<code>_read</code>函数主要负责两件事:</p>
+  <p>可以看见所有的线索都指向了_read函数。_read函数主要负责两件事:</p>
 
   <ol>
 
@@ -298,7 +298,7 @@ typedef struct _iobuf FILE;
 
   <h3>11.5.4 _read</h3>
 
-  <p><code>_read</code>的代码位于crt/src/read.c。在省略了一部分无关紧要的代码之后，其内容如下：</p>
+  <p>_read的代码位于crt/src/read.c。在省略了一部分无关紧要的代码之后，其内容如下：</p>
 
   <pre>fread -&gt; fread_s -&gt; _fread_nolock_s -&gt; _read:
 
@@ -316,7 +316,7 @@ int __cdecl _read (int fh, void *buf, unsigned cnt)
     buffer = buf;
 </pre>
 
-  <p>这部分是<code>_read</code>函数的参数、局部变量和初始化部分。下面的代码处理一个单字节缓冲：</p>
+  <p>这部分是_read函数的参数、局部变量和初始化部分。下面的代码处理一个单字节缓冲：</p>
 
   <pre>if ((_osfile(fh) &amp; (FPIPE|FDEV)) &amp;&amp; _pipech(fh) != LF) 
 {
@@ -394,7 +394,7 @@ int __cdecl _read (int fh, void *buf, unsigned cnt)
             _osfile(fh) &amp;= ~FCRLF;
 </pre>
 
-  <p>首先需要检查文件是否是以文本模式打开，如果不是，就什么也不需要处理。<code>_osfile</code>是一个宏，用于访问一个句柄对应的ioinfo对象的osfile字段（还记得IO初始化时的osfile吗？）。当本次读文件读到的第一个字符是一个LF(‘\n’)时，需要在该句柄的osfile字段中加入FCRLF标记，表明一个\r\n可能跨过了两次读文件。这个标记在一些特殊场合下会有作用（例如ftell函数）。</p>
+  <p>首先需要检查文件是否是以文本模式打开，如果不是，就什么也不需要处理。_osfile是一个宏，用于访问一个句柄对应的ioinfo对象的osfile字段（还记得IO初始化时的osfile吗？）。当本次读文件读到的第一个字符是一个LF(‘\n’)时，需要在该句柄的osfile字段中加入FCRLF标记，表明一个\r\n可能跨过了两次读文件。这个标记在一些特殊场合下会有作用（例如ftell函数）。</p>
 
   <p>接下来要进行实际的转换，转换需要经历一个循环：</p>
 
@@ -516,7 +516,7 @@ int __cdecl _read (int fh, void *buf, unsigned cnt)
 
   <p><img alt="" src="../Images/11-15.jpg"/><br/>图11-15 ReadFile调用轨迹</p>
 
-  <p>在这个轨迹中，<code>_fread_nolock_s</code>的实现是最复杂的，因为它涉及缓冲区的操作，它也是读取文件的主要部分，如果我们使用fread读取一小块数据，有可能在<code>_fread_nolock_s</code>的时候发现所有所需要的数据都在缓冲中，就不需要通过_read和ReadFile向操作系统读取文件了，而是直接从缓冲区复制数据并返回，这样就减少了系统调用的开销。</p>
+  <p>在这个轨迹中，_fread_nolock_s的实现是最复杂的，因为它涉及缓冲区的操作，它也是读取文件的主要部分，如果我们使用fread读取一小块数据，有可能在_fread_nolock_s的时候发现所有所需要的数据都在缓冲中，就不需要通过_read和ReadFile向操作系统读取文件了，而是直接从缓冲区复制数据并返回，这样就减少了系统调用的开销。</p>
 
 </body>
 

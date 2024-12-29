@@ -220,7 +220,7 @@ JMP DWORD PTR [0x0040D11C]
 
   <p>即对于调用函数来说，它只是产生一般形式的指令“CALL XXXXXXXX”，然后在链接时，链接器把这个XXXXXXXX地址重定位到一段桩代码，即那条JMP指令处，然后这条JMP指令才通过IAT间接跳转到导入函数。我们知道，链接器一般情况下是不会产生指令的，那么这段包含JMP指令的桩代码来自何处呢？答案是来自产生DLL文件时伴随的那个LIB文件，即导入库。</p>
 
-  <p>编译器在产生导入库时，同一个导出函数会产生两个符号的定义，比如对于函数<code>foo</code>来说，它在导入库中有两个符号，一个是<code>foo</code>，另外一个是<code>__imp__foo</code>。这两个符号的区别是，<code>foo</code>这个符号指向<code>foo</code>函数的桩代码，而<code>__imp__foo</code>指向<code>foo</code>函数在IAT中的位置。所以当我们通过“<code>__declspec(dllimport)</code>”来声明foo导入函数时，编译器在编译时会在该导入函数前加上前缀“<code>__imp__</code>”，以确保跟导入库中的“<code>__imp__foo</code>”能够正确链接；如果不使用“<code>__declspec(dllimport)</code>”，那么编译器将产生一个正常的foo符号引用，以便于跟导入库中的foo符号定义相链接。</p>
+  <p>编译器在产生导入库时，同一个导出函数会产生两个符号的定义，比如对于函数foo来说，它在导入库中有两个符号，一个是foo，另外一个是__imp__foo。这两个符号的区别是，foo这个符号指向foo函数的桩代码，而__imp__foo指向foo函数在IAT中的位置。所以当我们通过“__declspec(dllimport)”来声明foo导入函数时，编译器在编译时会在该导入函数前加上前缀“__imp__”，以确保跟导入库中的“__imp__foo”能够正确链接；如果不使用“__declspec(dllimport)”，那么编译器将产生一个正常的foo符号引用，以便于跟导入库中的foo符号定义相链接。</p>
 
   <p>现在的MSVC编译器对于以上两种导入方式都支持，即程序员可以通过“__declspec(dllimport)”来声明导入函数，也可以不使用。但我们还是推荐使用“__declspec(dllimport)”，毕竟从性能上来讲，它比不使用该声明少了一条跳转指令。当然它还有其他的好处，我们到后面用到时还会提起。</p>
 

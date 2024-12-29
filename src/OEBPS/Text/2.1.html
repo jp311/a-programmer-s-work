@@ -36,27 +36,27 @@ Hello World
 
   <p>首先是源代码文件hello.c和相关的头文件，如stdio.h等被预编译器cpp预编译成一个.i文件。对于C++程序来说，它的源代码文件的扩展名可能是.cpp或.cxx，头文件的扩展名可能是.hpp，而预编译后的文件扩展名是.ii。第一步预编译的过程相当于如下命令（-E表示只进行预编译）：</p>
 
-  <pre>$gcc –E hello.c –o hello.i</pre>
+  <pre>$gcc -E hello.c -o hello.i</pre>
 
   <p>或者：</p>
 
   <pre>$cpp hello.c &gt; hello.i</pre>
 
-  <p>预编译过程主要处理那些源代码文件中的以“#”开始的预编译指令。比如“<code>#include</code>”、“<code>#define</code>”等，主要处理规则如下：</p>
+  <p>预编译过程主要处理那些源代码文件中的以“#”开始的预编译指令。比如“#include”、“#define”等，主要处理规则如下：</p>
 
   <ul>
 
-    <li>将所有的“<code>#define</code>”删除，并且展开所有的宏定义。</li>
+    <li>将所有的“#define”删除，并且展开所有的宏定义。</li>
 
-    <li>处理所有条件预编译指令，比如“<code>#if</code>”、“<code>#ifdef</code>”、“<code>#elif</code>”、“<code>#else</code>”、“<code>#endif</code>”。</li>
+    <li>处理所有条件预编译指令，比如“#if”、“#ifdef”、“#elif”、“#else”、“#endif”。</li>
 
-    <li>处理“<code>#include</code>”预编译指令，将被包含的文件插入到该预编译指令的位置。注意，这个过程是递归进行的，也就是说被包含的文件可能还包含其他文件。</li>
+    <li>处理“#include”预编译指令，将被包含的文件插入到该预编译指令的位置。注意，这个过程是递归进行的，也就是说被包含的文件可能还包含其他文件。</li>
 
-    <li>删除所有的注释“<code>//</code>”和“<code>/* */</code>”。</li>
+    <li>删除所有的注释“//”和“/* */”。</li>
 
     <li>添加行号和文件名标识，比如#2“hello.c”2，以便于编译时编译器产生调试用的行号信息及用于编译时产生编译错误或警告时能够显示行号。</li>
 
-    <li>保留所有的<code>#pragma</code>编译器指令，因为编译器须要使用它们。</li>
+    <li>保留所有的#pragma编译器指令，因为编译器须要使用它们。</li>
 
   </ul>
 
@@ -110,7 +110,7 @@ Execution times (seconds)
 
   <pre>ld -static crt1.o crti.o crtbeginT.o hello.o --start-group -lgcc -lgcc_eh -lc --end-group crtend.o crtn.o</pre>
 
-  <p>可以看到，我们需要将一大堆文件链接起来才可以得到“a.out”，即最终的可执行文件。看了这行复杂的命令，可能很多读者的疑惑更多了，crt1.o、crti.o、crtbeginT.o、crtend.o、crtn.o这些文件是什么？它们做什么用的？<code>-lgcc –lgcc_eh –lc</code>这些都是什么参数？为什么要使用它们？为什么要将它们和hello.o链接起来才可以得到可执行文件？等等。</p>
+  <p>可以看到，我们需要将一大堆文件链接起来才可以得到“a.out”，即最终的可执行文件。看了这行复杂的命令，可能很多读者的疑惑更多了，crt1.o、crti.o、crtbeginT.o、crtend.o、crtn.o这些文件是什么？它们做什么用的？-lgcc –lgcc_eh –lc这些都是什么参数？为什么要使用它们？为什么要将它们和hello.o链接起来才可以得到可执行文件？等等。</p>
 
   <p>这些问题正是本书所需要介绍的内容，它们看似简单，其实涉及了编译、链接和库，甚至是操作系统的一些很底层的内容。我们将紧紧围绕着这些内容，进行必要的分析。不过在分析这些内容之前，我们还是来关注一下上面这些过程中，编译器担任了一个什么样的角色。</p>
 

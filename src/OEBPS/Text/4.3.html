@@ -36,7 +36,7 @@ st_other = 0
 st_shndx = 0xfff2 SHN_COMMON
 </pre>
 
-  <p>可以看到它是一个全局的数据对象，它的类型为<code>SHN_COMMON</code>类型，这是一个典型的弱符号。那么如果我们在另外一个文件中也定义了<code>global_uninit_var</code>变量，且未初始化，它的类型为double，占8个字节，情况会怎么样呢？按照COMMON类型的链接规则，原则上讲最终链接后输出文件中，<code>global_uninit_var</code>的大小以输入文件中最大的那个为准。即这两个文件链接后输出文件中<code>global_uninit_var</code>所占的空间为8个字节。</p>
+  <p>可以看到它是一个全局的数据对象，它的类型为SHN_COMMON类型，这是一个典型的弱符号。那么如果我们在另外一个文件中也定义了global_uninit_var变量，且未初始化，它的类型为double，占8个字节，情况会怎么样呢？按照COMMON类型的链接规则，原则上讲最终链接后输出文件中，global_uninit_var的大小以输入文件中最大的那个为准。即这两个文件链接后输出文件中global_uninit_var所占的空间为8个字节。</p>
 
   <p>当然COMMON类型的链接规则是针对符号都是弱符号的情况，如果其中有一个符号为强符号，那么最终输出结果中的符号所占空间与强符号相同。值得注意的是，如果链接过程中有弱符号大小大于强符号，那么ld链接器会报如下警告：</p>
 
@@ -54,7 +54,7 @@ st_shndx = 0xfff2 SHN_COMMON
 
   </blockquote>
 
-  <p>GCC的“<code>-fno-common</code>”也允许我们把所有未初始化的全局变量不以COMMON块的形式处理，或者使用“<code>__attribute__</code>”扩展：</p>
+  <p>GCC的“-fno-common”也允许我们把所有未初始化的全局变量不以COMMON块的形式处理，或者使用“__attribute__”扩展：</p>
 
   <pre>int global __attribute__((nocommon));</pre>
 

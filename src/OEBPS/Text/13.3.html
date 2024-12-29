@@ -108,13 +108,13 @@ Disassembly of section .text:
   2d:   c3                      ret
 </pre>
 
-  <p>可以看到，new操作的实现实际上是调用了一个叫做<code>_Znwj</code>的函数，如果用c++filt将这个符号反修饰（Demangle），可以看到它的真面目：</p>
+  <p>可以看到，new操作的实现实际上是调用了一个叫做_Znwj的函数，如果用c++filt将这个符号反修饰（Demangle），可以看到它的真面目：</p>
 
   <pre>$c++filt _Znwj
 operator new(unsigned int)
 </pre>
 
-  <p>可以看到<code>_Znwj</code>实际上是一个叫做operator new的函数，这也是我们在C++中熟悉的操作符函数。在C++中，操作符实际上是一种特殊的函数，叫做操作符函数，一般new操作符函数被定义为：</p>
+  <p>可以看到_Znwj实际上是一个叫做operator new的函数，这也是我们在C++中熟悉的操作符函数。在C++中，操作符实际上是一种特殊的函数，叫做操作符函数，一般new操作符函数被定义为：</p>
 
   <pre>void* operator new(unsigned int size);</pre>
 
@@ -159,7 +159,7 @@ void operator delete[](void* p)
 
   <p>C++全局构造与析构的实现是有些特殊的，它与编译器、链接器的关系比较紧密。正如已经在第10章中所描述的一样，它们的实现是依赖于编译器、链接器和运行库三者共同的支持和协作的。Mini CRT对于全局对象构造与析构的实现也是基于第10章中描述的Glibc和MSVC CRT的，本质上没有多大的区别，仅仅是将它们简化到最简程度，保留本质而去除了一些繁琐的细节。</p>
 
-  <p>通过第10章的分析我们可以得知，C++全局构造和析构的实现在Glibc和MSVC CRT中的原理十分相似，构造函数主要实现的是依靠特殊的段合并后形成构造函数数组，而析构则依赖于<code>atexit()</code>函数。这一节中将主要关注全局构造的实现，而把<code>atexit()</code>的实现留到下一节中。</p>
+  <p>通过第10章的分析我们可以得知，C++全局构造和析构的实现在Glibc和MSVC CRT中的原理十分相似，构造函数主要实现的是依靠特殊的段合并后形成构造函数数组，而析构则依赖于atexit()函数。这一节中将主要关注全局构造的实现，而把atexit()的实现留到下一节中。</p>
 
   <p>全局构造对于MSVC来说，主要实现两个段“.CRT$XCA”和“.CRT$XCZ”，然后定义两个函数指针分别指向它们；而对于GCC来说，须要定义“.ctor”段的起始部分和结束部分，然后定义两个函数指针分别指向它们。真正的构造部分则只要由一个循环将这两个函数指针指向的所有函数都调用一遍即可。</p>
 
@@ -232,13 +232,13 @@ ctor_func crt_end[1] __attribute__ ((section(".ctors"))) =
 
   <h3>13.3.3 atexit实现</h3>
 
-  <p><code>atexit()</code>的用法十分简单，即由它注册的函数会在进程退出前，在<code>exit()</code>函数中被调用。<code>atexit()</code>和<code>exit()</code>函数实际上并不属于C++运行库的一部分，它们是C语言运行库的一部分。在前面实现Mini CRT时我们在<code>exit()</code>函数的实现中预留了对<code>atexit()</code>的支持。</p>
+  <p>atexit()的用法十分简单，即由它注册的函数会在进程退出前，在exit()函数中被调用。atexit()和exit()函数实际上并不属于C++运行库的一部分，它们是C语言运行库的一部分。在前面实现Mini CRT时我们在exit()函数的实现中预留了对atexit()的支持。</p>
 
-  <p>本来可以不实现<code>atexit()</code>的，毕竟它不是非常重要的CRT函数，但是在这里不得不实现atexit的原因是：所有全局对象的析构函数——不管是Linux还是Windows——都是通过atexit或其类似函数来注册的，以达到在程序退出时执行的目的。</p>
+  <p>本来可以不实现atexit()的，毕竟它不是非常重要的CRT函数，但是在这里不得不实现atexit的原因是：所有全局对象的析构函数——不管是Linux还是Windows——都是通过atexit或其类似函数来注册的，以达到在程序退出时执行的目的。</p>
 
-  <p>实现它的基本思路也很简单，就是使用一个链表把所有注册的函数存储起来，到<code>exit()</code>时将链表遍历一遍，执行其中所有的回调函数，Windows版的atexit的确可以按照这个思路实现。</p>
+  <p>实现它的基本思路也很简单，就是使用一个链表把所有注册的函数存储起来，到exit()时将链表遍历一遍，执行其中所有的回调函数，Windows版的atexit的确可以按照这个思路实现。</p>
 
-  <p>Linux版的atexit要复杂一些，导致这个的问题的原因是GCC实现全局对象的析构不是调用的atexit，而是调用的<code>__cxa_atexit</code>。这个函数在前面的全局构造和析构中也碰到过，它不是C语言标准库函数，它是GCC实现的一部分。为了兼容GCC，Mini CRT不得不实现它。它的定义与<code>atexit()</code>有所不同的是<code>，__cxa_atexit</code>所接受的参数类型和atexit不同：</p>
+  <p>Linux版的atexit要复杂一些，导致这个的问题的原因是GCC实现全局对象的析构不是调用的atexit，而是调用的__cxa_atexit。这个函数在前面的全局构造和析构中也碰到过，它不是C语言标准库函数，它是GCC实现的一部分。为了兼容GCC，Mini CRT不得不实现它。它的定义与atexit()有所不同的是，__cxa_atexit所接受的参数类型和atexit不同：</p>
 
   <pre>typedef void (*cxa_func_t )( void* );
 typedef void (*atexit_func_t )( void );
@@ -246,15 +246,15 @@ int __cxa_atexit(cxa_func_t func, void* arg, void*);
 int atexit(atexit_func_t func);
 </pre>
 
-  <p><code>__cxa_atexit</code>所接受的函数指针必须有一个<code>void*</code>型指针作为参数，并且调用<code>__cxa_atexit</code>的时候，这个参数<code>(void* arg)</code>也要随着记录下来，等到要执行的时候再传递进去。也就是说<code>，__cxa_atexit()</code>注册的回调函数是带一个参数的，我们必须把这个参数也记下来。</p>
+  <p>__cxa_atexit所接受的函数指针必须有一个void*型指针作为参数，并且调用__cxa_atexit的时候，这个参数(void* arg)也要随着记录下来，等到要执行的时候再传递进去。也就是说，__cxa_atexit()注册的回调函数是带一个参数的，我们必须把这个参数也记下来。</p>
 
   <blockquote>
 
-    <p><code>__cxa_atexit</code>的最后一个参数可以忽略，在这里不会用到。</p>
+    <p>__cxa_atexit的最后一个参数可以忽略，在这里不会用到。</p>
 
   </blockquote>
 
-  <p>于是在设计链表时要考虑到这一点，链表的节点必须能够区分是否是<code>atexit()</code>函数<code>__cxa_atexit()</code>注册的函数，如果是<code>__cxa_atexit()</code>注册的函数，还要把回调函数的参数保存下来。我们定义链表节点的结构如下：</p>
+  <p>于是在设计链表时要考虑到这一点，链表的节点必须能够区分是否是atexit()函数__cxa_atexit()注册的函数，如果是__cxa_atexit()注册的函数，还要把回调函数的参数保存下来。我们定义链表节点的结构如下：</p>
 
   <pre>typedef struct _func_node
 {
@@ -265,7 +265,7 @@ int atexit(atexit_func_t func);
 } func_node;
 </pre>
 
-  <p>其中<code>is_cxa</code>成员如果不为0，则表示这个节点是由<code>__cxa_atexit()</code>注册的回调函数，arg成员表示相应的参数。atexit的实现代码如清单13-12所示。</p>
+  <p>其中is_cxa成员如果不为0，则表示这个节点是由__cxa_atexit()注册的回调函数，arg成员表示相应的参数。atexit的实现代码如清单13-12所示。</p>
 
   <p>清单13-12 atexit.c</p>
 
@@ -331,11 +331,11 @@ void mini_crt_call_exit_routine()
 }
 </pre>
 
-  <p>值得一提的是，在注册函数时，被注册的函数是插入到列表头部的，而最后<code>mini_crt_call_exit_routine()</code>是从头部开始遍历的，于是由<code>atexit()</code>或<code>__cxa_atexit()</code>注册的函数是按照先注册后调用的顺序，这符合析构函数的规则，因为先构造的全局对象应该后析构。</p>
+  <p>值得一提的是，在注册函数时，被注册的函数是插入到列表头部的，而最后mini_crt_call_exit_routine()是从头部开始遍历的，于是由atexit()或__cxa_atexit()注册的函数是按照先注册后调用的顺序，这符合析构函数的规则，因为先构造的全局对象应该后析构。</p>
 
   <h3>13.3.4 入口函数修改</h3>
 
-  <p>由于增加了全局构造和析构的支持，那么需要对Mini CRT的入口函数和<code>exit()</code>函数进行修改，把对<code>do_global_ctors()</code>和<code>mini_crt_call_exit_routine()</code>的调用加入到<code>entry()</code>和<code>exit()</code>函数中去。修改后的entry.c如下（省略一部分未修改的内容）：</p>
+  <p>由于增加了全局构造和析构的支持，那么需要对Mini CRT的入口函数和exit()函数进行修改，把对do_global_ctors()和mini_crt_call_exit_routine()的调用加入到entry()和exit()函数中去。修改后的entry.c如下（省略一部分未修改的内容）：</p>
 
   <pre>//entry.c
 …
@@ -376,11 +376,11 @@ void exit(int exitCode)
 
   <ul>
 
-    <li>不支持模板定制，即这两个类仅支持char字符串类型，不支持自定义分配器等，没有<code>basic_string</code>模板类。</li>
+    <li>不支持模板定制，即这两个类仅支持char字符串类型，不支持自定义分配器等，没有basic_string模板类。</li>
 
     <li>流对象仅实现ofstream，且没有继承体系，即没有ios_base、stream、ostream、fstream等类似的相关类。</li>
 
-    <li>流对象没有内置的缓冲功能，即没有<code>stream_buffer</code>类支持。</li>
+    <li>流对象没有内置的缓冲功能，即没有stream_buffer类支持。</li>
 
     <li>cout作为ofstream的一个实例，它的输出文件是标准输出。</li>
 

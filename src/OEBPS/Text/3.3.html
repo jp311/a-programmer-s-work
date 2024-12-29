@@ -101,7 +101,7 @@ Idx Name        Size      VMA         LMA       File off  Algn
 
   <h3>3.3.1 代码段</h3>
 
-  <p>挖掘各个段的内容，我们还是离不开objdump这个利器。objdump的“<code>-s</code>”参数可以将所有段的内容以十六进制的方式打印出来，“<code>-d</code>”参数可以将所有包含指令的段反汇编。我们将objdump输出中关于代码段的内容提取出来，分析一下关于代码段的内容（省略号表示略去无关内容）：</p>
+  <p>挖掘各个段的内容，我们还是离不开objdump这个利器。objdump的“-s”参数可以将所有段的内容以十六进制的方式打印出来，“-d”参数可以将所有包含指令的段反汇编。我们将objdump输出中关于代码段的内容提取出来，分析一下关于代码段的内容（省略号表示略去无关内容）：</p>
 
   <pre>$ objdump -s -d SimpleSection.o
 ……
@@ -148,11 +148,11 @@ Contents of section .text:
   5a:   c3                        ret
 </pre>
 
-  <p>“Contents of section .text”就是.text的数据以十六进制方式打印出来的内容，总共0x5b字节，跟前面我们了解到的“.text”段长度相符合，最左面一列是偏移量，中间4列是十六进制内容，最右面一列是.text段的ASCII码形式。对照下面的反汇编结果，可以很明显地看到，.text段里所包含的正是SimpleSection.c里两个函数<code>func1()</code>和<code>main()</code>的指令。.text段的第一个字节“<code>0x55</code>”就是“<code>func1()</code>”函数的第一条“<code>push %ebp</code>”指令，而最后一个字节<code>0xc3</code>正是<code>main()</code>函数的最后一条指令“<code>ret</code>”。</p>
+  <p>“Contents of section .text”就是.text的数据以十六进制方式打印出来的内容，总共0x5b字节，跟前面我们了解到的“.text”段长度相符合，最左面一列是偏移量，中间4列是十六进制内容，最右面一列是.text段的ASCII码形式。对照下面的反汇编结果，可以很明显地看到，.text段里所包含的正是SimpleSection.c里两个函数func1()和main()的指令。.text段的第一个字节“0x55”就是“func1()”函数的第一条“push %ebp”指令，而最后一个字节0xc3正是main()函数的最后一条指令“ret”。</p>
 
   <h3>3.3.2 数据段和只读数据段</h3>
 
-  <p>.data段保存的是那些已经初始化了的全局静态变量和局部静态变量。前面的SimpleSection.c代码里面一共有两个这样的变量，分别是<code>global_init_varabal</code>与<code>static_var</code>。这两个变量每个4个字节，一共刚好8个字节，所以“.data”这个段的大小为8个字节。</p>
+  <p>.data段保存的是那些已经初始化了的全局静态变量和局部静态变量。前面的SimpleSection.c代码里面一共有两个这样的变量，分别是global_init_varabal与static_var。这两个变量每个4个字节，一共刚好8个字节，所以“.data”这个段的大小为8个字节。</p>
 
   <p>SimpleSection.c里面我们在调用“printf”的时候，用到了一个字符串常量“%d\n”，它是一种只读数据，所以它被放到了“.rodata”段，我们可以从输出结果看到“.rodata”这个段的4个字节刚好是这个字符串常量的ASCII字节序，最后以\0结尾。</p>
 
@@ -176,13 +176,13 @@ Contents of section .rodata:
 ……
 </pre>
 
-  <p>我们看到“.data”段里的前4个字节，从低到高分别为0x54、0x00、0x00、0x00。这个值刚好是<code>global_init_varabal</code>，即十进制的84。<code>global_init_varabal</code>是个4字节长度的int类型，为什么存放的次序为0x54、0x00、0x00、0x00而不是0x00、0x00、0x00、0x54？这涉及CPU的字节序（Byte Order）的问题，也就是所谓的大端（Big-endian）和小端（Little-endian）的问题。关于字节序的问题本书的附录有详细的介绍。而最后4个字节刚好是<code>static_init_var</code>的值，即85。</p>
+  <p>我们看到“.data”段里的前4个字节，从低到高分别为0x54、0x00、0x00、0x00。这个值刚好是global_init_varabal，即十进制的84。global_init_varabal是个4字节长度的int类型，为什么存放的次序为0x54、0x00、0x00、0x00而不是0x00、0x00、0x00、0x54？这涉及CPU的字节序（Byte Order）的问题，也就是所谓的大端（Big-endian）和小端（Little-endian）的问题。关于字节序的问题本书的附录有详细的介绍。而最后4个字节刚好是static_init_var的值，即85。</p>
 
   <h3>3.3.3 BSS段</h3>
 
-  <p>.bss段存放的是未初始化的全局变量和局部静态变量，如上述代码中<code>global_uninit_var</code>和<code>static_var2</code>就是被存放在.bss段，其实更准确的说法是.bss段为它们预留了空间。但是我们可以看到该段的大小只有4个字节，这与<code>global_uninit_var</code>和<code>static_var2</code>的大小的8个字节不符。</p>
+  <p>.bss段存放的是未初始化的全局变量和局部静态变量，如上述代码中global_uninit_var和static_var2就是被存放在.bss段，其实更准确的说法是.bss段为它们预留了空间。但是我们可以看到该段的大小只有4个字节，这与global_uninit_var和static_var2的大小的8个字节不符。</p>
 
-  <p>其实我们可以通过符号表（Symbol Table）（后面章节介绍符号表）看到，只有<code>static_var2</code>被存放在了.bss段，而<code>global_uninit_var</code>却没有被存放在任何段，只是一个未定义的“COMMON符号”。这其实是跟不同的语言与不同的编译器实现有关，有些编译器会将全局的未初始化变量存放在目标文件.bss段，有些则不存放，只是预留一个未定义的全局变量符号，等到最终链接成可执行文件的时候再在.bss段分配空间。我们将在“弱符号与强符号”和“COMMON块”这两个章节深入分析这个问题。原则上讲，我们可以简单地把它当作全局未初始化变量存放在.bss段。值得一提的是编译单元内部可见的静态变量（比如给<code>global_uninit_var</code>加上static修饰）的确是存放在.bss段的，这一点很容易理解。</p>
+  <p>其实我们可以通过符号表（Symbol Table）（后面章节介绍符号表）看到，只有static_var2被存放在了.bss段，而global_uninit_var却没有被存放在任何段，只是一个未定义的“COMMON符号”。这其实是跟不同的语言与不同的编译器实现有关，有些编译器会将全局的未初始化变量存放在目标文件.bss段，有些则不存放，只是预留一个未定义的全局变量符号，等到最终链接成可执行文件的时候再在.bss段分配空间。我们将在“弱符号与强符号”和“COMMON块”这两个章节深入分析这个问题。原则上讲，我们可以简单地把它当作全局未初始化变量存放在.bss段。值得一提的是编译单元内部可见的静态变量（比如给global_uninit_var加上static修饰）的确是存放在.bss段的，这一点很容易理解。</p>
 
   <pre>$ objdump -x -s -d SimpleSection.o
 ……
@@ -243,7 +243,7 @@ SYMBOL TABLE:
 00081200 g       *ABS*  00000000 _binary_image_jpg_size
 </pre>
 
-    <p>符号“<code>_binary_image_jpg_start</code>”、“<code>_binary_image_jpg_end</code>”和“_<code>binary_image_jpg_size</code>”分别表示该图片文件在内存中的起始地址、结束地址和大小，我们可以在程序里面直接声明并使用它们。</p>
+    <p>符号“_binary_image_jpg_start”、“_binary_image_jpg_end”和“_binary_image_jpg_size”分别表示该图片文件在内存中的起始地址、结束地址和大小，我们可以在程序里面直接声明并使用它们。</p>
 
   </blockquote>
 
@@ -258,7 +258,7 @@ __attribute__((section("BAR"))) void foo()
 }
 </pre>
 
-  <p>我们在全局变量或函数之前加上“<code>__attribute__((section(“name”)))</code>”属性就可以把相应的变量或函数放到以“<code>name</code>”作为段名的段中。</p>
+  <p>我们在全局变量或函数之前加上“__attribute__((section(“name”)))”属性就可以把相应的变量或函数放到以“name”作为段名的段中。</p>
 
 </body>
 

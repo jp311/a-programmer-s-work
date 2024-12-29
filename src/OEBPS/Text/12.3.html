@@ -14,7 +14,7 @@
 
   <p>Windows API是指Windows操作系统提供给应用程序开发者的最底层的、最直接与Windows打交道的接口。在Windows操作系统下，CRT是建立在Windows API之上的。另外还有很多对Windows API的各种包装库，MFC就是很著名的一种以C++形式封装的库。</p>
 
-  <p>很多操作系统是以系统调用作为应用程序最底层的，而Windows的最底层接口是Windows API。Windows API是Windows编程的基础，尽管Windows的内核提供了数百个系统调用（Windows又把系统调用称作系统服务（System Service）），但是出于种种原因，微软并没有将这些系统调用公开，而在这些系统调用之上，建立了这样一个API层，让程序员只能调用API层的函数，而不是如Linux一般直接使用系统调用。Windows在加入API层以后，一个普通的<code>fwrite()</code>的调用路径如图12-9所示。</p>
+  <p>很多操作系统是以系统调用作为应用程序最底层的，而Windows的最底层接口是Windows API。Windows API是Windows编程的基础，尽管Windows的内核提供了数百个系统调用（Windows又把系统调用称作系统服务（System Service）），但是出于种种原因，微软并没有将这些系统调用公开，而在这些系统调用之上，建立了这样一个API层，让程序员只能调用API层的函数，而不是如Linux一般直接使用系统调用。Windows在加入API层以后，一个普通的fwrite()的调用路径如图12-9所示。</p>
 
   <p><img alt="" src="../Images/12-9.jpg"/><br/>图12-9 Linux和Windows的fwrite路径</p>
 
@@ -160,7 +160,7 @@ CreateFileW(
 
   <p>为了操作系统的兼容性，微软试图让Windows NT能够支持其他操作系统上的应用程序。在设计Windows NT的时候，与它同一时期的操作系统有各种UNIX（posix标准）、IBM的OS/2、微软自家的DOS和Windows 3.x等。于是Windows NT提出子系统（Subsystem）的概念，希望提供各种操作系统的执行环境，以兼容它们的应用程序。</p>
 
-  <p>子系统又称为Windows环境子系统（Evironment Subsystem），简称子系统（Subsystem）。我们知道，原生的Windows程序是通过CreateProcess这个API来创建进程的，而UNIX的程序则是通过<code>fork()</code>来创建的，子系统就是这样一个中间层，它使用Windows的API来模拟<code>fork()</code>这样的系统调用，使得应用程序看起来与UNIX没有区别。</p>
+  <p>子系统又称为Windows环境子系统（Evironment Subsystem），简称子系统（Subsystem）。我们知道，原生的Windows程序是通过CreateProcess这个API来创建进程的，而UNIX的程序则是通过fork()来创建的，子系统就是这样一个中间层，它使用Windows的API来模拟fork()这样的系统调用，使得应用程序看起来与UNIX没有区别。</p>
 
   <p>子系统实际上又是Windows架设在API和应用程序之间的另一个中间层。前面讲到API这个中间层是为了防止内核系统调用层发生变化导致用户程序也必须随之变化而增加的，而子系统则是用来为各种不同平台的应用程序创建与它们兼容的运行环境。</p>
 

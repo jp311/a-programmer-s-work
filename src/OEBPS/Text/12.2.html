@@ -50,7 +50,7 @@
 
   <pre>_syscall0(pid_t, fork);</pre>
 
-  <p><code>_syscall0</code>是一个宏函数，用于定义一个没有参数的系统调用的封装。它的第一个参数为这个系统调用的返回值类型，这里为<code>pid_t</code>，是一个Linux自定义类型，代表进程的id<code>。_syscall0</code>的第二个参数是系统调用的名称<code>，_syscall0</code>展开之后会形成一个与系统调用名称同名的函数。下面的代码是i386版本的syscall0定义：</p>
+  <p>_syscall0是一个宏函数，用于定义一个没有参数的系统调用的封装。它的第一个参数为这个系统调用的返回值类型，这里为pid_t，是一个Linux自定义类型，代表进程的id。_syscall0的第二个参数是系统调用的名称，_syscall0展开之后会形成一个与系统调用名称同名的函数。下面的代码是i386版本的syscall0定义：</p>
 
   <pre>#define _syscall0(type,name)          \
 type name(void)                       \
@@ -79,13 +79,13 @@ __syscall_return(type,__res);         \
 
   <ul>
 
-    <li>首先<code>__asm__</code>是一个gcc的关键字，表示接下来要嵌入汇编代码。<code>volatile</code>关键字告诉GCC对这段代码不进行任何优化。</li>
+    <li>首先__asm__是一个gcc的关键字，表示接下来要嵌入汇编代码。volatile关键字告诉GCC对这段代码不进行任何优化。</li>
 
-    <li><code>__asm__</code>的第一个参数是一个字符串，代表汇编代码的文本。这里的汇编代码只有一句：<code>int $0x80</code>，这就要调用0x80号中断。</li>
+    <li>__asm__的第一个参数是一个字符串，代表汇编代码的文本。这里的汇编代码只有一句：int $0x80，这就要调用0x80号中断。</li>
 
-    <li><code>"=a" (__res)</code>表示用eax（a表示eax）输出返回数据并存储在__res里。</li>
+    <li>"=a" (__res)表示用eax（a表示eax）输出返回数据并存储在__res里。</li>
 
-    <li><code>"0" (__NR_##name))</code>表示<code>__NR_##name</code>为输入，“0”指示由编译器选择和输出相同的寄存器（即eax）来传递参数。</li>
+    <li>"0" (__NR_##name))表示__NR_##name为输入，“0”指示由编译器选择和输出相同的寄存器（即eax）来传递参数。</li>
 
   </ul>
 
@@ -103,7 +103,7 @@ pid_t fork(void)
 }
 </pre>
 
-  <p><code>__NR_fork</code>是一个宏，表示fork系统调用的调用号，对于x86体系结构，该宏的定义可以在Linux/include/asm-x86/unistd_32.h里找到：</p>
+  <p>__NR_fork是一个宏，表示fork系统调用的调用号，对于x86体系结构，该宏的定义可以在Linux/include/asm-x86/unistd_32.h里找到：</p>
 
   <pre>#define __NR_restart_syscall    0
 #define __NR_exit                 1
@@ -113,7 +113,7 @@ pid_t fork(void)
 ......
 </pre>
 
-  <p>而<code>__syscall_return</code>是另一个宏，定义如下：</p>
+  <p>而__syscall_return是另一个宏，定义如下：</p>
 
   <pre>#define __syscall_return(type, res)                     \
 do {                                                    \
@@ -152,7 +152,7 @@ type name(type1 arg1)                                   \
 }
 </pre>
 
-  <p>这段代码和<code>_syscall0</code>不同的是，它多了一个“b” ((long)(arg1))。这一句的意思是先把arg1强制转换为long，然后存放在EBX（b代表EBX）里作为输入。编译器还会生成相应的代码来保护原来的EBX的值不被破坏。这段汇编可以改写为：</p>
+  <p>这段代码和_syscall0不同的是，它多了一个“b” ((long)(arg1))。这一句的意思是先把arg1强制转换为long，然后存放在EBX（b代表EBX）里作为输入。编译器还会生成相应的代码来保护原来的EBX的值不被破坏。这段汇编可以改写为：</p>
 
   <pre>push ebx
 eax = __NR_##name
@@ -212,7 +212,7 @@ pop ebx
 
   <p><img alt="" src="../Images/12-5.jpg"/><br/>图12-5 Linux i386中断服务流程</p>
 
-  <p>i386的中断向量表在Linux源代码的Linux/arch/i386/kernel/traps.c里可见一部分。在该文件的末尾，我们能看到一个函数<code>trap_init</code>，该函数用于初始化中断向量表：</p>
+  <p>i386的中断向量表在Linux源代码的Linux/arch/i386/kernel/traps.c里可见一部分。在该文件的末尾，我们能看到一个函数trap_init，该函数用于初始化中断向量表：</p>
 
   <pre>void __init trap_init(void)
 {
@@ -246,7 +246,7 @@ pop ebx
 }
 </pre>
 
-  <p>以上代码中的函数<code>set_intr_gate/set_trap_gate/set_system_gate/set_system_intr_gate</code>用于设置某个中断号上的中断处理程序。之所以区分为3种名字，是因为在i386下对中断有更加细致的划分，限于篇幅这里就不详细介绍了，读者在这里可以暂时将它们都等同对待。</p>
+  <p>以上代码中的函数set_intr_gate/set_trap_gate/set_system_gate/set_system_intr_gate用于设置某个中断号上的中断处理程序。之所以区分为3种名字，是因为在i386下对中断有更加细致的划分，限于篇幅这里就不详细介绍了，读者在这里可以暂时将它们都等同对待。</p>
 
   <p>从这段代码可以看到0～19号中断对应的中断处理程序，其中包含算数异常（除零、溢出）、页缺失（page fault）、无效指令等。在最后一行：</p>
 
@@ -268,7 +268,7 @@ ENTRY(system_call)
     jae syscall_badsys
 </pre>
 
-  <p>这一段是<code>system_call</code>的开头，中间省略了一些不太重要的代码。在这里一开始使用宏SAVE_ALL将各种寄存器压入栈中，以免它们的值被后续执行的代码所覆盖。然后接下来使用cmpl指令比较eax和<code>nr_syscalls</code>的值，<code>nr_syscalls</code>是比最大的有效系统调用号大1的值，因此，如果eax（即用户传入的系统调用号）大于等于<code>nr_syscalls</code>，那么这个系统调用就是无效的，如果这样，接着就会跳转到后面的<code>syscall_badsys</code>执行。如果系统调用号是有效的，那么程序就会执行下面的代码：</p>
+  <p>这一段是system_call的开头，中间省略了一些不太重要的代码。在这里一开始使用宏SAVE_ALL将各种寄存器压入栈中，以免它们的值被后续执行的代码所覆盖。然后接下来使用cmpl指令比较eax和nr_syscalls的值，nr_syscalls是比最大的有效系统调用号大1的值，因此，如果eax（即用户传入的系统调用号）大于等于nr_syscalls，那么这个系统调用就是无效的，如果这样，接着就会跳转到后面的syscall_badsys执行。如果系统调用号是有效的，那么程序就会执行下面的代码：</p>
 
   <pre>syscall_call:
     call *sys_call_table(0,%eax,4)
@@ -278,9 +278,9 @@ ENTRY(system_call)
     iret
 </pre>
 
-  <p>确定系统调用号有效并且保存了寄存器之后，接下来要执行的就是调用<code>*sys_call_table (0,%eax,4)</code>来查找中断服务程序并执行。执行结束之后，使用宏RESTORE_REGS来恢复之前被SAVE_ALL保存的寄存器。最后通过指令iret从中断处理程序中返回。</p>
+  <p>确定系统调用号有效并且保存了寄存器之后，接下来要执行的就是调用*sys_call_table (0,%eax,4)来查找中断服务程序并执行。执行结束之后，使用宏RESTORE_REGS来恢复之前被SAVE_ALL保存的寄存器。最后通过指令iret从中断处理程序中返回。</p>
 
-  <p>究竟什么是<code>*sys_call_table(0,%eax,4)</code>呢？我们在Linux/arch/i386/kernel/syscall_table.S里能找到定义：</p>
+  <p>究竟什么是*sys_call_table(0,%eax,4)呢？我们在Linux/arch/i386/kernel/syscall_table.S里能找到定义：</p>
 
   <pre>.data
 ENTRY(sys_call_table)
@@ -292,11 +292,11 @@ ENTRY(sys_call_table)
     ......
 </pre>
 
-  <p>这就是Linux的i386系统调用表，这个表里的每一个元素（long，4字节）都是一个系统调用函数的地址。那么不难推知<code>*sys_call_table(0,%eax,4)</code>指的是<code>sys_call_table</code>上偏移量为<code>0+%eax * 4</code>上的那个元素的值指向的函数，也就是<code>%eax</code>所记录的系统调用号所对应的系统调用函数（见图12-6）。接下来系统就会去调用相应的系统调用函数。例如，如果<code>%eax=2</code>，那么<code>sys_fork</code>就会调用。</p>
+  <p>这就是Linux的i386系统调用表，这个表里的每一个元素（long，4字节）都是一个系统调用函数的地址。那么不难推知*sys_call_table(0,%eax,4)指的是sys_call_table上偏移量为0+%eax * 4上的那个元素的值指向的函数，也就是%eax所记录的系统调用号所对应的系统调用函数（见图12-6）。接下来系统就会去调用相应的系统调用函数。例如，如果%eax=2，那么sys_fork就会调用。</p>
 
   <blockquote>
 
-    <p>内核里的系统调用函数往往以<code>sys_</code>加上系统调用函数名来命名，例如<code>sys_fork</code>、<code>sys_open</code>等。</p>
+    <p>内核里的系统调用函数往往以sys_加上系统调用函数名来命名，例如sys_fork、sys_open等。</p>
 
   </blockquote>
 
@@ -332,15 +332,15 @@ ENTRY(sys_call_table)
 
     <p>抛开SAVE_ALL的最后3个mov指令不看（这3条指令用于设置内核数据段，它们不影响栈），我们可以发现SAVE_ALL的一系列push指令的最后6条所压入栈中的寄存器恰好就是用来存放系统调用参数的6个寄存器，连顺序都一样，这当然不是一个巧合。</p>
 
-    <p>再回到<code>system_call</code>的代码，我们可以发现，在执行SAVE_ALL与执行<code>call *sys_call_table(0,%eax,4)</code>之间，没有任何代码会影响到栈。因此刚刚进入sys开头的内核系统调用函数的时候，栈上恰好是这样的情景，如图12-7所示。</p>
+    <p>再回到system_call的代码，我们可以发现，在执行SAVE_ALL与执行call *sys_call_table(0,%eax,4)之间，没有任何代码会影响到栈。因此刚刚进入sys开头的内核系统调用函数的时候，栈上恰好是这样的情景，如图12-7所示。</p>
 
     <p><img alt="" src="../Images/12-7.jpg"/><br/>图12-7 系统调用时堆栈分布</p>
 
     <p>可以说，系统调用的参数被SAVE_ALL“阴差阳错”地放置在了栈上。</p>
 
-    <p>另一方面，所有以sys开头的内核系统调用函数，都有一个asmlinkage的标识，例如：<code>asmlinkage pid_t sys_fork(void);</code></p>
+    <p>另一方面，所有以sys开头的内核系统调用函数，都有一个asmlinkage的标识，例如：asmlinkage pid_t sys_fork(void);</p>
 
-    <p>asmlinkage是一个宏，定义为：<code>__attribute__ ((regparm(0)))</code></p>
+    <p>asmlinkage是一个宏，定义为：__attribute__ ((regparm(0)))</p>
 
     <p>这个扩展关键字的意义是让这个函数只从栈上获取参数。因为gcc对普通函数有优化措施，会使用寄存器来传递参数，而SAVE_ALL将参数全部放置于栈上，因此必须使用asmlinkage来强迫函数从栈上获取参数。这样一来，内核里的系统调用函数就可以正确地获取用户提供的参数了。整个过程可以用图12-8表示。</p>
 
@@ -398,7 +398,7 @@ ffffe440 g    DF .text  00000007  LINUX_2.5   __kernel_rt_sigreturn
 ffffe420 g    DF .text  00000008  LINUX_2.5   __kernel_sigreturn
 </pre>
 
-  <p>可以看到，vdso导出了一系列函数，当然这里最值得关心的是<code>__kernel_vsyscall</code>函数。这个函数负责进行新型的系统调用。现在来看看这个函数的内容:</p>
+  <p>可以看到，vdso导出了一系列函数，当然这里最值得关心的是__kernel_vsyscall函数。这个函数负责进行新型的系统调用。现在来看看这个函数的内容:</p>
 
   <pre>objdump -d --start-address=0xffffe400 --stop-address=0xffffe408 linux-gate.dso</pre>
 
@@ -445,7 +445,7 @@ ffffe407:       90              nop
 }
 </pre>
 
-    <p>读者应该还记得，在Linux下<code>fd=1</code>表示<code>stdout</code>。因此向<code>fd=1</code>写入数据等效于向命令行输出，这个例子就是这个目的。我们在main函数里将<code>__kernel_vsyscall</code>函数的地址赋值给esi(”S”表示esi)，并且使用指令call调用这个地址。与此同时，还在eax中放入了系统调用write的调用号(4)，在ebx、ecx、edx中放入write的参数，这样就完成了一次系统调用，在屏幕上输出了Hello。</p>
+    <p>读者应该还记得，在Linux下fd=1表示stdout。因此向fd=1写入数据等效于向命令行输出，这个例子就是这个目的。我们在main函数里将__kernel_vsyscall函数的地址赋值给esi(”S”表示esi)，并且使用指令call调用这个地址。与此同时，还在eax中放入了系统调用write的调用号(4)，在ebx、ecx、edx中放入write的参数，这样就完成了一次系统调用，在屏幕上输出了Hello。</p>
 
     <p>关于使用sysenter指令进入内核之后是如何执行的，在这里就不占用篇幅详细介绍了，如果读者有兴趣,可以参考Intel的CPU指令手册，并且结合阅读Linux的内核源代码中关于sysenter的实现代码：/arch/i386/kernel/sysenter.c。</p>
 

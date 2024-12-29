@@ -56,7 +56,7 @@
 
     <li>首先，经典的helloworld使用了printf函数，该函数是系统C语言库的一部分。为了使用该函数，我们必须在链接时将C语言库与程序的目标文件链接产生最终可执行文件。我们希望“小程序”能够脱离C语言运行库，使得它成为一个独立于任何库的纯正的“程序”。</li>
 
-    <li>其次，经典的helloworld由于使用了库，所以必须有main函数。我们知道一般程序的入口在库的<code>_start</code>，由库负责初始化后调用main函数来执行程序的主体部分。为了不使用main这个我们已经感到厌烦的函数名，“小程序”使用nomain作为整个程序的入口。</li>
+    <li>其次，经典的helloworld由于使用了库，所以必须有main函数。我们知道一般程序的入口在库的_start，由库负责初始化后调用main函数来执行程序的主体部分。为了不使用main这个我们已经感到厌烦的函数名，“小程序”使用nomain作为整个程序的入口。</li>
 
     <li>接着，经典的helloworld会产生多个段：main程序的指令部分会产生.text段、字符串常量“Hello world!\n”会被放在数据段或只读数据段，还有C库所包含的各种段。为了演示ld链接脚本的控制过程，我们将“小程序”的所有段都合并到一个叫“tinytext”的段，注意：这个段是我们任意命名的，是由链接脚本控制链接过程生成的。</li>
 
@@ -90,7 +90,7 @@ void nomain()
 }
 </pre>
 
-  <p>从源代码我们可以看到，程序入口为<code>nomain()</code>函数，然后该函数调用<code>print()</code>函数，打印“Hello World”，接着调用<code>exit()</code>函数，结束进程。这里的print函数使用了Linux的WRITE系统调用，<code>exit()</code>函数使用了EXIT系统调用。这里我们使用了GCC内嵌汇编，对这种内嵌汇编格式不熟悉的话，请参照GCC手册关于内嵌汇编的部分。这里简单介绍系统调用：系统调用通过0x80中断实现，其中eax为调用号，ebx、ecx、edx等通用寄存器用来传递参数，比如WRITE调用是往一个文件句柄写入数据，如果用C语言来描述它的原型就是：</p>
+  <p>从源代码我们可以看到，程序入口为nomain()函数，然后该函数调用print()函数，打印“Hello World”，接着调用exit()函数，结束进程。这里的print函数使用了Linux的WRITE系统调用，exit()函数使用了EXIT系统调用。这里我们使用了GCC内嵌汇编，对这种内嵌汇编格式不熟悉的话，请参照GCC手册关于内嵌汇编的部分。这里简单介绍系统调用：系统调用通过0x80中断实现，其中eax为调用号，ebx、ecx、edx等通用寄存器用来传递参数，比如WRITE调用是往一个文件句柄写入数据，如果用C语言来描述它的原型就是：</p>
 
   <pre>int write(int filedesc, char* buffer, int size);</pre>
 
@@ -131,13 +131,13 @@ $ ld -static -e nomain -o TinyHelloWorld TinyHelloWorld.o
 
   <ul>
 
-    <li><code>-fno-builtin</code> GCC编译器提供了很多内置函数（Built-in Function），它会把一些常用的C库函数替换成编译器的内置函数，以达到优化的功能。比如GCC会将只有字符串参数的printf函数替换成puts，以节省格式解析的时间。exit()函数也是GCC的内置参数之一，所以我们要使用-fno-builtin参数来关闭GCC内置函数功能。</li>
+    <li>-fno-builtin GCC编译器提供了很多内置函数（Built-in Function），它会把一些常用的C库函数替换成编译器的内置函数，以达到优化的功能。比如GCC会将只有字符串参数的printf函数替换成puts，以节省格式解析的时间。exit()函数也是GCC的内置参数之一，所以我们要使用-fno-builtin参数来关闭GCC内置函数功能。</li>
 
-    <li><code>-static</code> 这个参数表示ld将使用静态链接的方式来链接程序，而不是使用默认的动态链接的方式。</li>
+    <li>-static 这个参数表示ld将使用静态链接的方式来链接程序，而不是使用默认的动态链接的方式。</li>
 
-    <li><code>-e nomain</code> 表示该程序的入口函数为nomain，还记得ELF文件头Elf32_Ehdr的e_entry成员吗？这个参数就是将ELF文件头的e_entry成员赋值成nomain函数的地址。</li>
+    <li>-e nomain 表示该程序的入口函数为nomain，还记得ELF文件头Elf32_Ehdr的e_entry成员吗？这个参数就是将ELF文件头的e_entry成员赋值成nomain函数的地址。</li>
 
-    <li><code>-o TinyHelloWorld</code> 表示指定输出可执行文件名为TinyHelloWorld。</li>
+    <li>-o TinyHelloWorld 表示指定输出可执行文件名为TinyHelloWorld。</li>
 
   </ul>
 
@@ -145,13 +145,13 @@ $ ld -static -e nomain -o TinyHelloWorld TinyHelloWorld.o
 
   <ul>
 
-    <li><code>.text</code> 肯定保存的是程序的指令，它是只读的。</li>
+    <li>.text 肯定保存的是程序的指令，它是只读的。</li>
 
-    <li><code>.rodata</code> 保存的是字符串“Hello World!\n”，它也是只读的。</li>
+    <li>.rodata 保存的是字符串“Hello World!\n”，它也是只读的。</li>
 
-    <li><code>.data</code> 保存的是str全局变量，看上去它是可读写的，但我们并没有在程序中改写该变量，所以实际上它也是只读的。</li>
+    <li>.data 保存的是str全局变量，看上去它是可读写的，但我们并没有在程序中改写该变量，所以实际上它也是只读的。</li>
 
-    <li><code>.comment</code> 保存的是编译器和系统版本信息，这些信息也是只读的。由于.comment里面保存的数据并不关键，对于程序的运行没有作用，所以可以将其丢弃。</li>
+    <li>.comment 保存的是编译器和系统版本信息，这些信息也是只读的。由于.comment里面保存的数据并不关键，对于程序的运行没有作用，所以可以将其丢弃。</li>
 
   </ul>
 
@@ -179,11 +179,11 @@ SECTIONS
 
   <ul>
 
-    <li><code>. = 0x08048000 + SIZEOF_HEADERS</code> 第一条赋值语句的意思是将当前虚拟地址设置成 <code>0x08048000 + SIZEOF_HEADERS</code>，<code>SIZEOF_HEADERS</code>为输出文件的文件头大小。“.”表示当前虚拟地址，因为这条语句后面紧跟着输出段“tinytext”，所以“tinytext”段的起始虚拟地址即为0x08048000 + SIZEOF_HEADERS。它将当前虚拟地址设置成一个比较巧妙的值，以便于装载时页映射更为方便。具体请参考本书第2部分关于装载的章节。</li>
+    <li>. = 0x08048000 + SIZEOF_HEADERS 第一条赋值语句的意思是将当前虚拟地址设置成 0x08048000 + SIZEOF_HEADERS，SIZEOF_HEADERS为输出文件的文件头大小。“.”表示当前虚拟地址，因为这条语句后面紧跟着输出段“tinytext”，所以“tinytext”段的起始虚拟地址即为0x08048000 + SIZEOF_HEADERS。它将当前虚拟地址设置成一个比较巧妙的值，以便于装载时页映射更为方便。具体请参考本书第2部分关于装载的章节。</li>
 
-    <li><code>tinytext : { *(.text) *(.data) *(.rodata) }</code> 第二条是个段转换规则，它的意思即为所有输入文件中的名字为“.text”、“.data”或“.rodata”的段依次合并到输出文件的“tinytext”。</li>
+    <li>tinytext : { *(.text) *(.data) *(.rodata) } 第二条是个段转换规则，它的意思即为所有输入文件中的名字为“.text”、“.data”或“.rodata”的段依次合并到输出文件的“tinytext”。</li>
 
-    <li><code>/DISCARD/ : { *(.comment) }</code> 第三条规则为：将所有输入文件中的名字为“.comment”的段丢弃，不保存到输出文件中。</li>
+    <li>/DISCARD/ : { *(.comment) } 第三条规则为：将所有输入文件中的名字为“.comment”的段丢弃，不保存到输出文件中。</li>
 
   </ul>
 
@@ -207,7 +207,7 @@ $ ld -static -T TinyHelloWorld.lds -o TinyHelloWorld TinyHelloWorld.o
 
   <h3>4.6.4 ld链接脚本语法简介</h3>
 
-  <p>ld链接器的链接脚本语法继承与AT&amp;T链接器命令语言的语法，风格有点像C语言，它本身并不复杂。链接脚本由一系列语句组成，语句分两种，一种是命令语句，另外一种是赋值语句。我们前面的链接脚本里面的ENTRY(nomain)就是命令语句；而<code>. = 0x08480000 + SIZEOF_HEADERS</code>则是一个经典的赋值语句。之所以说链接脚本语法像C语言，主要有如下几点相似之处。</p>
+  <p>ld链接器的链接脚本语法继承与AT&amp;T链接器命令语言的语法，风格有点像C语言，它本身并不复杂。链接脚本由一系列语句组成，语句分两种，一种是命令语句，另外一种是赋值语句。我们前面的链接脚本里面的ENTRY(nomain)就是命令语句；而. = 0x08480000 + SIZEOF_HEADERS则是一个经典的赋值语句。之所以说链接脚本语法像C语言，主要有如下几点相似之处。</p>
 
   <ul>
 
@@ -245,13 +245,13 @@ $ ld -static -T TinyHelloWorld.lds -o TinyHelloWorld TinyHelloWorld.o
 
   <ul>
 
-    <li><code>file1.o(.data)</code> 表示输入文件中名为file1.o的文件中名叫.data的段符合条件。</li>
+    <li>file1.o(.data) 表示输入文件中名为file1.o的文件中名叫.data的段符合条件。</li>
 
-    <li><code>file1.o(.data .rodata)</code> 或 <code>file1.o(.data, .rodata)</code> 表示输入文件中名为file1.o的文件中的名叫.data或.rodata的段符合条件。</li>
+    <li>file1.o(.data .rodata) 或 file1.o(.data, .rodata) 表示输入文件中名为file1.o的文件中的名叫.data或.rodata的段符合条件。</li>
 
-    <li><code>*(.data)</code> 所有输入文件中的名字为.data的文件符合条件。 * 是通配符，类似于正则表达式中的 *，我们还可以使用正则表达式中的 ?、[]等规则。</li>
+    <li>*(.data) 所有输入文件中的名字为.data的文件符合条件。 * 是通配符，类似于正则表达式中的 *，我们还可以使用正则表达式中的 ?、[]等规则。</li>
 
-    <li><code>[a-z]*(.text*[A-Z])</code> 这个条件比较复杂，它表示所有输入文件中以小写字母a到z开头的文件中所有段名以.text开头，并且以大写字母A到Z结尾的段。从这个规则中你也许可以看到一些链接脚本功能的强大。</li>
+    <li>[a-z]*(.text*[A-Z]) 这个条件比较复杂，它表示所有输入文件中以小写字母a到z开头的文件中所有段名以.text开头，并且以大写字母A到Z结尾的段。从这个规则中你也许可以看到一些链接脚本功能的强大。</li>
 
   </ul>
 

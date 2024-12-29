@@ -19,7 +19,7 @@ $lib entry.obj malloc.obj printf.obj stdio.obj string.obj ctor.obj new_delete.ob
 
   <blockquote>
 
-    <p>这里新增的一个编译参数为/GR-，它的意思是关闭RTTI功能，否则编译器会为有虚函数的类产生RTTI相关代码，在最终链接时会看到“<code>const type_info::`vftable</code>”符号未定义的错误。</p>
+    <p>这里新增的一个编译参数为/GR-，它的意思是关闭RTTI功能，否则编译器会为有虚函数的类产生RTTI相关代码，在最终链接时会看到“const type_info::`vftable”符号未定义的错误。</p>
 
   </blockquote>
 
@@ -32,7 +32,7 @@ $lib entry.obj malloc.obj printf.obj stdio.obj string.obj ctor.obj new_delete.ob
 
   <blockquote>
 
-    <p>这个函数是用于处理共享库的全局对象构造与析构的。我们知道共享库也可以拥有全局对象，这些对象在共享库被装载和卸载时必须被正确地构造和析构。而共享库有可能在进程退出之前被卸载，比如使用dlopen/dlclose就可能导致这种情况。那么一个问题就产生了，如何使得属于某个共享库的全局对象析构函数在共享库被卸载时运行呢？GCC的做法是向<code>__cxa_atexit()</code>传递一个参数，这个参数用于标示这个析构函数属于哪个共享对象。我们在前面实现<code>__cxa_atexit()</code>时忽略了第三个参数，实际上这第三个参数就是用于标示共享对象的，它就是__dso_handle这个符号。由于在MiniCRT++中并不考虑对共享库的支持，于是我们就仅仅定义这个符号为0，以防止链接时出现符号未定义错误。</p>
+    <p>这个函数是用于处理共享库的全局对象构造与析构的。我们知道共享库也可以拥有全局对象，这些对象在共享库被装载和卸载时必须被正确地构造和析构。而共享库有可能在进程退出之前被卸载，比如使用dlopen/dlclose就可能导致这种情况。那么一个问题就产生了，如何使得属于某个共享库的全局对象析构函数在共享库被卸载时运行呢？GCC的做法是向__cxa_atexit()传递一个参数，这个参数用于标示这个析构函数属于哪个共享对象。我们在前面实现__cxa_atexit()时忽略了第三个参数，实际上这第三个参数就是用于标示共享对象的，它就是__dso_handle这个符号。由于在MiniCRT++中并不考虑对共享库的支持，于是我们就仅仅定义这个符号为0，以防止链接时出现符号未定义错误。</p>
 
   </blockquote>
 
@@ -45,9 +45,9 @@ $ar -rs minicrt.a malloc.o printf.o stdio.o string.o ctor.o atexit.o iostream.o 
 
   <blockquote>
 
-    <p><code>-fno-rtti</code>的作用与cl的/GR-作用一样，用于关闭RTTI。</p>
+    <p>-fno-rtti的作用与cl的/GR-作用一样，用于关闭RTTI。</p>
 
-    <p><code>-fno-exceptions</code>的作用用于关闭异常支持，否则GCC会产生异常支持代码，可能导致链接错误。</p>
+    <p>-fno-exceptions的作用用于关闭异常支持，否则GCC会产生异常支持代码，可能导致链接错误。</p>
 
   </blockquote>
 

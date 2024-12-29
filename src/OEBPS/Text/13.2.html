@@ -95,11 +95,11 @@ $ar -rs minicrt.a malloc.o printf.o stdio.o string.o
 
   <ul>
 
-    <li>这里的<code>-fno-builtin</code>参数是指关闭GCC的内置函数功能，默认情况下GCC会把strlen、strcmp等这些常用函数展开成它内部的实现。</li>
+    <li>这里的-fno-builtin参数是指关闭GCC的内置函数功能，默认情况下GCC会把strlen、strcmp等这些常用函数展开成它内部的实现。</li>
 
-    <li><code>-nostdlib</code>表示不使用任何来自Glibc、GCC的库文件和启动文件，它包含了<code>-nostartfiles</code>这个参数。</li>
+    <li>-nostdlib表示不使用任何来自Glibc、GCC的库文件和启动文件，它包含了-nostartfiles这个参数。</li>
 
-    <li><code>-fno-stack-protector</code>是指关闭堆栈保护功能，最近版本的GCC会在vfprintf这样的变长参数函数中插入堆栈保护函数，如果不关闭，我们在使用Mini CRT时会发生“<code>__stack_chk_fail</code>”函数未定义的错误。</li>
+    <li>-fno-stack-protector是指关闭堆栈保护功能，最近版本的GCC会在vfprintf这样的变长参数函数中插入堆栈保护函数，如果不关闭，我们在使用Mini CRT时会发生“__stack_chk_fail”函数未定义的错误。</li>
 
   </ul>
 
@@ -113,7 +113,7 @@ $ar -rs minicrt.a malloc.o printf.o stdio.o string.o
 
     <li>/DWIN32表示定义WIN32这个宏，这也正是在代码中用于区分平台的宏。</li>
 
-    <li>/GS- 表示关闭堆栈保护功能，MSVC和GCC一样也会在不定参数中插入堆栈保护功能。不管这个功能会不会在最后链接时发生“<code>__security_cookie</code>”和“<code>__security_check_ cookie</code>”符号未定义错误。</li>
+    <li>/GS- 表示关闭堆栈保护功能，MSVC和GCC一样也会在不定参数中插入堆栈保护功能。不管这个功能会不会在最后链接时发生“__security_cookie”和“__security_check_ cookie”符号未定义错误。</li>
 
   </ul>
 
@@ -172,7 +172,7 @@ $ ./test arg1 arg2 123
 
   <ul>
 
-    <li><code>-e mini_crt_entry</code>用于指定入口函数。</li>
+    <li>-e mini_crt_entry用于指定入口函数。</li>
 
   </ul>
 

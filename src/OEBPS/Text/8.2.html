@@ -55,7 +55,7 @@ SUNWprivate {
 } 
 </pre>
 
-  <p>在这个脚本文件中，我们可以看到它定义了两个符号集合，分别为“<code>SUNW_1.1</code>”和“<code>SUNWprivate</code>”（在Solaris系统中，符号的集合名通常由“<code>SUNW</code>”开头）。第一个包含了两个全局符号<code>pop</code>和<code>push</code>；在第二个集合中，包含了两个全局符号“<code>__pop</code>”和“<code>__push</code>”。第二个集合中最后的“<code>local: *;</code>”表示：除了上述被标识为全局的“<code>pop</code>”、“<code>push</code>”、“<code>__pop</code>”和“<code>__push</code>”这4个符号以外，共享库中其他的本来是全局的符号都将成为共享库局部符号，也就是说链接器会把原先是全局的符号全部变成局部的，这样一来，共享库外部的应用程序或其他的共享库将无法访问这些符号。这种方式可以用于保护那些共享库内部的公用实用函数，但是共享库的作者又不希望共享库的使用者能够有意或无意地访问这些函数。这种方法又被称为范围机制（Scoping），它实际上是对C语言没有很好的符号可见范围的控制机制的一种补充，或者说是一种补救性质的措施。</p>
+  <p>在这个脚本文件中，我们可以看到它定义了两个符号集合，分别为“SUNW_1.1”和“SUNWprivate”（在Solaris系统中，符号的集合名通常由“SUNW”开头）。第一个包含了两个全局符号pop和push；在第二个集合中，包含了两个全局符号“__pop”和“__push”。第二个集合中最后的“local: *;”表示：除了上述被标识为全局的“pop”、“push”、“__pop”和“__push”这4个符号以外，共享库中其他的本来是全局的符号都将成为共享库局部符号，也就是说链接器会把原先是全局的符号全部变成局部的，这样一来，共享库外部的应用程序或其他的共享库将无法访问这些符号。这种方式可以用于保护那些共享库内部的公用实用函数，但是共享库的作者又不希望共享库的使用者能够有意或无意地访问这些函数。这种方法又被称为范围机制（Scoping），它实际上是对C语言没有很好的符号可见范围的控制机制的一种补充，或者说是一种补救性质的措施。</p>
 
   <p>假设现在这个共享库升级了，在原有的基础上添加了一个全局函数“swap”，那么新的符号版本脚本文件可以在原有的基础上添加如下内容：</p>
 
@@ -115,7 +115,7 @@ int new_printf()
 
   <h4>Linux系统中符号版本机制实践</h4>
 
-  <p>在Linux下，当我们使用ld链接一个共享库时，可以使用“<code>--version-script</code>”参数；如果使用GCC，则可以使用“<code>-Xlinker</code>”参数加“<code>--version-script</code>”，相当于把“<code>--version-script</code>”传递给ld链接器。如编译源代码为“lib.c”，符号版本脚本文件为“lib.ver”：</p>
+  <p>在Linux下，当我们使用ld链接一个共享库时，可以使用“--version-script”参数；如果使用GCC，则可以使用“-Xlinker”参数加“--version-script”，相当于把“--version-script”传递给ld链接器。如编译源代码为“lib.c”，符号版本脚本文件为“lib.ver”：</p>
 
   <pre>gcc -shared -fPIC lib.c -Xlinker --version-script lib.ver -o lib.so</pre>
 

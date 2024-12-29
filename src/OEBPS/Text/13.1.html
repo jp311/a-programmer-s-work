@@ -28,7 +28,7 @@
 
     <li>支持格式化字符串和输出操作（printf、sprintf）。</li>
 
-    <li>支持<code>atexit()</code>函数。</li>
+    <li>支持atexit()函数。</li>
 
     <li>最后，Mini CRT应该是跨平台的。我们计划让Mini CRT能够同时支持Windows和Linux两个操作系统。</li>
 
@@ -45,7 +45,7 @@
 #endif
 </pre>
 
-  <p>在本章中，<code>#ifdef-#else-#endif</code>这个条件编译指令会加粗显示，以方便读者区分Windows和Linux的代码。</p>
+  <p>在本章中，#ifdef-#else-#endif这个条件编译指令会加粗显示，以方便读者区分Windows和Linux的代码。</p>
 
   <p>通常我们会把CRT的各个函数的声明放在不同的头文件中，比如IO相关的位于stdio.h；字符串和堆相关的放在stdlib.h中。为了简单起见，将Mini CRT中所有函数的声明都放在minicrt.h中。</p>
 
@@ -65,7 +65,7 @@
 
   <h4>入口函数</h4>
 
-  <p>首先，须要确定入口函数的函数原型，包括函数名、输入参数及返回值。在这里，入口函数命名为<code>mini_crt_entry</code>。为了简单起见，它没有输入参数，同时没有返回值。其实<code>mini_crt_entry</code>的返回值没有意义，因为它永远不会返回，在它返回之前就会调用进程退出函数结束进程。这样，入口函数具有如下形式：</p>
+  <p>首先，须要确定入口函数的函数原型，包括函数名、输入参数及返回值。在这里，入口函数命名为mini_crt_entry。为了简单起见，它没有输入参数，同时没有返回值。其实mini_crt_entry的返回值没有意义，因为它永远不会返回，在它返回之前就会调用进程退出函数结束进程。这样，入口函数具有如下形式：</p>
 
   <pre>void mini_crt_entry(void)</pre>
 
@@ -88,7 +88,7 @@
 
   <pre>int main(int argc, char* argv[]);</pre>
 
-  <p>其中<code>argc</code>和<code>argv</code>分别是main函数的两个参数，它们分别表示运行程序时的参数个数和指向参数的字符串指针数组。在第6章中已经介绍过在Linux系统下，当进程被初始化时，它的堆栈结构中就保存着环境变量和传递给main函数的参数，我们可以通过ESP寄存器获得这两个参数。但是一旦进入<code>mini_crt_entry</code>之后，ESP寄存器会随着函数的执行而被改变，通过第9章中关于函数对于堆栈帧的知识，可以知道EBP的内容就是进入函数后ESP + 4（4是因为函数第一条指令是push ebp）。那么可以推断出EBP - 4所指向的内容应该就是argc，而EBP - 8则就是argv。整个堆栈的分布可以如图13-1所示。</p>
+  <p>其中argc和argv分别是main函数的两个参数，它们分别表示运行程序时的参数个数和指向参数的字符串指针数组。在第6章中已经介绍过在Linux系统下，当进程被初始化时，它的堆栈结构中就保存着环境变量和传递给main函数的参数，我们可以通过ESP寄存器获得这两个参数。但是一旦进入mini_crt_entry之后，ESP寄存器会随着函数的执行而被改变，通过第9章中关于函数对于堆栈帧的知识，可以知道EBP的内容就是进入函数后ESP + 4（4是因为函数第一条指令是push ebp）。那么可以推断出EBP - 4所指向的内容应该就是argc，而EBP - 8则就是argv。整个堆栈的分布可以如图13-1所示。</p>
 
   <p><img alt="" src="../Images/13-1.jpg"/><br/>图13-1 main函数参数</p>
 
@@ -102,15 +102,15 @@
 
   <h4>CRT初始化</h4>
 
-  <p>完成了获取main 函数参数的代码后，还应该在入口函数里对CRT进行初始化。由于Mini CRT所实现的功能较少，所以初始化部分十分简单。需要初始化的主要是堆和IO部分。在堆被初始化之前，malloc/free函数是没有办法使用的。我们定义堆的初始化函数为<code>mini_crt_heap_init()</code>；IO部分的初始化函数为<code>mini_crt_io_init()</code>。这两个函数的返回值都是整数类型的，返回非0即表示初始化成功，否则表示失败。这两个函数的实现将在后面介绍堆实现和IO实现时详细介绍。</p>
+  <p>完成了获取main 函数参数的代码后，还应该在入口函数里对CRT进行初始化。由于Mini CRT所实现的功能较少，所以初始化部分十分简单。需要初始化的主要是堆和IO部分。在堆被初始化之前，malloc/free函数是没有办法使用的。我们定义堆的初始化函数为mini_crt_heap_init()；IO部分的初始化函数为mini_crt_io_init()。这两个函数的返回值都是整数类型的，返回非0即表示初始化成功，否则表示失败。这两个函数的实现将在后面介绍堆实现和IO实现时详细介绍。</p>
 
   <h4>结束部分</h4>
 
-  <p>Mini CRT结束部分很简单，它要完成两项任务：一个就是调用由<code>atexit()</code>注册的退出回调函数；另外一个就是实现结束进程。这两项任务都由<code>exit()</code>函数完成，这个函数在Linux的实现已经在第4章中碰到过了，它调用Linux的1号系统调用实现进程结束，ebx表示进程退出码；而Windows则提供了一个叫做ExitProcess的API，直接调用该API即可结束进程。</p>
+  <p>Mini CRT结束部分很简单，它要完成两项任务：一个就是调用由atexit()注册的退出回调函数；另外一个就是实现结束进程。这两项任务都由exit()函数完成，这个函数在Linux的实现已经在第4章中碰到过了，它调用Linux的1号系统调用实现进程结束，ebx表示进程退出码；而Windows则提供了一个叫做ExitProcess的API，直接调用该API即可结束进程。</p>
 
-  <p>不过在进行系统调用或API之前，<code>exit()</code>还有一个任务就是调用由<code>atexit()</code>注册的退出回调函数，这个任务通过调用<code>mini_crt_exit_routine()</code>实现。我们在第10章中已经了解到，<code>atexit()</code>注册回调函数的机制主要是用来实现全局对象的析构的，在这一节中暂时不打算让Mini CRT支持C++，所以暂时将调用<code>mini_crt_exit_routine()</code>这个函数的那行代码去掉。</p>
+  <p>不过在进行系统调用或API之前，exit()还有一个任务就是调用由atexit()注册的退出回调函数，这个任务通过调用mini_crt_exit_routine()实现。我们在第10章中已经了解到，atexit()注册回调函数的机制主要是用来实现全局对象的析构的，在这一节中暂时不打算让Mini CRT支持C++，所以暂时将调用mini_crt_exit_routine()这个函数的那行代码去掉。</p>
 
-  <p>最终Mini CRT的入口函数<code>mini_crt_entry</code>的代码如清单13-1所示。</p>
+  <p>最终Mini CRT的入口函数mini_crt_entry的代码如清单13-1所示。</p>
 
   <p>清单13-1 entry.c</p>
 
@@ -197,7 +197,7 @@ void exit(int exitCode)
 
   <h3>13.1.2 堆的实现</h3>
 
-  <p>有了CRT的入口函数、<code>exit()</code>函数之后，下一步的目标就是实现堆的操作，即<code>malloc()</code>函数和<code>free()</code>函数。当然堆的实现方法有很多，在不同的操作系统平台上也有很多可以选择的方案，在遵循Mini CRT的原则下，我们将Mini CRT堆的实现归纳为下面几条。</p>
+  <p>有了CRT的入口函数、exit()函数之后，下一步的目标就是实现堆的操作，即malloc()函数和free()函数。当然堆的实现方法有很多，在不同的操作系统平台上也有很多可以选择的方案，在遵循Mini CRT的原则下，我们将Mini CRT堆的实现归纳为下面几条。</p>
 
   <ul>
 
@@ -362,7 +362,7 @@ int mini_crt_heap_init()
 }
 </pre>
 
-  <p>我们在malloc.c中实现了3个对外的接口函数，分别是：<code>mini_crt_init_heap</code>、<code>malloc</code>和<code>free</code>。不过这个堆的实现还比较简陋：它的搜索算法是O(n)的（n是堆中分配的块的数量）；堆的空间固定为32MB，没有办法扩张；它没有实现<code>realloc</code>、<code>calloc</code>函数；它没有很好的堆溢出防范机制；它不支持多线程同时访问等等。</p>
+  <p>我们在malloc.c中实现了3个对外的接口函数，分别是：mini_crt_init_heap、malloc和free。不过这个堆的实现还比较简陋：它的搜索算法是O(n)的（n是堆中分配的块的数量）；堆的空间固定为32MB，没有办法扩张；它没有实现realloc、calloc函数；它没有很好的堆溢出防范机制；它不支持多线程同时访问等等。</p>
 
   <p>虽然它很简陋，但是它体现出了堆分配算法的最本质的几个特征，其他的诸如改进搜索速度、扩展堆空间、多线程支持等都可以在此基础上进行改进，由于篇幅有限，我们也不打算一一实现它们，读者如果有兴趣，可以自己考虑动手改进Mini CRT，为它增加上述特性。</p>
 
@@ -602,7 +602,7 @@ int fseek(FILE* fp, int offset, int set)
 
   <p>值得一提的是，在Windows下，标准输入输出并不是文件描述符0、1和2，而是要通过一个叫做GetStdHandle的API获得。</p>
 
-  <p>由于省略了诸多实现内容，所以CRT IO部分甚至可以不要做任何初始化，于是IO的初始化函数<code>mini_crt_init_io</code>也形同虚设，仅仅是一个空函数而已。</p>
+  <p>由于省略了诸多实现内容，所以CRT IO部分甚至可以不要做任何初始化，于是IO的初始化函数mini_crt_init_io也形同虚设，仅仅是一个空函数而已。</p>
 
   <h3>13.1.4 字符串相关操作</h3>
 
@@ -687,7 +687,7 @@ unsigned strlen(const char *str)
 
   <ul>
 
-    <li>printf实现仅支持<code>%d</code>、<code>%s</code>，且不支持格式控制（比如<code>%08d</code>）。</li>
+    <li>printf实现仅支持%d、%s，且不支持格式控制（比如%08d）。</li>
 
     <li>实现fprintf和vfprintf，实际上printf是fprintf的特殊形式，即目标文件为标准输出的fprintf。</li>
 

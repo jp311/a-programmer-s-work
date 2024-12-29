@@ -51,7 +51,7 @@ ELF Header:
 
   <p><img alt="" src="../Images/3-0-3.jpg"/><br/>表3-3</p>
 
-  <p>我们这里以32位版本的文件头结构“<code>Elf32_Ehdr</code>”作为例子来描述，它的定义如下：</p>
+  <p>我们这里以32位版本的文件头结构“Elf32_Ehdr”作为例子来描述，它的定义如下：</p>
 
   <pre>typedef struct {
     unsigned char e_ident[16];
@@ -105,19 +105,19 @@ ELF Header:
 
   </blockquote>
 
-  <p><b>文件类型</b> <code>e_type</code>成员表示ELF文件类型，即前面提到过的3种ELF文件类型，每个文件类型对应一个常量。系统通过这个常量来判断ELF的真正文件类型，而不是通过文件的扩展名。相关常量以“<code>ET_</code>”开头，如表3-5所示。</p>
+  <p><b>文件类型</b> e_type成员表示ELF文件类型，即前面提到过的3种ELF文件类型，每个文件类型对应一个常量。系统通过这个常量来判断ELF的真正文件类型，而不是通过文件的扩展名。相关常量以“ET_”开头，如表3-5所示。</p>
 
   <p><img alt="" src="../Images/3-0-5.jpg"/><br/>表3-5</p>
 
-  <p><b>机器类型</b> ELF文件格式被设计成可以在多个平台下使用。这并不表示同一个ELF文件可以在不同的平台下使用（就像java的字节码文件那样），而是表示不同平台下的ELF文件都遵循同一套ELF标准。<code>e_machine</code>成员就表示该ELF文件的平台属性，比如3表示该ELF文件只能在Intel x86机器下使用，这也是我们最常见的情况。相关的常量以“<code>EM_</code>”开头，如表3-6所示。</p>
+  <p><b>机器类型</b> ELF文件格式被设计成可以在多个平台下使用。这并不表示同一个ELF文件可以在不同的平台下使用（就像java的字节码文件那样），而是表示不同平台下的ELF文件都遵循同一套ELF标准。e_machine成员就表示该ELF文件的平台属性，比如3表示该ELF文件只能在Intel x86机器下使用，这也是我们最常见的情况。相关的常量以“EM_”开头，如表3-6所示。</p>
 
   <p><img alt="" src="../Images/3-0-6.jpg"/><br/>表3-6</p>
 
   <h3>3.4.2 段表</h3>
 
-  <p>我们知道ELF文件中有很多各种各样的段，这个段表（Section Header Table）就是保存这些段的基本属性的结构。段表是ELF文件中除了文件头以外最重要的结构，它描述了ELF的各个段的信息，比如每个段的段名、段的长度、在文件中的偏移、读写权限及段的其他属性。也就是说，ELF文件的段结构就是由段表决定的，编译器、链接器和装载器都是依靠段表来定位和访问各个段的属性的。段表在ELF文件中的位置由ELF文件头的“<code>e_shoff</code>”成员决定，比如SimpleSection.o中，段表位于偏移0x118。</p>
+  <p>我们知道ELF文件中有很多各种各样的段，这个段表（Section Header Table）就是保存这些段的基本属性的结构。段表是ELF文件中除了文件头以外最重要的结构，它描述了ELF的各个段的信息，比如每个段的段名、段的长度、在文件中的偏移、读写权限及段的其他属性。也就是说，ELF文件的段结构就是由段表决定的，编译器、链接器和装载器都是依靠段表来定位和访问各个段的属性的。段表在ELF文件中的位置由ELF文件头的“e_shoff”成员决定，比如SimpleSection.o中，段表位于偏移0x118。</p>
 
-  <p>前文中我们使用了“objudmp -h”来查看ELF文件中包含的段，结果是SimpleSection里面看到了总共有6个段，分别是“<code>.code</code>”、“<code>.data</code>”、“<code>.bss</code>”、“<code>.rodata</code>”、“<code>.comment</code>”和“<code>.note.GNU-stack</code>”。实际上的情况却有所不同，“objdump -h”命令只是把ELF文件中关键的段显示了出来，而省略了其他的辅助性的段，比如：符号表、字符串表、段名字符串表、重定位表等。我们可以使用readelf工具来查看ELF文件的段，它显示出来的结果才是真正的段表结构：</p>
+  <p>前文中我们使用了“objudmp -h”来查看ELF文件中包含的段，结果是SimpleSection里面看到了总共有6个段，分别是“.code”、“.data”、“.bss”、“.rodata”、“.comment”和“.note.GNU-stack”。实际上的情况却有所不同，“objdump -h”命令只是把ELF文件中关键的段显示了出来，而省略了其他的辅助性的段，比如：符号表、字符串表、段名字符串表、重定位表等。我们可以使用readelf工具来查看ELF文件的段，它显示出来的结果才是真正的段表结构：</p>
 
   <pre>$ readelf -S SimpleSection.o
 There are 11 section headers, starting at offset 0x118:
@@ -141,7 +141,7 @@ Key to Flags:
   O (extra OS processing required) o (OS specific), p (processor specific)
 </pre>
 
-  <p>readelf输出的结果就是ELF文件段表的内容，那么就让我们对照这个输出来看看段表的结构。段表的结构比较简单，它是一个以“<code>Elf32_Shdr</code>”结构体为元素的数组。数组元素的个数等于段的个数，每个“<code>Elf32_Shdr</code>”结构体对应一个段。“<code>Elf32_Shdr</code>”又被称为段描述符（Section Descriptor）。对于SimpleSection.o来说，段表就是有11个元素的数组。ELF段表的这个数组的第一个元素是无效的段描述符，它的类型为“NULL”，除此之外每个段描述符都对应一个段。也就是说SimpleSection.o共有10个有效的段。</p>
+  <p>readelf输出的结果就是ELF文件段表的内容，那么就让我们对照这个输出来看看段表的结构。段表的结构比较简单，它是一个以“Elf32_Shdr”结构体为元素的数组。数组元素的个数等于段的个数，每个“Elf32_Shdr”结构体对应一个段。“Elf32_Shdr”又被称为段描述符（Section Descriptor）。对于SimpleSection.o来说，段表就是有11个元素的数组。ELF段表的这个数组的第一个元素是无效的段描述符，它的类型为“NULL”，除此之外每个段描述符都对应一个段。也就是说SimpleSection.o共有10个有效的段。</p>
 
   <blockquote>
 
@@ -151,7 +151,7 @@ Key to Flags:
 
   </blockquote>
 
-  <p><code>Elf32_Shdr</code>被定义在“/usr/include/elf.h”，代码如清单3-3所示。</p>
+  <p>Elf32_Shdr被定义在“/usr/include/elf.h”，代码如清单3-3所示。</p>
 
   <p>清单3-3 Elf32_Shdr段描述符结构</p>
 
@@ -170,23 +170,23 @@ Key to Flags:
 } Elf32_Shdr;
 </pre>
 
-  <p><code>Elf32_Shdr</code>的各个成员的含义如表3-7所示。</p>
+  <p>Elf32_Shdr的各个成员的含义如表3-7所示。</p>
 
   <p><img alt="" src="../Images/3-0-7.jpg"/><br/>表3-7</p>
 
   <p><i>注 1：事实上段的名字对于编译器、链接器来说是有意义的，但是对于操作系统来说并没有实质的意义，对于操作系统来说，一个段该如何处理取决于它的属性和权限，即由段的类型和段的标志位这两个成员决定。</i><br/><i>注 2：关于这些字段，涉及一些映像文件的加载的概念，我们将在本书的第2部分详细介绍其相关内容，读者也可以先阅读第2部分的最前面一章“可执行文件的装载于进程”，了解一下加载的概念，然后再来阅读关于段的虚拟大小和虚拟地址的内容。当然，如果读者对映像文件加载过程比较熟悉，应该很容易理解这些内容。</i></p>
 
-  <p>让我们对照<code>Elf32_Shdr</code>和“<code>readelf -S</code>”的输出结果，可以很明显看到，结构体的每一个成员对应于输出结果中从第二列“Name”开始的每一列。于是SimpleSection的段表的位置如图3-6所示。</p>
+  <p>让我们对照Elf32_Shdr和“readelf -S”的输出结果，可以很明显看到，结构体的每一个成员对应于输出结果中从第二列“Name”开始的每一列。于是SimpleSection的段表的位置如图3-6所示。</p>
 
   <p>到了这一步，我们才彻彻底底把SimpleSection的所有段的位置和长度给分析清楚了。在图3-6中，SectionTable长度为0x1b8，也就是440个字节，它包含了11个段描述符，每个段描述符为40个字节，这个长度刚好等于sizeof(Elf32_Shdr)，符合段描述符的结构体长度；整个文件最后一个段“.rel.text”结束后，长度为0x450，即1104字节，即刚好是SimpleSection.o的文件长度。中间Section Table和“.rel.text”都因为对齐的原因，与前面的段之间分别有一个字节和两个字节的间隔。</p>
 
   <p><img alt="" src="../Images/3-6.jpg"/><br/>图3-6 SimpleSection.o 的Section Table及所有段的位置和长度</p>
 
-  <p><b>段的类型（<code>sh_type</code>）</b> 正如前面所说的，段的名字只是在链接和编译过程中有意义，但它不能真正地表示段的类型。我们也可以将一个数据段命名为“.text”，对于编译器和链接器来说，主要决定段的属性的是段的类型（<code>sh_type</code>）和段的标志位（<code>sh_flags</code>）。段的类型相关常量以SHT_开头，列举如表3-8所示。</p>
+  <p><b>段的类型（sh_type）</b> 正如前面所说的，段的名字只是在链接和编译过程中有意义，但它不能真正地表示段的类型。我们也可以将一个数据段命名为“.text”，对于编译器和链接器来说，主要决定段的属性的是段的类型（sh_type）和段的标志位（sh_flags）。段的类型相关常量以SHT_开头，列举如表3-8所示。</p>
 
   <p><img alt="" src="../Images/3-0-8.jpg"/><br/><img alt="" src="../Images/3-0-8-2.jpg"/><br/>表3-8</p>
 
-  <p><b>段的标志位（<code>sh_flag</code>）</b> 段的标志位表示该段在进程虚拟地址空间中的属性，比如是否可写，是否可执行等。相关常量以SHF_开头，如表3-9所示。</p>
+  <p><b>段的标志位（sh_flag）</b> 段的标志位表示该段在进程虚拟地址空间中的属性，比如是否可写，是否可执行等。相关常量以SHF_开头，如表3-9所示。</p>
 
   <p><img alt="" src="../Images/3-0-9.jpg"/><br/>表3-9</p>
 
@@ -194,15 +194,15 @@ Key to Flags:
 
   <p><img alt="" src="../Images/3-0-10.jpg"/><br/><img alt="" src="../Images/3-0-10-2.jpg"/><br/>表3-10</p>
 
-  <p><b>段的链接信息（<code>sh_link</code>、<code>sh_info</code>）</b> 如果段的类型是与链接相关的（不论是动态链接或静态链接），比如重定位表、符号表等，那么<code>sh_link</code>和<code>sh_info</code>这两个成员所包含的意义如表3-11所示。对于其他类型的段，这两个成员没有意义。</p>
+  <p><b>段的链接信息（sh_link、sh_info）</b> 如果段的类型是与链接相关的（不论是动态链接或静态链接），比如重定位表、符号表等，那么sh_link和sh_info这两个成员所包含的意义如表3-11所示。对于其他类型的段，这两个成员没有意义。</p>
 
   <p><img alt="" src="../Images/3-0-11.jpg"/><br/>表3-11</p>
 
   <h3>3.4.3 重定位表</h3>
 
-  <p>我们注意到，SimpleSection.o中有一个叫做“.rel.text”的段，它的类型（<code>sh_type</code>）为“<code>SHT_REL</code>”，也就是说它是一个重定位表（Relocation Table）。正如我们最开始所说的，链接器在处理目标文件时，须要对目标文件中某些部位进行重定位，即代码段和数据段中那些对绝对地址的引用的位置。这些重定位的信息都记录在ELF文件的重定位表里面，对于每个须要重定位的代码段或数据段，都会有一个相应的重定位表。比如SimpleSection.o中的“.rel.text”就是针对“.text”段的重定位表，因为“.text”段中至少有一个绝对地址的引用，那就是对“printf”函数的调用；而“.data”段则没有对绝对地址的引用，它只包含了几个常量，所以SimpleSection.o中没有针对“.data”段的重定位表“.rel.data”。</p>
+  <p>我们注意到，SimpleSection.o中有一个叫做“.rel.text”的段，它的类型（sh_type）为“SHT_REL”，也就是说它是一个重定位表（Relocation Table）。正如我们最开始所说的，链接器在处理目标文件时，须要对目标文件中某些部位进行重定位，即代码段和数据段中那些对绝对地址的引用的位置。这些重定位的信息都记录在ELF文件的重定位表里面，对于每个须要重定位的代码段或数据段，都会有一个相应的重定位表。比如SimpleSection.o中的“.rel.text”就是针对“.text”段的重定位表，因为“.text”段中至少有一个绝对地址的引用，那就是对“printf”函数的调用；而“.data”段则没有对绝对地址的引用，它只包含了几个常量，所以SimpleSection.o中没有针对“.data”段的重定位表“.rel.data”。</p>
 
-  <p>一个重定位表同时也是ELF的一个段，那么这个段的类型（<code>sh_type</code>）就是“<code>SHT_REL</code>”类型的，它的“<code>sh_link</code>”表示符号表的下标，它的“<code>sh_info</code>”表示它作用于哪个段。比如“.rel.text”作用于“.text”段，而“.text”段的下标为“1”，那么“.rel.text”的“<code>sh_info</code>”为“1”。</p>
+  <p>一个重定位表同时也是ELF的一个段，那么这个段的类型（sh_type）就是“SHT_REL”类型的，它的“sh_link”表示符号表的下标，它的“sh_info”表示它作用于哪个段。比如“.rel.text”作用于“.text”段，而“.text”段的下标为“1”，那么“.rel.text”的“sh_info”为“1”。</p>
 
   <p>关于重定位表的内部结构我们在这里先不展开了，在下一章分析静态链接过程的时候，我们还会详细地分析重定位表的结构。</p>
 
@@ -216,9 +216,9 @@ Key to Flags:
 
   <p><img alt="" src="../Images/3-0-13.jpg"/><br/>表3-13</p>
 
-  <p>通过这种方法，在ELF文件中引用字符串只须给出一个数字下标即可，不用考虑字符串长度的问题。一般字符串表在ELF文件中也以段的形式保存，常见的段名为“.strtab”或“.shstrtab”。这两个字符串表分别为字符串表（String Table）和段表字符串表（Section Header String Table）。顾名思义，字符串表用来保存普通的字符串，比如符号的名字；段表字符串表用来保存段表中用到的字符串，最常见的就是段名（<code>sh_name</code>）。</p>
+  <p>通过这种方法，在ELF文件中引用字符串只须给出一个数字下标即可，不用考虑字符串长度的问题。一般字符串表在ELF文件中也以段的形式保存，常见的段名为“.strtab”或“.shstrtab”。这两个字符串表分别为字符串表（String Table）和段表字符串表（Section Header String Table）。顾名思义，字符串表用来保存普通的字符串，比如符号的名字；段表字符串表用来保存段表中用到的字符串，最常见的就是段名（sh_name）。</p>
 
-  <p>接着我们再回头看这个ELF文件头中的“<code>e_shstrndx</code>”的含义，我们在前面提到过，“<code>e_shstrndx</code>”是<code>Elf32_Ehdr</code>的最后一个成员，它是“Section header string table index”的缩写。我们知道段表字符串表本身也是ELF文件中的一个普通的段，知道它的名字往往叫做“.shstrtab”。那么这个“<code>e_shstrndx</code>”就表示“.shstrtab”在段表中的下标，即段表字符串表在段表中的下标。前面的SimpleSection.o中，“<code>e_shstrndx</code>”的值为8，我们再对照“<code>readelf -S</code>”的输出结果，可以看到“.shstrtab”这个段刚好位于段表中的下标为8的位置上。由此，我们可以得出结论，只有分析ELF文件头，就可以得到段表和段表字符串表的位置，从而解析整个ELF文件。</p>
+  <p>接着我们再回头看这个ELF文件头中的“e_shstrndx”的含义，我们在前面提到过，“e_shstrndx”是Elf32_Ehdr的最后一个成员，它是“Section header string table index”的缩写。我们知道段表字符串表本身也是ELF文件中的一个普通的段，知道它的名字往往叫做“.shstrtab”。那么这个“e_shstrndx”就表示“.shstrtab”在段表中的下标，即段表字符串表在段表中的下标。前面的SimpleSection.o中，“e_shstrndx”的值为8，我们再对照“readelf -S”的输出结果，可以看到“.shstrtab”这个段刚好位于段表中的下标为8的位置上。由此，我们可以得出结论，只有分析ELF文件头，就可以得到段表和段表字符串表的位置，从而解析整个ELF文件。</p>
 
 </body>
 

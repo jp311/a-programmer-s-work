@@ -14,13 +14,13 @@
   
   <p><img alt="" src="../Images/5-2.jpg"/><br/>图5-2 PE文件格式</p>
 
-  <p>DOS下的可执行文件的扩展名与Windows下的可执行文件扩展名一样，都是“.exe”，但是DOS下的可执行文件格式是“MZ”格式（因为这个格式比较古老，我们在这里并不打算展开介绍这种格式），与Windows下的PE格式完全不同，虽然它们使用相同的扩展名。在Windows发展的早期，那时候DOS系统还如日中天，而且早期的Windows版本还不能脱离DOS环境独立运行，所以为了照顾DOS系统，那些为Windows编写的程序必须尽量兼容原有的DOS系统，所以PE文件在设计之初就背负着历史的累赘。PE文件中“<code>Image DOS Header</code>”和“<code>DOS Stub</code>”这两个结构就是为了兼容DOS系统而设计的，其中“<code>IMAGE_DOS_HEADER</code>”结构其实跟DOS的“<code>MZ</code>”可执行结构的头部完全一样，所以从某个角度看，PE文件其实也是一个“MZ”文件。“<code>IMAGE_DOS_HEADER</code>”的结构中有的前两个字节是“<code>e_magic</code>”结构，它是里面包含了“MZ”这两个字母的ASCII码；“<code>e_cs</code>”和“<code>e_ip</code>”两个成员指向程序的入口地址。</p>
+  <p>DOS下的可执行文件的扩展名与Windows下的可执行文件扩展名一样，都是“.exe”，但是DOS下的可执行文件格式是“MZ”格式（因为这个格式比较古老，我们在这里并不打算展开介绍这种格式），与Windows下的PE格式完全不同，虽然它们使用相同的扩展名。在Windows发展的早期，那时候DOS系统还如日中天，而且早期的Windows版本还不能脱离DOS环境独立运行，所以为了照顾DOS系统，那些为Windows编写的程序必须尽量兼容原有的DOS系统，所以PE文件在设计之初就背负着历史的累赘。PE文件中“Image DOS Header”和“DOS Stub”这两个结构就是为了兼容DOS系统而设计的，其中“IMAGE_DOS_HEADER”结构其实跟DOS的“MZ”可执行结构的头部完全一样，所以从某个角度看，PE文件其实也是一个“MZ”文件。“IMAGE_DOS_HEADER”的结构中有的前两个字节是“e_magic”结构，它是里面包含了“MZ”这两个字母的ASCII码；“e_cs”和“e_ip”两个成员指向程序的入口地址。</p>
 
   <p>当PE可执行映像在DOS下被加载的时候，DOS系统检测该文件，发现最开始两个字节是“MZ”，于是认为它是一个“MZ”可执行文件。然后DOS系统就将PE文件当作正常的“MZ”文件开始执行。DOS系统会读取“e_cs”和“e_ip”这两个成员的值，以跳转到程序的入口地址。然而PE文件中，“e_cs”和“e_ip”这两个成员并不指向程序真正的入口地址，而是指向文件中的“DOS Stub”。“DOS Stub”是一段可以在DOS下运行的一小段代码，这段代码的唯一作用是向终端输出一行字：“This program cannot be run in DOS”，然后退出程序，表示该程序不能在DOS下运行。所以我们如果在DOS系统下运行Windows的程序就可以看到上面这句话，这是因为PE文件结构兼容DOS“MZ”可执行文件结构的缘故。</p>
 
-  <p>“<code>IMAGE_DOS_HEADER</code>”结构也被定义在WinNT.h里面，该结构的大多数成员我们都不关心，唯一值得关心的是“<code>e_lfanew</code>”成员，这个成员表明了PE文件头（IMAGE_NT_HEADERS）在PE文件中的偏移，我们须要使用这个值来定位PE文件头。这个成员在DOS的“MZ”文件格式中它的值永远为0，所以当Windows开始执行一个后缀名为“.exe”的文件时，它会判断“<code>e_lfanew</code>”成员是否为0。如果为0，则该“.exe”文件是一个DOS“MZ”可执行文件，Windows会启动DOS子系统来执行它；如果不为0，那么它就是一个Windows的PE可执行文件，“<code>e_lfanew</code>”的值表示“IMAGE_NT_HEADERS”在文件中的偏移。</p>
+  <p>“IMAGE_DOS_HEADER”结构也被定义在WinNT.h里面，该结构的大多数成员我们都不关心，唯一值得关心的是“e_lfanew”成员，这个成员表明了PE文件头（IMAGE_NT_HEADERS）在PE文件中的偏移，我们须要使用这个值来定位PE文件头。这个成员在DOS的“MZ”文件格式中它的值永远为0，所以当Windows开始执行一个后缀名为“.exe”的文件时，它会判断“e_lfanew”成员是否为0。如果为0，则该“.exe”文件是一个DOS“MZ”可执行文件，Windows会启动DOS子系统来执行它；如果不为0，那么它就是一个Windows的PE可执行文件，“e_lfanew”的值表示“IMAGE_NT_HEADERS”在文件中的偏移。</p>
 
-  <p>“<code>IMAGE_NT_HEADERS</code>”是PE真正的文件头，它包含了一个标记（Signature）和两个结构体。标记是一个常量，对于一个合法的PE文件来说，它的值为0x00004550，按照小端字节序，它对应的是’P’、‘E’、‘\0’、‘\0’这4个字符的ASCII码。文件头包含的两个结构分别是映像头（Image Header）、PE扩展头部结构（Image Optional Header）。这个结构定义如下：</p>
+  <p>“IMAGE_NT_HEADERS”是PE真正的文件头，它包含了一个标记（Signature）和两个结构体。标记是一个常量，对于一个合法的PE文件来说，它的值为0x00004550，按照小端字节序，它对应的是’P’、‘E’、‘\0’、‘\0’这4个字符的ASCII码。文件头包含的两个结构分别是映像头（Image Header）、PE扩展头部结构（Image Optional Header）。这个结构定义如下：</p>
 
   <pre>typedef struct _IMAGE_NT_HEADERS {
     DWORD Signature;

@@ -51,23 +51,23 @@ void foobar(int i);
 #endif
 </pre>
 
-  <p>程序很简单，两个程序的主要模块Program1.c和Program2.c分别调用了Lib.c里面的<code>foobar()</code>函数，传进去一个数字，<code>foobar()</code>函数的作用就是打印这个数字。然后我们使用GCC将Lib.c编译成一个共享对象文件：</p>
+  <p>程序很简单，两个程序的主要模块Program1.c和Program2.c分别调用了Lib.c里面的foobar()函数，传进去一个数字，foobar()函数的作用就是打印这个数字。然后我们使用GCC将Lib.c编译成一个共享对象文件：</p>
 
   <pre>gcc -fPIC -shared -o Lib.so Lib.c</pre>
 
   <blockquote>
 
-    <p>上面GCC命令中的参数“<code>-shared</code>”表示产生共享对象，“<code>-fPIC</code>”我们稍后还会详细解释，这里暂且略过。</p>
+    <p>上面GCC命令中的参数“-shared”表示产生共享对象，“-fPIC”我们稍后还会详细解释，这里暂且略过。</p>
 
   </blockquote>
 
-  <p>这时候我们得到了一个Lib.so文件，这就是包含了Lib.c的<code>foobar()</code>函数的共享对象文件。然后我们分别编译链接Program1.c和Program2.c：</p>
+  <p>这时候我们得到了一个Lib.so文件，这就是包含了Lib.c的foobar()函数的共享对象文件。然后我们分别编译链接Program1.c和Program2.c：</p>
 
   <pre>gcc -o Program1 Program1.c ./Lib.so
 gcc -o Program2 Program2.c ./Lib.so
 </pre>
 
-  <p>这样我们得到了两个程序Program1和Program2，这两个程序都使用了Lib.so里面的<code>foobar()</code>函数。从Program1的角度看，整个编译和链接过程如图7-3所示。</p>
+  <p>这样我们得到了两个程序Program1和Program2，这两个程序都使用了Lib.so里面的foobar()函数。从Program1的角度看，整个编译和链接过程如图7-3所示。</p>
 
   <p><img alt="" src="../Images/7-3.jpg"/><br/>图7-3 动态链接过程</p>
 
@@ -81,7 +81,7 @@ gcc -o Program2 Program2.c ./Lib.so
 
   </blockquote>
 
-  <p>让我们再回到动态链接的机制上来，当程序模块Program1.c被编译成为Program1.o时，编译器还不不知道<code>foobar()</code>函数的地址，这个内容我们已在静态链接中解释过了。当链接器将Program1.o链接成可执行文件时，这时候链接器必须确定Program1.o中所引用的<code>foobar()</code>函数的性质。如果<code>foobar()</code>是一个定义与其他静态目标模块中的函数，那么链接器将会按照静态链接的规则，将Program1.o中的foobar地址引用重定位；如果<code>foobar()</code>是一个定义在某个动态共享对象中的函数，那么链接器就会将这个符号的引用标记为一个动态链接的符号，不对它进行地址重定位，把这个过程留到装载时再进行。</p>
+  <p>让我们再回到动态链接的机制上来，当程序模块Program1.c被编译成为Program1.o时，编译器还不不知道foobar()函数的地址，这个内容我们已在静态链接中解释过了。当链接器将Program1.o链接成可执行文件时，这时候链接器必须确定Program1.o中所引用的foobar()函数的性质。如果foobar()是一个定义与其他静态目标模块中的函数，那么链接器将会按照静态链接的规则，将Program1.o中的foobar地址引用重定位；如果foobar()是一个定义在某个动态共享对象中的函数，那么链接器就会将这个符号的引用标记为一个动态链接的符号，不对它进行地址重定位，把这个过程留到装载时再进行。</p>
 
   <p>那么这里就有个问题，链接器如何知道foobar的引用是一个静态符号还是一个动态符号？这实际上就是我们要用到Lib.so的原因。Lib.so中保存了完整的符号信息（因为运行时进行动态链接还须使用符号信息），把Lib.so也作为链接的输入文件之一，链接器在解析符号时就可以知道：foobar是一个定义在Lib.so的动态符号。这样链接器就可以对foobar的引用做特殊的处理，使它成为一个对动态符号的引用。</p>
 

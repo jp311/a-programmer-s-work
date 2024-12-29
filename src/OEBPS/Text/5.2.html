@@ -24,7 +24,7 @@
 
   <pre>dumpbin /ALL SimpleSection.obj &gt; SimpleSection.txt</pre>
 
-  <p>“<code>/ALL</code>”参数是将打印输出目标文件的所有相关信息，包括文件头、每个段的属性和段的原始数据及符号表。由于输出信息较多，如果直接打印到终端上，可能不太便于查看，所以我们将其导向到一个输出文件“SimpleSection.txt”中。因为在接下来的分析过程中，我们将会经常用到这个“dumpbin”的输出结果，所以将它保存在“SimpleSection.txt”文件中，以便后面分析时逐一对照。我们也可以用“<code>/SUMMARY</code>”选项来查看整个文件的基本信息，它只输出所有段的段名和长度：</p>
+  <p>“/ALL”参数是将打印输出目标文件的所有相关信息，包括文件头、每个段的属性和段的原始数据及符号表。由于输出信息较多，如果直接打印到终端上，可能不太便于查看，所以我们将其导向到一个输出文件“SimpleSection.txt”中。因为在接下来的分析过程中，我们将会经常用到这个“dumpbin”的输出结果，所以将它保存在“SimpleSection.txt”文件中，以便后面分析时逐一对照。我们也可以用“/SUMMARY”选项来查看整个文件的基本信息，它只输出所有段的段名和长度：</p>
 
   <pre>dumpbin SimpleSection.obj /SUMMARY
 Microsoft (R) COFF/PE Dumper Version 8.00.50727.762
@@ -56,7 +56,7 @@ File Type: COFF OBJECT
 
   </blockquote>
 
-  <p>文件头里描述COFF文件总体属性的映像头是一个“IMAGE_FILE_HEADER”的结构，很明显，它跟ELF中的“Elf32_Ehdr”结构的作用相同。这个结构及相关常数被定义在“<code>VC\PlatformSDK\include\WinNT.h</code>”里面：</p>
+  <p>文件头里描述COFF文件总体属性的映像头是一个“IMAGE_FILE_HEADER”的结构，很明显，它跟ELF中的“Elf32_Ehdr”结构的作用相同。这个结构及相关常数被定义在“VC\PlatformSDK\include\WinNT.h”里面：</p>
 
   <pre>typedef struct _IMAGE_FILE_HEADER {
     WORD    Machine;
@@ -83,9 +83,9 @@ FILE HEADER VALUES
             0 characteristics
 </pre>
 
-  <p>可以看到这个目标文件的文件类型是“COFF OBJECT”，也就是COFF目标文件格式。文件头里面还包含了目标机器类型，例子里的类型是0x14C，微软定义该类型为x86兼容CPU。按照微软的预想，PE/COFF结构的可执行文件应该可以在不同类型的硬件平台上使用，所以预留了该字段。如果你安装了VC或Windows SDK（也叫Platform SDK），就可以在WinNT.h里面找到相应的以“<code>IMAGE_FILE_MACHINE_</code>”开头的目标机器类型的定义。VISUAL C++里面附带的Platform SDK定义了28种CPU类型，从x86到MIPS R系列、ALPHA、ARM、PowerPC等。但是由于目前Windows只能应用在为数不多的平台上（目前只有x86平台），所以我们看到的这个类型值几乎都是0x14C。文件头里面的“Number of Sections”是指该PE所包含的“段”的数量。“Time date stamp”是指PE文件的创建时间。“File pointer to symbol table”是符号表在PE中的位置。“Size of optional header”是指Optional Header的大小，这个结构只存在于PE可执行文件，COFF目标文件中该结构不存在，所以为0，我们在后面介绍PE文件结构时还会提到这个成员。</p>
+  <p>可以看到这个目标文件的文件类型是“COFF OBJECT”，也就是COFF目标文件格式。文件头里面还包含了目标机器类型，例子里的类型是0x14C，微软定义该类型为x86兼容CPU。按照微软的预想，PE/COFF结构的可执行文件应该可以在不同类型的硬件平台上使用，所以预留了该字段。如果你安装了VC或Windows SDK（也叫Platform SDK），就可以在WinNT.h里面找到相应的以“IMAGE_FILE_MACHINE_”开头的目标机器类型的定义。VISUAL C++里面附带的Platform SDK定义了28种CPU类型，从x86到MIPS R系列、ALPHA、ARM、PowerPC等。但是由于目前Windows只能应用在为数不多的平台上（目前只有x86平台），所以我们看到的这个类型值几乎都是0x14C。文件头里面的“Number of Sections”是指该PE所包含的“段”的数量。“Time date stamp”是指PE文件的创建时间。“File pointer to symbol table”是符号表在PE中的位置。“Size of optional header”是指Optional Header的大小，这个结构只存在于PE可执行文件，COFF目标文件中该结构不存在，所以为0，我们在后面介绍PE文件结构时还会提到这个成员。</p>
 
-  <p>映像头后面紧跟着的就是COFF文件的段表，它是一个类型为“<code>IMAGE_SECTION_ HEADER</code>”结构的数组，数组里面每个元素代表一个段，这个结构跟ELF文件中的“Elf32_Shdr”很相似。很明显，这个数组元素的个数刚好是该COFF文件所包含的段的数量，也就是映像头里面的“NumberOfSections”。这个结构是用来描述每个段的属性的，它也被定义在WinNT.h里面：</p>
+  <p>映像头后面紧跟着的就是COFF文件的段表，它是一个类型为“IMAGE_SECTION_ HEADER”结构的数组，数组里面每个元素代表一个段，这个结构跟ELF文件中的“Elf32_Shdr”很相似。很明显，这个数组元素的个数刚好是该COFF文件所包含的段的数量，也就是映像头里面的“NumberOfSections”。这个结构是用来描述每个段的属性的，它也被定义在WinNT.h里面：</p>
 
   <pre>typedef struct _IMAGE_SECTION_HEADER {
     BYTE    Name[8];
@@ -108,7 +108,7 @@ FILE HEADER VALUES
 
   <p><img alt="" src="../Images/5-0-1.jpg"/><br/><img alt="" src="../Images/5-0-1-2.jpg"/><br/>表5-1</p>
 
-  <p>段表以后就是一个个的段的实际内容了，我们在分析ELF文件的过程中已经分析过代码段、数据段和BSS段的内容及它们的存储方式，COFF中这几个段的内容与ELF中几乎一样，我们在这里也不详细介绍了。在这里我们准备介绍两个ELF文件中不存在的段，这两个段就是“<code>.drectve</code>”段和“<code>.debug$S</code>”段。</p>
+  <p>段表以后就是一个个的段的实际内容了，我们在分析ELF文件的过程中已经分析过代码段、数据段和BSS段的内容及它们的存储方式，COFF中这几个段的内容与ELF中几乎一样，我们在这里也不详细介绍了。在这里我们准备介绍两个ELF文件中不存在的段，这两个段就是“.drectve”段和“.debug$S”段。</p>
 
 </body>
 
