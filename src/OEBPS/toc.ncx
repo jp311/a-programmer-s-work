@@ -5,6 +5,7 @@
     <meta name="dtb:depth" content="3"/>
     <meta name="dtb:totalPageCount" content="0"/>
     <meta name="dtb:maxPageNumber" content="0"/>
+    <meta name="cover" content="cover.jpg" />
   </head>
   <docTitle>
     <text>程序员的自我修养</text>
@@ -431,7 +432,7 @@
       <content src="Text/9.html"/>
       <navPoint id="num_71" playOrder="71">
         <navLabel>
-          <text>9.1 DLL 简介</text>
+          <text>9.1 DLL简介</text>
         </navLabel>
         <content src="Text/9.1.html"/>
       </navPoint>
