@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>作者访谈录 - 程序员的自我修养</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">程序员的自我修养</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="作者访谈录"><a class="header" href="#作者访谈录">作者访谈录</a></h1>
+<p>针对俞甲子、石凡和潘爱民三位的新书《程序员的自我修养——链接、装载与库》的出版，博文视点对俞甲子进行了专访，现将博文的编辑与俞甲子的访谈对话整理成文，以飨读者。</p>
+<p><strong>博文编辑：</strong></p>
+<p>甲子，你好！能否向读者介绍你是如何对操作系统的底层机制和运行原理产生兴趣的？</p>
+<p><strong>俞甲子：</strong></p>
+<p>很大程度上是因为性格决定的吧，因为我是一个喜欢对技术问题寻根究底的人，不满足于仅仅了解一个技术的表面，而是希望能通过层层深入地挖掘，找出它背后最关键最核心的机理。我相信很多计算机技术都是相通的，它们的核心思想相对是稳定不变的。经常听很多人谈起，IT技术日新月异，其实真正核心的东西数十年都没怎么变化，变化的仅仅是它们外在的表现，大体也是换汤不换药吧。</p>
+<p>为了了解操作系统内核及装载、链接等这些关键的技术，我曾经自己从头写了一个很小的内核、装载器及一个简单的运行库，它们组成了一个可以完整运行在PC上的支持多进程、多线程的操作系统环境，并且支持虚拟存储、简单的文件系统、网络、鼠标键盘等，前后加起来花了两年多时间，大约有数万行代码，编译器和链接器使用的是GCC和LD。当然，如果继续写下去，可以让它的功能变得更加完整，但是我停止了对它的继续维护，因为我认为通过这个雏形系统，我已经了解了其背后的机理，如果再继续写下去更多的只是重复性的工作，因为现在已经有了很多很优秀的内核、装载和链接的相关软件和标准。</p>
+<p>虽然我在这个系统上花费了很多时间和精力，却没有获得什么直接的收益，也没有让我跟上最新的技术潮流，但是它带给我的间接收获却是无法言表的，它使我在后来学习其他技术的时候能够很快地触类旁通、自下而上地去理解整个系统，往往能够理解得更加深刻更加透彻。</p>
+<p><strong>博文编辑：</strong></p>
+<p>介绍链接、装载与库原理的资料非常少，你在自己钻研的过程中，遇到的最大困难是什么？</p>
+<p><strong>俞甲子：</strong></p>
+<p>当然相关资料很少会给我们带来很多的困难和挑战，而且相关的源代码在经过多年的发展和锤炼后，变得非常注重性能和效率，而很少考虑可读性，这使得通过挖掘源代码理解机制变得更为困难。这些代码很多都是相关领域的黑客高手写的，他们对系统机制的了解已经到了很深刻的地步，一小段代码会用尽系统的各种机制和方法，经常让人看得不知所云。比如系统库在不同的链接和装载方式下对C++全局对象的构造和析构，就异常复杂。整个流程来回曲折，加上有些代码已经遗弃，还会造成误解。Glibc这种支持数十种平台的系统还要考虑到各个系统的通性和个性，更使整个过程雪上加霜。其实理解还不是最大的困难，最大的困难是理解了这个复杂而又晦涩的机制和过程，如何将它们尽量地简化，从中取舍，摈弃所有不必要的内容，再将它剥离出来后组织成尽量深入浅出层层引导的文字和图表，这才是最大的挑战。</p>
+<p><strong>博文编辑：</strong></p>
+<p>在自学的过程中，一定有许多令你得意或开心的事，可不可以分享一二？</p>
+<p><strong>俞甲子：</strong></p>
+<p>在这个过程中，最烦恼的事莫过于一个困扰了你很久的问题，通过各种办法，包括阅读源代码等还是无法理解或无法解释某个程序现象。忽然有一天某个灵感突现，回头再仔细阅读代码，紧接着马上试验一下，果真如此！大有拨云见日、豁然开朗的感觉，这应该是最开心的事吧。</p>
+<p><strong>博文编辑：</strong></p>
+<p>你现在从事的工作和系统底层结合紧密吗？在系统运行机制上的积累对目前的工作有帮助吗？</p>
+<p><strong>俞甲子：</strong></p>
+<p>我目前从事的工作跟系统底层关系不是很大，现在最常用的都是Web前端、MySQL数据库等这些应用层面的系统。虽然不是直接与系统底层打交道，但是之前的积累无时无刻不在帮助我去深入理解应用开发。比如MySQL系统的内存和文件系统的优化，如果对操作系统的虚拟存储和文件系统机制没有深入了解，那么可能只能在配置参数上做一些"猜测"性质的调整，不断地尝试各种参数，或者参考网络上别人提供的配置参数，但不一定适合自己的应用情况。了解虚存如何运作，进程地址空间的分布等，将会对应用的优化甚至是构架设计上都会有更高层次的俯视。</p>
+<p><strong>博文编辑：</strong></p>
+<p>对知识的渴求，对未知世界的好奇是人类的天性。但这种天性也需要引导，小心保护，否则就可能会丧失。读书是一种很好的保护途径，可不可以向读者推荐几本对你个人成长影响最大的书？</p>
+<p><strong>俞甲子：</strong></p>
+<p>如果是推荐非技术类的书籍，我应该不是很在行。在这里向大家推荐几本我读过的，并且跟本书主题相关的书籍吧。</p>
+<p>《Linkers and Loaders》，John R.
+Levine。这本书基本上是链接和装载方面最为完整和权威的理论著作了，但是内容有些偏旧，并且有些晦涩。</p>
+<p>《Intel® 64 and IA-32 Architectures Software Developer's
+Manuals》，Intel官方的x64和x86CPU的技术手册，总共分3卷，另外还有几本优化手册，这些手册不适合通读，但强烈建议阅读其中的介绍性章节，并且手边能够常备一份，以便需要时查阅，查阅网址<a href="http://www.intel.com/products/processor/manuals/">http://www.intel.com/products/processor/manuals/</a>。</p>
+<p>《Linux内核源代码情景分析》，毛德操，胡希明。这部书分为上下两卷，总共近2000页，虽然出版年份较早（2001年出版），而且是基于Linux
+2.4内核的，但是它对很多细节的描述非常到位，比很多Linux内核的书籍要详细，值得一看。</p>
+<p>《深入理解计算机系统》（Computer Systems A Programmer's
+Perspective，Randal E. Bryant和David
+O'Hallaron著）。这本书对整个计算机软硬件体系结构进行了深入浅出的介绍，是理解系统底层不可多得的好书，强烈推荐！</p>
+<p>《深入解析Windows操作系统，第4版------Microsoft Windows Server
+2003/Windows XP/Windows 2000技术内幕》，Mark
+E.Russinovich（著），潘爱民（译）。这本书是理解Windows内核最好的选择，至少我没有看到任何一本描述关于Windows内核的书能与它相媲美。</p>
+<p>《Advanced Programming in the UNIX Environment, Second
+Edition》，W.Richard Stevens，Stephen
+A.Rago。这本书被誉为UNIX程序设计的"圣经"，也是了解*NIX系统内核，运行库和执行环境的很好选择。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="cover.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="preface_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="cover.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="preface_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

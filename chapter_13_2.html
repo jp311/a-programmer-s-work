@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>13.2 如何使用Mini CRT - 程序员的自我修养</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">程序员的自我修养</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="132-如何使用mini-crt"><a class="header" href="#132-如何使用mini-crt">13.2 如何使用Mini CRT</a></h2>
+<p>通过上面的章节，我们已经基本实现了一个可以使用的Mini
+CRT，它虽然小但是却能支持大部分常用的CRT函数，使得程序可以脱离Glibc和MSVC
+CRT，仅依赖于Mini CRT就可以运行。而且Mini
+CRT还有一个惊人的特性那就是它是跨平台的，它可以运行在两个操作系统下面。有了上面章节中的实现原理及源代码之后，在这一节中将介绍如何使用Mini
+CRT。</p>
+<p>一般一个CRT提供给最终用户时往往有两部分，一部分是CRT的库文件部分，用于与用户程序进行链接，如Glibc提供了两个版本的库文件：静态Glibc库libc.a和动态Glibc库libc.so；MSVC
+CRT也提供了静态和动态版本，libcmt.lib与msvcrt90.dll。CRT的另外一部分就是它的头文件，包含了使用该CRT所需要的所有常数定义、宏定义及函数声明，通常CRT都会有很多个头文件。</p>
+<p>Mini
+CRT也将以库文件和头文件的形式提供给用户。首先我们建立一个minicrt.h的头文件，然后将所有相关的常数定义、宏定义，以及Mini
+CRT所实现的函数声明等放在该头文件里。当用户程序使用Mini
+CRT时，仅需要#include
+"minicrt.h"即可，而无须像标准的CRT一样，需要独立的包含相关文件，比如"stdio.h"、"stdlib.h"等。minicrt.h的内容如清单13-6所示。</p>
+<p>清单13-6 minicrt.h</p>
+<pre><code>#ifndef __MINI_CRT_H__
+#define __MINI_CRT_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// malloc
+#ifndef NULL
+#define NULL (0)
+#endif
+
+void free(void* ptr);
+void* malloc( unsigned size );
+static int brk(void* end_data_segment);
+int mini_crt_init_heap();
+
+
+// 字符串
+char* itoa(int n, char* str, int radix);
+int strcmp (const char * src, const char * dst);
+char *strcpy(char *dest, const char *src);
+unsigned strlen(const char *str);
+
+
+// 文件与IO
+typedef int FILE; 
+
+#define EOF (-1)
+
+#ifdef WIN32
+#define stdin ((FILE*)(GetStdHandle(STD_INPUT_HANDLE)))
+#define stdout  ((FILE*)(GetStdHandle(STD_OUTPUT_HANDLE)))
+#define stderr  ((FILE*)(GetStdHandle(STD_ERROR_HANDLE)))
+#else
+#define stdin ((FILE*)0)
+#define stdout  ((FILE*)1)
+#define stderr  ((FILE*)2)
+#endif
+
+int mini_crt_init_io();
+FILE* fopen( const char *filename,const char *mode );
+int fread(void* buffer, int size, int count, FILE *stream);
+int fwrite(const void* buffer, int size, int count, FILE *stream);
+int fclose(FILE* fp);
+int fseek(FILE* fp, int offset, int set);
+
+// printf
+int fputc(int c,FILE *stream );
+int fputs( const char *str, FILE *stream);
+int printf (const char *format, ...);
+int fprintf (FILE *stream, const char *format, ...);
+
+// internal
+void do_global_ctors();
+void mini_crt_call_exit_routine();
+
+// atexit
+typedef void (*atexit_func_t )( void );
+int atexit(atexit_func_t func);
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif // __MINI_CRT_H__
+</code></pre>
+<p>接下来的问题是如何编译得到库文件了。由于动态库的实现比静态库要复杂，所以Mini
+CRT仅仅以静态库的形式提供给最终用户，在Windows下它是minicrt.lib；在Linux下它是minicrt.a。在不同平台下编译和制作库文件的步骤如下所示，Linux下的命令行为：</p>
+<pre><code>$gcc -c -fno-builtin -nostdlib -fno-stack-protector entry.c malloc.c stdio.c string.c printf.c
+$ar -rs minicrt.a malloc.o printf.o stdio.o string.o
+</code></pre>
+<ul>
+<li>这里的-fno-builtin参数是指关闭GCC的内置函数功能，默认情况下GCC会把strlen、strcmp等这些常用函数展开成它内部的实现。</li>
+<li>-nostdlib表示不使用任何来自Glibc、GCC的库文件和启动文件，它包含了-nostartfiles这个参数。</li>
+<li>-fno-stack-protector是指关闭堆栈保护功能，最近版本的GCC会在vfprintf这样的变长参数函数中插入堆栈保护函数，如果不关闭，我们在使用Mini
+CRT时会发生"__stack_chk_fail"函数未定义的错误。</li>
+</ul>
+<p>在Windows下，Mini CRT的编译方法如下：</p>
+<pre><code>&gt;cl /c /DWIN32 /GS- entry.c malloc.c printf.c stdio.c string.c
+&gt;lib entry.obj malloc.obj printf.obj stdio.obj string.obj /OUT:minicrt.lib
+</code></pre>
+<ul>
+<li>/DWIN32表示定义WIN32这个宏，这也正是在代码中用于区分平台的宏。</li>
+<li>/GS-
+表示关闭堆栈保护功能，MSVC和GCC一样也会在不定参数中插入堆栈保护功能。不管这个功能会不会在最后链接时发生"__security_cookie"和"__security_check_
+cookie"符号未定义错误。</li>
+</ul>
+<p>为了测试Mini
+CRT是否能够正常运行，我们专门编写了一段测试代码，用于测试Mini
+CRT的功能，如清单13-7所示。</p>
+<p>清单13-7 test.c</p>
+<pre><code>#include "minicrt.h"
+
+int main(int argc, char* argv[])
+{
+    int i;
+    FILE* fp;
+    char** v = malloc(argc*sizeof(char*));
+    for(i = 0; i &lt; argc; ++i) {
+        v[i] = malloc(strlen(argv[i]) + 1);
+        strcpy(v[i], argv[i]);
+    }
+
+    fp = fopen("test.txt","w");
+    for(i = 0; i &lt; argc; ++i) {
+        int len = strlen(v[i]);
+        fwrite(&amp;len, 1, sizeof(int), fp);
+        fwrite(v[i],1, len, fp);
+    }
+    fclose(fp);
+
+    fp = fopen("test.txt","r");
+    for(i = 0; i &lt; argc; ++i) {
+        int len;
+        char* buf;
+        fread(&amp;len, 1, sizeof(int), fp);
+        buf = malloc(len + 1);
+        fread(buf, 1, len, fp);
+        buf[len] = '\0';
+        printf("%d %s\n", len, buf);
+        free(buf);
+        free(v[i]);
+    }
+    fclose(fp);
+}
+</code></pre>
+<p>这段代码用到了Mini
+CRT中绝大部分函数，包括malloc、free、fopen、fclose、fread、fwrite、printf，并且测试了main参数。它的作用就是将main的参数字符串都保存到文件中，然后再读取出来，由printf显示出来。在Linux下，可以用下面的方法编译和运行test.c：</p>
+<pre><code>$gcc -c -ggdb -fno-builtin -nostdlib -fno-stack-protector test.c 
+$ld -static -e mini_crt_entry entry.o test.o minicrt.a –o test
+$ ls -l test
+-rwxr-xr-x 1 yujiazi yujiazi 5083 2008-08-19 21:59 test
+$ ./test arg1 arg2 123
+6 ./test
+4 arg1
+4 arg2
+3 123
+</code></pre>
+<ul>
+<li>-e mini_crt_entry用于指定入口函数。</li>
+</ul>
+<p>可以看到静态链接Mini
+CRT最后输出的可执行文件只有5083个字节，这正体现出了Mini
+CRT的"迷你"之处，而如果静态链接Glibc时，最后可执行文件则约为538KB。在Windows下，编译和运行test.c的步骤如下：</p>
+<pre><code>&gt;cl /c /DWIN32 test.c
+&gt;link test.obj minicrt.lib kernel32.lib /NODEFAULTLIB /entry:mini_crt_entry
+&gt;dir test.exe
+…
+2008-08-19  22:05             5,120 test.exe
+..
+&gt;dumpbin /IMPORTS test.exe
+Microsoft (R) COFF/PE Dumper Version 9.00.21022.08
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file test.exe
+
+File Type: EXECUTABLE IMAGE
+
+  Section contains the following imports:
+
+    KERNEL32.dll
+                402000 Import Address Table
+                402050 Import Name Table
+                      0 time date stamp
+                      0 Index of first forwarder reference
+
+                  16F GetCommandLineA
+                  104 ExitProcess
+                  454 VirtualAlloc
+                  23B GetStdHandle
+                   78 CreateFileA
+                  368 ReadFile
+                  48D WriteFile
+                   43 CloseHandle
+                  3DF SetFilePointer
+
+  Summary
+
+        1000 .data
+        1000 .rdata
+        1000 .text
+&gt;test.exe arg1 arg2 123
+8 test.exe
+4 arg1
+4 arg2
+3 123
+</code></pre>
+<p>与Linux类似，Windows下使用Mini
+CRT链接的可执行文件也非常小，只有5120字节。如果我们使用dumpbin查看它的导入函数可以发现，它仅依赖于Kernel32.DLL，也就是说它的确是绕过了MSVC
+CRT的运行库msvcr90.dll（或msvcr90d.dll）。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chapter_13_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="chapter_13_3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chapter_13_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="chapter_13_3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
