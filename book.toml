@@ -1,0 +1,9 @@
+[book]
+authors = ["俞甲子", "石凡", "潘爱民"]
+language = "zh-CN"
+src = "src"
+title = "程序员的自我修养"
+
+[output.html]
+additional-css = ["custom.css"]
+no-section-label = true

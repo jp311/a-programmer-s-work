@@ -1,0 +1,16 @@
+name: Publish Epub File
+on:
+  push:
+    tags: v*.*.*
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: thedoctor0/zip-release@0.7.6
+        with:
+          filename: ../${{vars.EPUB_FILENAME}}
+          directory: epub
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ${{vars.EPUB_FILENAME}}

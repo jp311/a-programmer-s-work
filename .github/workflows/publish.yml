@@ -1,16 +1,22 @@
-name: Publish Epub File
+name: Deploy mdBook to GitHub Pages
 on:
   push:
-    tags: v*.*.*
+    branches:
+      - main
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - uses: thedoctor0/zip-release@0.7.6
+      - uses: peaceiris/actions-mdbook@v1
         with:
-          filename: ../${{vars.EPUB_FILENAME}}
-          directory: src
-      - uses: softprops/action-gh-release@v2
+          mdbook-version: "latest"
+      - run: mdbook build
+      - uses: peaceiris/actions-gh-pages@v3
         with:
-          files: ${{vars.EPUB_FILENAME}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book
+          publish_branch: gh-pages

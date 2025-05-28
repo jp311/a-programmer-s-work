@@ -1,6 +1,6 @@
 # 程序员的自我修养——链接、装载与库
 
-![Cover](src/OEBPS/Images/cover.jpg)
+![Cover](src/images/cover.jpg)
 
 作者：愈甲子、石凡、潘爱民
 
